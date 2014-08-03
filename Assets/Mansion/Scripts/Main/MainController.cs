@@ -11,28 +11,34 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
 		shopPanel.SetActive (false);
+		statusPanel.SetActive (false);
 		mCurrentPanel = homePanel;
 	}
 
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
-		scrollView.ResetPosition();
-		mCurrentPanel.SetActive(false);
-		homePanel.SetActive(true);
-		mCurrentPanel = homePanel;
+		ChangePanel (homePanel);
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
-		scrollView.ResetPosition();
-		mCurrentPanel.SetActive(false);
-		shopPanel.SetActive(true);
-		mCurrentPanel = shopPanel;
+		ChangePanel (shopPanel);
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
-		scrollView.ResetPosition();
+		ChangePanel (statusPanel);
 	}
 
+	private void ChangePanel (GameObject panel) {
+		if(mCurrentPanel.Equals(panel)){
+			Debug.Log("same");
+			scrollView.ResetPosition ();
+			return;
+		}
+		panel.SetActive (true);
+		mCurrentPanel.SetActive (false);
+		mCurrentPanel = panel;
+		scrollView.ResetPosition ();
+	}
 }
