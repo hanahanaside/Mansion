@@ -7,7 +7,7 @@ public class ShopPanelInitializer : MonoBehaviour {
 	public UIGrid grid;
 
 	void OnEnable () {
-		Debug.Log ("enable");
+
 	}
 
 	// Use this for initialization
