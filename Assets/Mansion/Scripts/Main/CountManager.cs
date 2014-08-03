@@ -32,6 +32,10 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
+	public void AddCount(int count){
+		mCount += count;
+	}
+
 	private void Reset () {
 		mTime = mInterval;
 	}

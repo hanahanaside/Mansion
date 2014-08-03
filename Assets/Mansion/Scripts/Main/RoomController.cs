@@ -6,6 +6,11 @@ public class RoomController : MonoBehaviour {
 	public GameObject buyButton;
 	public GameObject uiRoot;
 	public GameObject buyRoomItemDialogPrefab;
+	public UIGrid grid;
+
+	void OnEnable(){
+		Debug.Log("sssss"+grid.GetIndex(transform.parent));
+	}
 	
 	public void OnBuyButtonClicked () {
 		ShowBuyRoomItemDialog ();
