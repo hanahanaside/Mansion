@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Mansion\Scripts\Main\BuyRoomItemDialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\CountManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomData.cs" />
