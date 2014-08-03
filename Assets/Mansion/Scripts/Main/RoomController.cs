@@ -1,17 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class RoomController : MonoBehaviour {
 
 	public GameObject buyButton;
-	public GameObject uiRoot;
-	public GameObject buyRoomItemDialogPrefab;
-	public UIGrid grid;
+	public GameObject roomItemDialogPrefab;
 
-	void OnEnable(){
-		Debug.Log("sssss"+grid.GetIndex(transform.parent));
+	public void Init(RoomData roomData){
+
 	}
-	
+
 	public void OnBuyButtonClicked () {
 		ShowBuyRoomItemDialog ();
 		iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButton, "ExitEvent");
@@ -19,27 +17,29 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void ShowBuyRoomItemDialog () {
-		GameObject buyRoomItemDialogObject = Instantiate (buyRoomItemDialogPrefab) as GameObject;
+		GameObject uiRoot = GameObject.Find("UI Root");
+		GameObject buyRoomItemDialogObject = Instantiate (roomItemDialogPrefab) as GameObject;
 		buyRoomItemDialogObject.transform.parent = uiRoot.transform;
 		buyRoomItemDialogObject.transform.localScale = new Vector3 (1, 1, 1);
-		BuyRoomItemDialogController.itemBoughtEvent += itemBoughtEvent;
-		BuyRoomItemDialogController.dialogClosedEvent += dialogClosedEvent;
+		DialogController.itemBoughtEvent += itemBoughtEvent;
+		DialogController.dialogClosedEvent += dialogClosedEvent;
 	}
 
 	public void itemBoughtEvent () {
 		Debug.Log ("boughtEvent");
-		BuyRoomItemDialogController.itemBoughtEvent -= itemBoughtEvent;
-		PlayComeBackEvent ();
+		Reset ();
 	}
 
 	public void dialogClosedEvent () {
 		Debug.Log ("closedEvent");
-		BuyRoomItemDialogController.dialogClosedEvent -= dialogClosedEvent;
-		PlayComeBackEvent ();
+		Reset ();
 	}
 
-	private void PlayComeBackEvent () {
+	private void Reset () {
+		DialogController.itemBoughtEvent -= itemBoughtEvent;
+		DialogController.dialogClosedEvent -= dialogClosedEvent;
 		iTweenEvent comeBackEvent = iTweenEvent.GetEvent (buyButton, "ComeBackEvent");
 		comeBackEvent.Play ();
 	}
+
 }

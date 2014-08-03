@@ -47,14 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Mansion\Scripts\Main\AddCountLabelController.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\BuyRoomItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\CountManager.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\DialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\HumanController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ParkController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomData.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\RoomItemDialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\ShopButtonController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopItemData.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\ShopItemDialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\ShopPanelInitializer.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />

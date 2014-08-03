@@ -34,6 +34,7 @@ public class CountManager : MonoBehaviour {
 
 	public void AddCount(int count){
 		mCount += count;
+		countLabel.text = "count = " + mCount;
 	}
 
 	private void Reset () {
