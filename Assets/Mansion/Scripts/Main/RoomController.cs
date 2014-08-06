@@ -5,9 +5,13 @@ public class RoomController : MonoBehaviour {
 
 	public GameObject buyButton;
 	public GameObject roomItemDialogPrefab;
+	public UILabel nameLabel;
+	public UILabel generateSpeedLabel;
+	private RoomData mRoomData;
 
-	public void Init(RoomData roomData){
-
+	void Init (RoomData roomData) {
+		mRoomData = roomData;
+		SetTextData ();
 	}
 
 	public void OnBuyButtonClicked () {
@@ -17,22 +21,31 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void ShowBuyRoomItemDialog () {
-		GameObject uiRoot = GameObject.Find("UI Root");
-		GameObject buyRoomItemDialogObject = Instantiate (roomItemDialogPrefab) as GameObject;
-		buyRoomItemDialogObject.transform.parent = uiRoot.transform;
-		buyRoomItemDialogObject.transform.localScale = new Vector3 (1, 1, 1);
+		GameObject roomItemDialog = Instantiate (roomItemDialogPrefab) as GameObject;
+		roomItemDialog.transform.parent = RootInstanceKeeper.Instance.transform;
+		roomItemDialog.transform.localScale = new Vector3 (1, 1, 1);
+		roomItemDialog.BroadcastMessage ("Init", mRoomData);
 		DialogController.itemBoughtEvent += itemBoughtEvent;
 		DialogController.dialogClosedEvent += dialogClosedEvent;
 	}
 
 	public void itemBoughtEvent () {
 		Debug.Log ("boughtEvent");
+		// update database
+		mRoomData.ItemCount++;
+		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
+		SetTextData ();
 		Reset ();
 	}
 
 	public void dialogClosedEvent () {
 		Debug.Log ("closedEvent");
 		Reset ();
+	}
+
+	private void SetTextData () {
+		nameLabel.text = mRoomData.ItemName + " : " + mRoomData.ItemCount;
+		generateSpeedLabel.text = (mRoomData.GenerateSpeed * mRoomData.ItemCount) + " / \u79d2";
 	}
 
 	private void Reset () {

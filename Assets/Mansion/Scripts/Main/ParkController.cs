@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ParkController : MonoBehaviour {
@@ -11,6 +11,6 @@ public class ParkController : MonoBehaviour {
 		addCountLabelObject.transform.parent = transform.parent;
 		addCountLabelObject.transform.localPosition = hole.transform.localPosition;
 		addCountLabelObject.transform.localScale = new Vector3 (1, 1, 1);
-		CountManager.Instance.AddCount(10);
+		CountManager.Instance.AddGeneratedCount(10);
 	}
 }

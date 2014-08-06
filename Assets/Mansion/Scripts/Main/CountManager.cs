@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CountManager : MonoBehaviour {
 
-	public UILabel countLabel;
-	public UILabel perSecondLabel;
+	public UILabel generatedCountLabel;
+	public UILabel totalGenerateSpeedLabel;
 	private static CountManager sInstance;
-	private int mCount;
-	private float mInterval = 1.0f;
+	private int mGeneratedCount;
+	private float mTotalGenerateSpeed;
 	private float mTime;
 
 	void Start () {
-		if (sInstance == null) {
-			sInstance = this;
-		}
-		Reset ();
+		sInstance = this;
+		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
+		totalGenerateSpeedLabel.text = mTotalGenerateSpeed + " / \u79d2";
+		ResetTime ();
 	}
 
 	void Update () {
 		mTime -= Time.deltaTime;
 		if (mTime <= 0.0f) {
-			mCount++;
-			countLabel.text = "count = " + mCount;
-			Reset ();
+			mGeneratedCount++;
+			generatedCountLabel.text = "count = " + mGeneratedCount;
+			ResetTime ();
 		}
 	}
 
@@ -32,12 +33,17 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
-	public void AddCount(int count){
-		mCount += count;
-		countLabel.text = "count = " + mCount;
+	public void AddGeneratedCount (int addCount) {
+		mGeneratedCount += addCount;
+		generatedCountLabel.text = "count = " + mGeneratedCount;
 	}
 
-	private void Reset () {
-		mTime = mInterval;
+	public void AddGenerateSpeed (float addSpeed) {
+		mTotalGenerateSpeed += addSpeed;
+		totalGenerateSpeedLabel.text = mTotalGenerateSpeed + " / \u79d2";
+	}
+
+	private void ResetTime () {
+		mTime = 1.0f / mTotalGenerateSpeed;
 	}
 }

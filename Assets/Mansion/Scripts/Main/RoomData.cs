@@ -7,9 +7,9 @@ public class RoomData {
 
 	public int ItemCount{ get; set; }
 
-	public int Price{ get; set; }
+	public int ItemPrice{ get; set; }
 
-	public float GeneratePerSecond{ get; set; }
+	public float GenerateSpeed{ get; set; }
 
 	public string ItemName{ get; set; }
 
