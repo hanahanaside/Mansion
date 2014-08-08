@@ -23,9 +23,22 @@ public class RoomController : MonoBehaviour {
 	}
 
 	public void OnBuyButtonClicked () {
-		ShowRoomItemDialog ();
-		iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButton, "ExitEvent");
-		removeEvent.Play ();
+		if(CheckInActiveItemExist()){
+			ShowRoomItemDialog ();
+			iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButton, "ExitEvent");
+			removeEvent.Play ();
+		}else {
+			//full of item
+		}
+	}
+
+	private bool CheckInActiveItemExist () {
+		foreach (GameObject item in mItemList) {
+			if (!item.activeSelf) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void ShowRoomItemDialog () { 
@@ -41,7 +54,7 @@ public class RoomController : MonoBehaviour {
 		Debug.Log ("boughtEvent");
 		// update database
 		mRoomData.ItemCount++;
-		SetActiveItem();
+		SetActiveItem ();
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
 		Reset ();
@@ -70,11 +83,11 @@ public class RoomController : MonoBehaviour {
 		List<Transform> backItemList = backGrid.GetChildList ();
 		foreach (Transform child in frontItemList) {
 			mItemList.Add (child.gameObject);
-			child.gameObject.SetActive(false);
+			child.gameObject.SetActive (false);
 		}
 		foreach (Transform child in backItemList) {
 			mItemList.Add (child.gameObject);
-			child.gameObject.SetActive(false);
+			child.gameObject.SetActive (false);
 		}
 	}
 
