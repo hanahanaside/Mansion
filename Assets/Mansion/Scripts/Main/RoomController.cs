@@ -20,7 +20,7 @@ public class RoomController : MonoBehaviour {
 		removeEvent.Play ();
 	}
 
-	private void ShowBuyRoomItemDialog () {
+	private void ShowBuyRoomItemDialog () { 
 		GameObject roomItemDialog = Instantiate (roomItemDialogPrefab) as GameObject;
 		roomItemDialog.transform.parent = RootInstanceKeeper.Instance.transform;
 		roomItemDialog.transform.localScale = new Vector3 (1, 1, 1);

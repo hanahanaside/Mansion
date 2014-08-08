@@ -49,6 +49,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\AddCountLabelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\CountManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\DialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\FenceManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\HomePanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\HumanController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MainController.cs" />
