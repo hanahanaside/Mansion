@@ -16,8 +16,7 @@ public class Test : MonoBehaviour {
 		StartCoroutine(Start());
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnApplicationPause(bool state){
+		Debug.Log("paaa");
 	}
 }

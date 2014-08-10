@@ -43,7 +43,7 @@ public class RoomController : MonoBehaviour {
 
 	private void ShowRoomItemDialog () { 
 		GameObject roomItemDialog = Instantiate (roomItemDialogPrefab) as GameObject;
-		roomItemDialog.transform.parent = RootInstanceKeeper.Instance.transform;
+		roomItemDialog.transform.parent = UIRootInstanceKeeper.UIRootGameObject.transform;
 		roomItemDialog.transform.localScale = new Vector3 (1, 1, 1);
 		roomItemDialog.BroadcastMessage ("Init", mRoomData);
 		DialogController.itemBoughtEvent += itemBoughtEvent;

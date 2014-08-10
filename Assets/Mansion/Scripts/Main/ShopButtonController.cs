@@ -4,9 +4,14 @@ using System.Collections;
 public class ShopButtonController : MonoBehaviour {
 
 	public GameObject shopDialogPrefab;
+	private ShopItemData mShopItemData;
+
+	void Init(ShopItemData shopItemData){
+		mShopItemData = shopItemData;
+	}
 	
 	public void OnButtonClicked () {
-		GameObject uiRoot = GameObject.Find ("UI Root");
+		GameObject uiRoot = UIRootInstanceKeeper.UIRootGameObject;
 		GameObject shopDialog = Instantiate (shopDialogPrefab) as GameObject;
 		shopDialog.transform.parent = uiRoot.transform;
 		shopDialog.transform.localScale = new Vector3 (1, 1, 1);

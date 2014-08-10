@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RootInstanceKeeper : MonoBehaviour {
+public class UIRootInstanceKeeper : MonoBehaviour {
 
 	private static GameObject sUiRoot;
 
@@ -10,7 +10,7 @@ public class RootInstanceKeeper : MonoBehaviour {
 		sUiRoot = gameObject;
 	}
 	
-	public static GameObject Instance {
+	public static GameObject UIRootGameObject {
 		get {
 			return sUiRoot;
 		}

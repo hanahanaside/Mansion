@@ -13,6 +13,9 @@ public class MainController : MonoBehaviour {
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
 		mCurrentPanel = homePanel;
+		SecomData secomData = new SecomData();
+		secomData.Count = 1;
+		secomData.MacxCount = 2;
 	}
 
 	public void OnHomeButtonClicked () {

@@ -55,16 +55,19 @@
      <Compile Include="Assets\Mansion\Scripts\Main\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MoneyParticleDestroyer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ParkController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\PrefsManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomItemDialogController.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\RootInstanceKeeper.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\SecomData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopButtonController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopItemData.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\ShopItemDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopPanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\StatusPanelInitializer.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\UIRootInstanceKeeper.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
@@ -241,6 +244,10 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F42B892A-E1EB-10E0-AC50-DE1F55D5B1BC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

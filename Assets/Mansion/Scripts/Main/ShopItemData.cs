@@ -9,7 +9,11 @@ public class ShopItemData {
 
 	public int BoughtFlag{ get; set; }
 
+	public int UnLockFlag{ get; set; }
+
 	public string Name{ get; set; }
 
-	public string Description{ get; set; }
+	public string LockDescription{ get; set; }
+
+	public string UnLockDescription{ get; set; }
 }
