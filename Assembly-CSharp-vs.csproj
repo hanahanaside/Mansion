@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Mansion\Scripts\Main\AbstractJsonParser.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\AddCountLabelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\CountManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\DialogController.cs" />
@@ -55,9 +56,10 @@
      <Compile Include="Assets\Mansion\Scripts\Main\HistoryDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\HomePanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\HumanController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\JsonParser.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\MoneyParticleDestroyer.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\ParkController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\PitController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\PrefsManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\RoomData.cs" />
@@ -69,6 +71,9 @@
      <Compile Include="Assets\Mansion\Scripts\Main\ShopItemDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\ShopPanelInitializer.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\StatusData.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\StatusDataKeeper.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\StatusLabelUpdater.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\StatusPanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\UIRootInstanceKeeper.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test.cs" />

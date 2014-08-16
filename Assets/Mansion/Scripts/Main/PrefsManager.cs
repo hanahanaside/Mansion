@@ -6,8 +6,7 @@ using MiniJSON;
 public class PrefsManager {
 
 	private const string SECOM_Data = "secomData";
-	private const string SECOM_COUNT = "secomCount";
-	private const string SECOM_MAX_COUNT = "secomMaxCount";
+	private const string STATUS_DATA = "statusData";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -20,26 +19,38 @@ public class PrefsManager {
 	}
 
 	public void SaveSecomData (SecomData secomData) {
-		Dictionary<string,object> dictionary = new Dictionary<string, object> ();
-		dictionary.Add (SECOM_COUNT, secomData.Count);
-		dictionary.Add (SECOM_MAX_COUNT, secomData.MacxCount);
-		string json = Json.Serialize (dictionary);
-		Debug.Log ("json = " + json);
+		string json = JsonParser.SerializeSecomData (secomData);
+		PlayerPrefs.SetString (SECOM_Data, json);
+		PlayerPrefs.Save ();
 	}
 
 	public SecomData GetSecomData () {
 		string json = PlayerPrefs.GetString (SECOM_Data, "");
 		Debug.Log ("json = " + json);
-		SecomData secomData = new SecomData ();
+		SecomData secomData;
 		if (json == "") {
-			secomData.Count = 0;
-			secomData.MacxCount = 0;
+			secomData = new SecomData ();
 		} else {
-			IList secomDataList = (IList)Json.Deserialize (json);
-			IDictionary secomDataDictionary = (IDictionary)secomDataList [0];
-			secomData.Count = (int)secomDataDictionary [SECOM_COUNT];
-			secomData.MacxCount = (int)secomDataDictionary [SECOM_MAX_COUNT];
+			secomData = JsonParser.DeserializeSecomData (json);
 		}
 		return secomData;
+	}
+
+	public void SaveStatusData (StatusData statusData) {
+		Debug.Log ("SaveStatusData");
+		string json = JsonParser.SerializeStatusData (statusData);
+		PlayerPrefs.SetString (STATUS_DATA, json);
+		PlayerPrefs.Save ();
+	}
+
+	public StatusData GetStatusData () {
+		string json = PlayerPrefs.GetString (STATUS_DATA, "");
+		StatusData statusData;
+		if (json == "") {
+			statusData = new StatusData ();
+		} else {
+			statusData = JsonParser.DeserializeStatusData (json);
+		}
+		return statusData;
 	}
 }

@@ -23,6 +23,7 @@ public class CountManager : MonoBehaviour {
 		if (mTime <= 0.0f) {
 			mGeneratedCount++;
 			generatedCountLabel.text = "count = " + mGeneratedCount;
+			StatusDataKeeper.Instance.IncrementTotalGenerateCount();
 			ResetTime ();
 		}
 	}

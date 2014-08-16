@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SecomData {
 
-	public int Count{ get; set; }
+	public long Count{ get; set; }
 
-	public int MacxCount{ get; set; }
+	public long MacxCount{ get; set; }
 }
