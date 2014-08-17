@@ -8,18 +8,9 @@ public class HomePanelInitializer : MonoBehaviour {
 
 	void OnEnable () {
 		List<Transform> childList = grid.GetChildList ();
-		List<RoomData> roomDataList = new List<RoomData> ();
-		for (int i = 0; i<11; i++) {
-			RoomData roomData = new RoomData ();
-			roomData.Id = i;
-			roomData.ItemCount = 1;
-			roomData.ItemPrice = i * 10;
-			roomData.GenerateSpeed = i + 1;
-			roomData.ItemName = "itemName " + i;
-			roomData.ItemDescription = "itemDescription " + i;
-			roomDataList.Add (roomData);
-		}
-		for (int i = 0; i<11; i++) {
+		List<RoomData> roomDataList = RoomDataDao.Instance.GetRoomDataList();
+		roomDataList.Reverse();
+		for (int i = 10; i>=0; i--) {
 			GameObject childObject = childList [i].gameObject;
 			RoomData roomData = roomDataList [i];
 			childObject.BroadcastMessage ("Init", roomData);

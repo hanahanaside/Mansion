@@ -7,6 +7,7 @@ public class PrefsManager {
 
 	private const string SECOM_Data = "secomData";
 	private const string STATUS_DATA = "statusData";
+	private const string KEEP_MONEY_COUNT = "keepMoneyCount";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -52,5 +53,15 @@ public class PrefsManager {
 			statusData = JsonParser.DeserializeStatusData (json);
 		}
 		return statusData;
+	}
+
+	public void SaveMoneyCount (int keepMoneyCount) {
+		PlayerPrefs.SetInt (KEEP_MONEY_COUNT, keepMoneyCount);
+		PlayerPrefs.Save ();
+	}
+
+	public int GetMoneyCount () {
+		int keepMoneyCount = PlayerPrefs.GetInt (KEEP_MONEY_COUNT);
+		return keepMoneyCount;
 	}
 }

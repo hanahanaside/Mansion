@@ -17,6 +17,16 @@ public class RoomDataDao {
 
 	public List<RoomData> GetRoomDataList () {
 		List<RoomData> roomDataList = new List<RoomData> ();
+		for (int i = 1; i<12; i++) {
+			RoomData roomData = new RoomData ();
+			roomData.Id = i;
+			roomData.ItemCount = 1;
+			roomData.ItemPrice = i * 10;
+			roomData.GenerateSpeed = i + 1;
+			roomData.ItemName = "itemName " + i;
+			roomData.ItemDescription = "itemDescription " + i;
+			roomDataList.Add (roomData);
+		}
 		return roomDataList;
 	}
 
