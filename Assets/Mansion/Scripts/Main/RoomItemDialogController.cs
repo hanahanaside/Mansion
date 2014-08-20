@@ -11,9 +11,11 @@ public class RoomItemDialogController : DialogController {
 	public UILabel priceLabel;
 	public UILabel countLabel;
 	public UILabel descriptionLabel;
+	private RoomData mRoomData;
 
 	void Init (RoomData roomData) {
 		Debug.Log ("roomId = " + roomData.Id);
+		mRoomData = roomData;
 		string spriteName = "room_item_" + roomData.Id;
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
 		itemSprite.spriteName = "room_item_" + roomData.Id;
@@ -31,6 +33,10 @@ public class RoomItemDialogController : DialogController {
 	}
 
 	public override void OnBuyButtonClicked () {
+		int keepMoneyCount = CountManager.Instance.KeepMoneyCount;
+		if(keepMoneyCount < mRoomData.ItemPrice){
+			return;
+		}
 		base.OnBuyButtonClicked ();
 		Destroy (transform.parent.gameObject);
 	}

@@ -19,21 +19,26 @@ public class RoomController : MonoBehaviour {
 	void Init (RoomData roomData) {
 		mRoomData = roomData;
 		if (mRoomData.ItemCount == 0) {
-			lockObject.SetActive(true);
+			lockObject.SetActive (true);
+			CreateItemList ();
 			return;
 		}
-		SetTextData ();
 		if (mItemList == null) {
 			CreateItemList ();
 			SetActiveItem ();
 			GenerateResident (mRoomData.ItemCount);
 		}
+		SetTextData ();
 	}
 
 	void itemBoughtEvent () {
 		Debug.Log ("boughtEvent");
-		// update database
+		if (mRoomData.ItemCount == 0) {
+			lockObject.SetActive (false);
+		}
 		mRoomData.ItemCount++;
+		RoomDataDao.Instance.UpdateItemCount (mRoomData);
+		CountManager.Instance.DecreaseMoneyCount(mRoomData.ItemPrice);
 		SetActiveItem ();
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
@@ -53,12 +58,14 @@ public class RoomController : MonoBehaviour {
 	}
 
 	public void OnBuyButtonClicked () {
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		if (CheckInActiveItemExist ()) {
 			ShowRoomItemDialog ();
 			iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButtonParent, "ExitEvent");
 			removeEvent.Play ();
 		} else {
 			//full of item
+			Debug.Log("full of item");
 		}
 	}
 

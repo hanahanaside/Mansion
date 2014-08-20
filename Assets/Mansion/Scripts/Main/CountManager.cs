@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class CountManager : MonoBehaviour {
 
@@ -14,15 +15,21 @@ public class CountManager : MonoBehaviour {
 	void Start () {
 		sInstance = this;
 		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
-		totalGenerateSpeedLabel.text = mTotalGenerateSpeed + " / \u79d2";
+		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
 		keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
-		ResetTime ();
+		if(mTotalGenerateSpeed != 0){
+			ResetTime ();
+		}
 	}
 
 	void Update () {
+		if(mTotalGenerateSpeed == 0){
+			// frist launch
+			return;
+		}
 		mTime -= Time.deltaTime;
-		if (mTime <= 0.0f) {
+		if (mTime < 0.0f) {
 			mKeepMoneyCount++;
 			keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
 			StatusDataKeeper.Instance.IncrementTotalGenerateCount ();
@@ -32,7 +39,6 @@ public class CountManager : MonoBehaviour {
 
 	void OnApplicationPause (bool pauseStatus) {
 		if (pauseStatus) {
-			Debug.Log("ppppppp");
 			PrefsManager.Instance.SaveMoneyCount (mKeepMoneyCount);
 		}
 	}
@@ -50,7 +56,19 @@ public class CountManager : MonoBehaviour {
 
 	public void AddGenerateSpeed (float addSpeed) {
 		mTotalGenerateSpeed += addSpeed;
-		totalGenerateSpeedLabel.text = mTotalGenerateSpeed + " / \u79d2";
+		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
+		ResetTime();
+	}
+
+	public void DecreaseMoneyCount (int decreaseCount) {
+		mKeepMoneyCount -= decreaseCount;
+	}
+
+	public int KeepMoneyCount {
+		get {
+			return mKeepMoneyCount;
+		}
 	}
 
 	private void ResetTime () {

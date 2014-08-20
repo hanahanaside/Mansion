@@ -8,6 +8,7 @@ public class PitController : MonoBehaviour {
 	public GameObject pit;
 
 	public void OnPitClicked () {
+		SoundManager.Instance.PlaySE(AudioClipID.SE_MONEY);
 		InstantiateObject(addCountLabelPrefab);
 		InstantiateObject(moneyParticlePrefab);
 		CountManager.Instance.AddGeneratedCount(10);

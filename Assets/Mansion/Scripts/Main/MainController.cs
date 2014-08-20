@@ -10,6 +10,7 @@ public class MainController : MonoBehaviour {
 	private GameObject mCurrentPanel;
 
 	void Start () {
+		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
 		mCurrentPanel = homePanel;
@@ -20,22 +21,26 @@ public class MainController : MonoBehaviour {
 
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		ChangePanel (homePanel);
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		ChangePanel (shopPanel);
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		ChangePanel (statusPanel);
 	}
 
 	private void ChangePanel (GameObject panel) {
 		if(mCurrentPanel.Equals(panel)){
 			Debug.Log("same");
+			SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 			scrollView.ResetPosition ();
 			return;
 		}
