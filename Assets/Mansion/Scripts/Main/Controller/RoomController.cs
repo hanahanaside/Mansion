@@ -120,7 +120,7 @@ public class RoomController : MonoBehaviour {
 	private void GenerateResident (int count) {
 		for (int i = 0; i<count; i++) {
 			float x = Random.Range (-200, 200);
-			float y = Random.Range (-160, -80);
+			float y = Random.Range (-100, 50);
 			GameObject resident = Instantiate (residentPrefab) as GameObject;
 			resident.transform.parent = transform.parent;
 			resident.transform.localScale = new Vector3(1,1,1);

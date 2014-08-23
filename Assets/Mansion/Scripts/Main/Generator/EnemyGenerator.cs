@@ -6,10 +6,13 @@ public class EnemyGenerator : MonoBehaviour {
 
 	public GameObject[] enemyPrefabArray;
 	public UIGrid homePanelGrid;
+	public UISprite exSprite;
 	private List<Transform> mHomeChildList;
 	private float mGenerateIntervalTime;
+	private static EnemyGenerator sInstance;
 
 	void Start () {
+		sInstance = this;
 		mHomeChildList = homePanelGrid.GetChildList ();
 		mHomeChildList.Reverse ();
 		SetGenerateIntervalTime ();
@@ -20,6 +23,16 @@ public class EnemyGenerator : MonoBehaviour {
 		if (mGenerateIntervalTime < 0) {
 			GenerateEnemy ();
 		}
+	}
+
+	public static EnemyGenerator Instance{
+		get{
+			return sInstance;
+		}
+	}
+
+	public void EXSpriteEnabled(bool state){
+		exSprite.enabled = state;
 	}
 
 	private void GenerateEnemy () {
@@ -46,8 +59,9 @@ public class EnemyGenerator : MonoBehaviour {
 		enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;
 		enemyObject.transform.parent = unlockRoomObject.transform;
 		enemyObject.transform.localScale = new Vector3 (1, 1, 1);
-		enemyObject.transform.localPosition = new Vector3 (0, -100, 0);
+		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
 		Debug.Log("generated roomId = "+unlockRoomData.Id);
+		EXSpriteEnabled(true);
 	}
 
 	private void SetGenerateIntervalTime () {

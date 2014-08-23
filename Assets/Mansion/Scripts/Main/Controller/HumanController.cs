@@ -38,12 +38,16 @@ public abstract class HumanController : MonoBehaviour {
 	}
 
 	public void StopWalkAnimation () {
-		walkAnimation.enabled = false;
+		if(walkAnimation!= null){
+			walkAnimation.enabled = false;
+		}
 	}
 
 	public void RestartWalkAnimation () {
 		SetSpeed();
-		walkAnimation.enabled = true;
+		if(walkAnimation != null){
+			walkAnimation.enabled = true;
+		}
 	}
 
 	private void ChangeMove () {
