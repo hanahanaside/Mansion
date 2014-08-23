@@ -11,8 +11,7 @@ public class RoomController : MonoBehaviour {
 	public GameObject residentPrefab;
 	public UILabel nameLabel;
 	public UILabel generateSpeedLabel;
-	public UIGrid frontGrid;
-	public UIGrid backGrid;
+	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
 	private List<GameObject> mItemList;
 	
@@ -102,15 +101,12 @@ public class RoomController : MonoBehaviour {
 
 	private void CreateItemList () {
 		mItemList = new List<GameObject> ();
-		List<Transform> frontItemList = frontGrid.GetChildList ();
-		List<Transform> backItemList = backGrid.GetChildList ();
-		foreach (Transform child in frontItemList) {
-			mItemList.Add (child.gameObject);
-			child.gameObject.SetActive (false);
-		}
-		foreach (Transform child in backItemList) {
-			mItemList.Add (child.gameObject);
-			child.gameObject.SetActive (false);
+		foreach(UIGrid grid in itemGridArray){
+			List<Transform> itemList = grid.GetChildList();
+			foreach(Transform item in itemList){
+				mItemList.Add(item.gameObject);
+				item.gameObject.SetActive(false);
+			}
 		}
 	}
 
@@ -127,6 +123,7 @@ public class RoomController : MonoBehaviour {
 			float y = Random.Range (-160, -80);
 			GameObject resident = Instantiate (residentPrefab) as GameObject;
 			resident.transform.parent = transform.parent;
+			resident.transform.localScale = new Vector3(1,1,1);
 			resident.transform.localPosition = new Vector3 (x, y, 0);
 		}
 	}
