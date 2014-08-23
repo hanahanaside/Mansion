@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Dao {
 
 	protected string ROOM_DATA_LIST_TABLE = "room_data_list";
+	protected string ENEMY_DATA_LIST_TABLE = "enemy_data_list";
 
 	protected SQLiteDB OpenDatabase(){
 		string filePath = Application.persistentDataPath + "/manshon.db";
@@ -22,6 +23,13 @@ public abstract class Dao {
 		public const string ITEM_COUNT = "item_count";
 		public const string PRICE = "price";
 		public const string GENERATE_SPEED = "generate_speed";
+		public const string NAME = "name";
+		public const string DESCRIPTION = "description";
+	}
+
+	protected class EnemyDataField{
+		public const string ID = "id";
+		public const string ATACK = "atack";
 		public const string NAME = "name";
 		public const string DESCRIPTION = "description";
 	}

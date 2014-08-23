@@ -16,29 +16,23 @@ public class DatabaseCreater : MonoBehaviour {
 	// Use this for initialization
 	private void CreateDatabase () {
 		Debug.Log("create Database");
-		string baseFilePath = "";
-		string filePath = "";
-
+		string baseFilePath = Application.streamingAssetsPath + "/" + DATABASE_FILE_NAME;
+		string filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
+	//	File.Delete(filePath);
 		#if UNITY_IPHONE
-		baseFilePath = Application.streamingAssetsPath + "/" + DATABASE_FILE_NAME;
-		filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
-		File.Delete(filePath);
 		if(!File.Exists(filePath)){
 			File.Copy( baseFilePath, filePath); 
+			Debug.Log("create Database");
 		}
-		createdDatabaseEvent ();
-
+		createdDatabaseEvent();
 		#endif
-
-		#if UNITY_ANDROID
-		baseFilePath = Path.Combine (Application.streamingAssetsPath, DATABASE_FILE_NAME);
+		
+		#if UNITY_ANDROID 
 		#if UNITY_EDITOR
 		baseFilePath = "file://"+Path.Combine (Application.streamingAssetsPath, DATABASE_FILE_NAME);
 		#endif
-		filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
-		File.Delete(filePath);
 		if(File.Exists(filePath)){
-			createdDatabaseEvent ();
+			createdDatabaseEvent();
 		}else {
 			StartCoroutine(CreateAndroidDatabase(baseFilePath,filePath));
 		}

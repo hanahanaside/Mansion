@@ -3,12 +3,16 @@ using System.Collections;
 
 public abstract class HumanController : MonoBehaviour {
 
-	public UISpriteAnimation spriteAnimation;
+	public UISpriteAnimation walkAnimation;
+	public float limitLeft;
+	public float limitRight;
+	public float limitTop;
+	public float limitBottom;
 	private float mSpeedX;
 	private float mSpeedY;
 	private float mTime;
 	
-	public void Walk(){
+	public void Walk () {
 		mTime -= Time.deltaTime;
 		if (mTime < 0) {
 			ChangeMove ();
@@ -18,29 +22,38 @@ public abstract class HumanController : MonoBehaviour {
 		}
 		float x = transform.localPosition.x;
 		float y = transform.localPosition.y;
-		if (x < -280) {
-			TurnRight();
+		if (x < limitLeft) {
+			TurnRight ();
 		}
-		if (x > 280) {
-			TurnLeft();
+		if (x > limitRight) {
+			TurnLeft ();
 		}
-		if (y > -80) {
+		if (y > limitTop) {
 			mSpeedY = -mSpeedY;
 		}
-		if (y < -240) {
+		if (y < limitBottom) {
 			mSpeedY = -mSpeedY;
 		}
 		transform.Translate (mSpeedX, mSpeedY, 0);
+	}
+
+	public void StopWalkAnimation () {
+		walkAnimation.enabled = false;
+	}
+
+	public void RestartWalkAnimation () {
+		SetSpeed();
+		walkAnimation.enabled = true;
 	}
 
 	private void ChangeMove () {
 		if (mSpeedX != 0) {
 			mSpeedX = 0;
 			mSpeedY = 0;
-			spriteAnimation.enabled = false;
+			StopWalkAnimation ();
 			SetTime ();
 		} else {
-			spriteAnimation.enabled = true;
+			RestartWalkAnimation ();
 			SetSpeed ();
 			SetTime ();
 		}
@@ -51,24 +64,24 @@ public abstract class HumanController : MonoBehaviour {
 	}
 
 	private void SetSpeed () {
-		mSpeedX = Random.Range (-0.002f,0);
-		mSpeedY = Random.Range (-0.002f,0);
+		mSpeedX = Random.Range (-0.002f, 0);
+		mSpeedY = Random.Range (-0.002f, 0);
 		int turn = Random.Range (0, 2);
 		switch (turn) {
 		case 0:
-			TurnLeft();
+			TurnLeft ();
 			break;
 		case 1:
-			TurnRight();
+			TurnRight ();
 			break;
 		}
 	}
 
-	private void TurnLeft(){
+	private void TurnLeft () {
 		transform.eulerAngles = new Vector3 (0, 0, 0);
 	}
 
-	private void TurnRight(){
+	private void TurnRight () {
 		transform.eulerAngles = new Vector3 (0, 180, 0);
 	}
 }
