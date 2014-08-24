@@ -49,7 +49,7 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
-	public void AddGeneratedCount (int addCount) {
+	public void AddMoneyCount (int addCount) {
 		mKeepMoneyCount += addCount;
 		SetKeepCountLabel();
 	}
@@ -63,6 +63,7 @@ public class CountManager : MonoBehaviour {
 
 	public void DecreaseMoneyCount (int decreaseCount) {
 		mKeepMoneyCount -= decreaseCount;
+		SetKeepCountLabel();
 	}
 
 	public int KeepMoneyCount {

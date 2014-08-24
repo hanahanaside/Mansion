@@ -10,10 +10,12 @@ public class EnemyGenerator : MonoBehaviour {
 	private List<Transform> mHomeChildList;
 	private float mGenerateIntervalTime;
 	private static EnemyGenerator sInstance;
+	private List<EnemyData> mEnemyDataList;
 
 	void Start () {
 		sInstance = this;
 		mHomeChildList = homePanelGrid.GetChildList ();
+		mEnemyDataList = EnemyDataDao.Instance.QueryEnemyDataList();
 		mHomeChildList.Reverse ();
 		SetGenerateIntervalTime ();
 	}
@@ -41,11 +43,14 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 	
 	private void GenerateEnemy () {
+		// enemy exist
 		if(IsEnemyExist){
 			Debug.Log("return generate");
 			SetGenerateIntervalTime();
 			return;
 		}
+
+		// no more unlock room
 		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
 		if(unlockRoomDataList.Count ==0){
 			Debug.Log("return generate");
@@ -58,18 +63,27 @@ public class EnemyGenerator : MonoBehaviour {
 		int enemyIndex = Random.Range (0, enemyPrefabArray.Length);
 		int unlockRoomDataIndex = Random.Range (0, unlockRoomDataList.Count);
 		Debug.Log("unlock size = "+unlockRoomDataList.Count);
+
 		RoomData unlockRoomData = unlockRoomDataList [unlockRoomDataIndex];
 		GameObject unlockRoomObject = mHomeChildList [unlockRoomData.Id].gameObject;
 		GameObject enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;
 		enemyObject.transform.parent = unlockRoomObject.transform;
 		enemyObject.transform.localScale = new Vector3 (1, 1, 1);
 		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
+		enemyObject.BroadcastMessage("SetEnemyData", mEnemyDataList[enemyIndex]);
+
 		Debug.Log("generated roomId = "+unlockRoomData.Id);
+
+		InsertHistoryData(mEnemyDataList[enemyIndex]);
 		exSprite.enabled = true;
 		SetGenerateIntervalTime();
 		IsEnemyExist = true;
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_ENEMY);
+	}
+
+	private void InsertHistoryData(EnemyData enemyData){
+
 	}
 
 	private void SetGenerateIntervalTime () {

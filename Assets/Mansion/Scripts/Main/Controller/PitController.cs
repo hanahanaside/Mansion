@@ -2,8 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class PitController : MonoBehaviour {
-
-	public UIButton pitButton;
+	
 	public UISprite backGroundSprite;
 	public GameObject countLabelPrefab;
 	public GameObject moneyParticlePrefab;
@@ -14,7 +13,9 @@ public class PitController : MonoBehaviour {
 		Debug.Log("pitLevel = " + pitLevel);
 		mPitLevel = pitLevel;
 		backGroundSprite.spriteName = "bg_pit_"+mPitLevel;
-		pitButton.normalSprite = "pit_" + mPitLevel;
+		string spriteName = "pit_" + mPitLevel;
+		pit.GetComponent<UIButton>().normalSprite = spriteName;
+		pit.GetComponent<UISprite>().spriteName = spriteName;
 	}
 
 	public void OnPitClicked () {
@@ -26,7 +27,7 @@ public class PitController : MonoBehaviour {
 		int getPoint = CalcGetPoint ();
 		countLabelObject.SendMessage ("SetCount", getPoint);
 		InstantiateObject (moneyParticlePrefab);
-		CountManager.Instance.AddGeneratedCount (getPoint);
+		CountManager.Instance.AddMoneyCount (getPoint);
 	}
 
 	private GameObject InstantiateObject (GameObject prefab) {

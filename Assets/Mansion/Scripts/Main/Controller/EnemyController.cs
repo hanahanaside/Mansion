@@ -4,14 +4,14 @@ using System.Collections;
 public abstract class EnemyController : HumanController {
 
 	public UISpriteAnimation atackAnimation;
-	public int enemyId;
 	private GameObject mDamageLabelPrefab;
+	private GameObject mGetMoneyLabelPrefab;
 	private EnemyData mEnemyData;
 
 	void Start () {
 		SetAtackIntervalTime ();
-		mDamageLabelPrefab = Resources.Load("Prefabs/Effect/DamageCountLabel") as GameObject;
-		mEnemyData = EnemyDataDao.Instance.QueryEnemyData(enemyId);
+		mDamageLabelPrefab = Resources.Load("Prefabs/Effect/DamageLabel") as GameObject;
+		mGetMoneyLabelPrefab =  Resources.Load("Prefabs/Effect/GetMoneyLabel") as GameObject;
 	}
 
 	void SetEnemyData (EnemyData enemyData) {
@@ -36,6 +36,13 @@ public abstract class EnemyController : HumanController {
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
 		EnemyGenerator.Instance.AttackedEnemy();
+		int getMoneyCount = mEnemyData.Atack;
+		GameObject getMoneyLabelObject = Instantiate(mGetMoneyLabelPrefab) as GameObject;
+		getMoneyLabelObject.transform.parent = transform.parent;
+		getMoneyLabelObject.transform.localScale = new Vector3(1,1,1);
+		getMoneyLabelObject.transform.localPosition = transform.localPosition;
+		getMoneyLabelObject.SendMessage("SetCount",getMoneyCount);
+		CountManager.Instance.AddMoneyCount(getMoneyCount);
 		Destroy (gameObject);
 	}
 	
@@ -44,10 +51,12 @@ public abstract class EnemyController : HumanController {
 	}
 
 	public void ApplyDamage(){
+		int damage = mEnemyData.Atack;
 		GameObject damageLabelObject = Instantiate(mDamageLabelPrefab)as GameObject;
 		damageLabelObject.transform.parent = transform.parent;
 		damageLabelObject.transform.localScale = new Vector3(1,1,1);
 		damageLabelObject.transform.localPosition = transform.localPosition;
-		damageLabelObject.SendMessage("SetCount",mEnemyData.Atack);
+		damageLabelObject.SendMessage("SetCount",damage);
+		CountManager.Instance.DecreaseMoneyCount(damage);
 	}
 }

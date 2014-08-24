@@ -15,20 +15,22 @@ public class EnemyDataDao : Dao {
 		}
 	}
 
-	public EnemyData QueryEnemyData (int id) {
+	public List<EnemyData> QueryEnemyDataList(){
 		SQLiteDB sqliteDB = OpenDatabase ();
-		string sql = "select * from " + ENEMY_DATA_LIST_TABLE + " where " + EnemyDataField.ID + " = " + id + ";";
+		string sql = "select * from " + ENEMY_DATA_LIST_TABLE +  ";";
 		Debug.Log("sql = "+ sql);
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sql);
-		EnemyData enemyData = new EnemyData ();
-		while (sqliteQuery.Step()) {
+		List<EnemyData> enemyDataList = new List<EnemyData>();
+		while(sqliteQuery.Step()){
+			EnemyData enemyData = new EnemyData ();
 			enemyData.Id = sqliteQuery.GetInteger (EnemyDataField.ID);
 			enemyData.Name = sqliteQuery.GetString (EnemyDataField.NAME);
 			enemyData.Description = sqliteQuery.GetString (EnemyDataField.DESCRIPTION);
 			enemyData.Atack = sqliteQuery.GetInteger (EnemyDataField.ATACK);
+			enemyDataList.Add(enemyData);
 		}
-		return enemyData;
+		CloseDatabase(sqliteDB,sqliteQuery);
+		return enemyDataList;
 	}
-
 
 }
