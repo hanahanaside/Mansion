@@ -10,37 +10,47 @@ public class MainController : MonoBehaviour {
 	private GameObject mCurrentPanel;
 
 	void Start () {
-		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
+		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
 		mCurrentPanel = homePanel;
-		SecomData secomData = new SecomData();
+		SecomData secomData = new SecomData ();
 		secomData.Count = 1;
 		secomData.MacxCount = 2;
 	}
 
+	void Update () {
+#if UNITY_ANDROID
+		if (Input.GetKey (KeyCode.Escape)) {
+			Application.Quit ();
+			Debug.Log("finish");
+			return;
+		}
+#endif
+	}
+
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
-		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (homePanel);
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
-		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (shopPanel);
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
-		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (statusPanel);
 	}
 
 	private void ChangePanel (GameObject panel) {
-		if(mCurrentPanel.Equals(panel)){
-			Debug.Log("same");
-			SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
+		if (mCurrentPanel.Equals (panel)) {
+			Debug.Log ("same");
+			SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 			scrollView.ResetPosition ();
 			return;
 		}
