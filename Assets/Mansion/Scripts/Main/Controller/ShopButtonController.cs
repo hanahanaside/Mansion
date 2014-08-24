@@ -1,30 +1,26 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ShopButtonController : MonoBehaviour {
 
 	public GameObject shopItemDialogPrefab;
-	public GameObject closedSprite;
-	public GameObject unLockSprite;
-	public GameObject lockSprite;
+	public GameObject parentObject;
+	public UISprite QuestionSprite;
+	public UISprite itemSprite;
+	public UISprite lockSprite;
+	public UISprite stampSprite;
 	private ShopItemData mShopItemData;
-
+	
 	void Init (ShopItemData shopItemData) {
 		mShopItemData = shopItemData;
-		if (mShopItemData.Level == ShopItemData.LEVEL_CLOSED) {
-			unLockSprite.SetActive (false);
-			lockSprite.SetActive (false);
-		} else if (mShopItemData.Level == ShopItemData.LEVEL_LOCK) {
-			closedSprite.SetActive (false);
-		} else if (mShopItemData.Level == ShopItemData.LEVEL_UNLOCK) {
-			closedSprite.SetActive (false);
-			lockSprite.SetActive (false);
-		}else if(mShopItemData.Level == ShopItemData.LEVEL_BOUGHT){
-
-		}
+		InitComponentsByLockLevel();
 	}
 	
 	public void OnButtonClicked () {
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
+		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_BOUGHT){
+			return;
+		}
 		GameObject uiRoot = UIRootInstanceKeeper.UIRootGameObject;
 		GameObject shopItemDialog = Instantiate (shopItemDialogPrefab) as GameObject;
 		shopItemDialog.transform.parent = uiRoot.transform;
@@ -48,5 +44,26 @@ public class ShopButtonController : MonoBehaviour {
 	private void Reset () {
 		DialogController.itemBoughtEvent -= itemBoughtEvent;
 		DialogController.dialogClosedEvent -= dialogClosedEvent;
+	}
+
+	private void InitComponentsByLockLevel(){
+		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_CLOSED){
+			QuestionSprite.enabled = true;
+			parentObject.collider.enabled = false;
+		}else if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_LOCKED){
+			lockSprite.enabled = true;
+			ShowItemSprite();
+		}else if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED){
+			ShowItemSprite();
+		}else if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_BOUGHT){
+			ShowItemSprite();
+			stampSprite.enabled = true;
+		}
+
+	}
+
+	private void ShowItemSprite(){
+		itemSprite.enabled = true;
+		itemSprite.spriteName = "shop_item_" + mShopItemData.Id;
 	}
 }

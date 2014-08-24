@@ -5,6 +5,7 @@ public abstract class Dao {
 
 	protected string ROOM_DATA_LIST_TABLE = "room_data_list";
 	protected string ENEMY_DATA_LIST_TABLE = "enemy_data_list";
+	protected string SHOP_ITEM_DATA_LIST_TABLE = "shop_item_data_list";
 
 	protected SQLiteDB OpenDatabase(){
 		string filePath = Application.persistentDataPath + "/manshon.db";
@@ -32,5 +33,17 @@ public abstract class Dao {
 		public const string ATACK = "atack";
 		public const string NAME = "name";
 		public const string DESCRIPTION = "description";
+	}
+
+	protected class ShopItemDataField{
+		public const string ID = "id";
+		public const string NAME = "name";
+		public const string DESCRIPTION = "description";
+		public const string TAG = "tag";
+		public const string PRICE = "price";
+		public const string UNLOCK_LEVEL = "unlock_level";
+		public const string UNLOCK_CONDITION = "unlock_condition";
+		public const string TARGET_ROOM_ID = "target_room_id";
+		public const string EFFECT = "effect";
 	}
 }
