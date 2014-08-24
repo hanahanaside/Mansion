@@ -17,7 +17,7 @@ public class CountManager : MonoBehaviour {
 		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
 		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
-		keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
+		SetKeepCountLabel();
 		if(mTotalGenerateSpeed != 0){
 			ResetTime ();
 		}

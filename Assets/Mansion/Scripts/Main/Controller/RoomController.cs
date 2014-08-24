@@ -13,24 +13,29 @@ public class RoomController : MonoBehaviour {
 	public UILabel generateSpeedLabel;
 	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
-	private int mMaxItemCount;
+	private List<UISprite> mItemSpriteList;
 
-	void Start () {
-		foreach (UIGrid grid in itemGridArray) {
-			List<Transform> itemList = grid.GetChildList ();
-			mMaxItemCount += itemList.Count;
+	void Start(){
+		if(mRoomData.ItemCount != 0){
+			GenerateResident (mRoomData.ItemCount);
 		}
 	}
 	
-	void Init (RoomData roomData) {
+	void Init (RoomData roomData) {  
 		mRoomData = roomData;
+		if(mItemSpriteList == null){
+			CreateItemSpriteList();
+		}
 		if (mRoomData.ItemCount == 0) {
 			lockObject.SetActive (true);
 			return;
 		}
-		SetActiveItem ();
-		GenerateResident (mRoomData.ItemCount);
-		SetTextData ();
+		// only first
+		UISprite firstItemSprite = mItemSpriteList[0];
+		if(!firstItemSprite.enabled){
+			SetActiveItem ();
+		}
+		SetTextData (); 
 	}
 
 	void itemBoughtEvent () {
@@ -89,18 +94,24 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void SetActiveItem () {
-		if (mRoomData.ItemCount > mMaxItemCount) {
+		if (mRoomData.ItemCount > mItemSpriteList.Count) {
 			return;
 		}
+		for(int i = 0; i<mRoomData.ItemCount;i++){
+			UISprite sprite = mItemSpriteList[i];
+			if(!sprite.enabled){
+				sprite.enabled = true;
+			}
+		}
+ 	}
+
+	private void CreateItemSpriteList(){
+		mItemSpriteList = new List<UISprite>();
 		foreach (UIGrid grid in itemGridArray) {
 			List<Transform> itemList = grid.GetChildList ();
-			for (int i = 0; i < mRoomData.ItemCount; i++) {
-				GameObject item = itemList [i].gameObject;
-				UISprite sprite = item.GetComponent<UISprite> ();
-				if (!sprite.enabled) {
-					sprite.enabled = true;
-					return;
-				}
+			foreach(Transform item in itemList){
+				UISprite sprite = item.GetComponent<UISprite>();
+				mItemSpriteList.Add(sprite);
 			}
 		}
 	}

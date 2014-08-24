@@ -87,6 +87,6 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 
 	private void SetGenerateIntervalTime () {
-		mGenerateIntervalTime = 5.0f;
+		mGenerateIntervalTime = 20.0f;
 	}
 }
