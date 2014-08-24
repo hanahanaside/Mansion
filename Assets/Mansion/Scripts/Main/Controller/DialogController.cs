@@ -12,11 +12,13 @@ public class DialogController : MonoBehaviour {
 	}
 
 	public virtual void OnBuyButtonClicked () {
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		itemBoughtEvent ();
 		FenceManager.Instance.HideFence ();
 	}
 	
 	public virtual void OnCloseButonClicked () {
+		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
 		dialogClosedEvent ();
 		FenceManager.Instance.HideFence ();
 	}

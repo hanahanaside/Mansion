@@ -50,7 +50,6 @@ public class RoomController : MonoBehaviour {
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
 		GenerateResident (1);
-		Reset ();
 	}
 	
 	void dialogClosedEvent () {

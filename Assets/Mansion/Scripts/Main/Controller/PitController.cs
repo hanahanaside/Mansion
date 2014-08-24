@@ -23,7 +23,7 @@ public class PitController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);
 
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
-		countLabelObject.transform.Translate (0, 0.3f, 0);
+		countLabelObject.transform.Translate (0, 0.1f, 0);
 		int getPoint = CalcGetPoint ();
 		countLabelObject.SendMessage ("SetCount", getPoint);
 		InstantiateObject (moneyParticlePrefab);
