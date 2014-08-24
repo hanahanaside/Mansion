@@ -21,6 +21,7 @@ public class WomanThiefController : EnemyController {
 		Debug.Log ("atack");
 		IsAtacking = true;
 		atackAnimation.enabled = true;
+		ApplyDamage();
 		yield return new WaitForSeconds (2.0f);
 		atackAnimation.enabled = false;
 		yield return new WaitForSeconds (1.0f);

@@ -31,13 +31,17 @@ public class EnemyGenerator : MonoBehaviour {
 		}
 	}
 
-	public void EXSpriteEnabled(bool state){
-		exSprite.enabled = state;
+	private bool IsEnemyExist{
+		set;get;
 	}
 
+	public void AttackedEnemy(){
+		exSprite.enabled = false;
+		IsEnemyExist = false;
+	}
+	
 	private void GenerateEnemy () {
-		GameObject enemyObject = GameObject.FindWithTag ("Enemy");
-		if (enemyObject != null) {
+		if(IsEnemyExist){
 			Debug.Log("return generate");
 			SetGenerateIntervalTime();
 			return;
@@ -56,12 +60,16 @@ public class EnemyGenerator : MonoBehaviour {
 		Debug.Log("unlock size = "+unlockRoomDataList.Count);
 		RoomData unlockRoomData = unlockRoomDataList [unlockRoomDataIndex];
 		GameObject unlockRoomObject = mHomeChildList [unlockRoomData.Id].gameObject;
-		enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;
+		GameObject enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;
 		enemyObject.transform.parent = unlockRoomObject.transform;
 		enemyObject.transform.localScale = new Vector3 (1, 1, 1);
 		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
 		Debug.Log("generated roomId = "+unlockRoomData.Id);
-		EXSpriteEnabled(true);
+		exSprite.enabled = true;
+		SetGenerateIntervalTime();
+		IsEnemyExist = true;
+		SoundManager.Instance.StopBGM();
+		SoundManager.Instance.PlayBGM(AudioClipID.BGM_ENEMY);
 	}
 
 	private void SetGenerateIntervalTime () {

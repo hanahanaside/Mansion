@@ -29,6 +29,7 @@ public class SpaceVikingController : EnemyController {
 		foreach(iTweenEvent atackEvent in atackEventArray){
 			atackEvent.Play();
 		}
+		ApplyDamage();
 		yield return new WaitForSeconds (2.0f);
 		foreach(iTweenEvent atackEvent in atackEventArray){
 			atackEvent.Stop();

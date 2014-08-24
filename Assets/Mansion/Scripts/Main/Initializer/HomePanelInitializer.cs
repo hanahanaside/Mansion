@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class HomePanelInitializer : MonoBehaviour {
 
 	public UIGrid grid;
+	public GameObject pitPrefab;
 
 	void OnEnable () {
 		List<Transform> childList = grid.GetChildList ();
@@ -15,5 +16,8 @@ public class HomePanelInitializer : MonoBehaviour {
 			RoomData roomData = roomDataList [i];
 			childObject.BroadcastMessage ("Init", roomData);
 		}
+		GameObject pitObject = childList[11].gameObject;
+		int pitLevel = ShopItemDataDao.Instance.GetPitLevel();
+		pitObject.BroadcastMessage("Init",pitLevel);
 	}
 }

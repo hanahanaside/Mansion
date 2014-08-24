@@ -49,7 +49,6 @@
      <Compile Include="Assets\Mansion\Scripts\Initialize\DatabaseCreater.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\AddCountLabelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\AudioClipID.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\AssassinController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\CatController.cs" />
@@ -68,6 +67,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\SpaceVikingController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\WomanThiefController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\CountLabelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\Dao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\EnemyDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\HistoryDataDao.cs" />

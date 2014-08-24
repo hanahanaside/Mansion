@@ -31,7 +31,7 @@ public class CountManager : MonoBehaviour {
 		mTime -= Time.deltaTime;
 		if (mTime < 0.0f) {
 			mKeepMoneyCount++;
-			keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
+			SetKeepCountLabel();
 			StatusDataKeeper.Instance.IncrementTotalGenerateCount ();
 			ResetTime ();
 		}
@@ -51,13 +51,13 @@ public class CountManager : MonoBehaviour {
 
 	public void AddGeneratedCount (int addCount) {
 		mKeepMoneyCount += addCount;
-		keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
+		SetKeepCountLabel();
 	}
 
 	public void AddGenerateSpeed (float addSpeed) {
 		mTotalGenerateSpeed += addSpeed;
 		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
-		keepMoneyCountLabel.text = "count = " + mKeepMoneyCount;
+		SetKeepCountLabel();
 		ResetTime();
 	}
 
@@ -73,5 +73,9 @@ public class CountManager : MonoBehaviour {
 
 	private void ResetTime () {
 		mTime = 1.0f / mTotalGenerateSpeed;
+	}
+
+	private void SetKeepCountLabel(){
+		keepMoneyCountLabel.text = mKeepMoneyCount + "\u5186";
 	}
 }

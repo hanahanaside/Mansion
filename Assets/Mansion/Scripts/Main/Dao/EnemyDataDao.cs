@@ -6,29 +6,29 @@ public class EnemyDataDao : Dao {
 
 	private static EnemyDataDao sInstance;
 
-	public static EnemyDataDao Instance{
-		get{
-			if(sInstance == null){
-				sInstance = new EnemyDataDao();
+	public static EnemyDataDao Instance {
+		get {
+			if (sInstance == null) {
+				sInstance = new EnemyDataDao ();
 			}
 			return sInstance;
 		}
 	}
 
-	public List<EnemyData> GetEnemyDataList(){
+	public EnemyData QueryEnemyData (int id) {
 		SQLiteDB sqliteDB = OpenDatabase ();
-		string sql = "select * from " + ENEMY_DATA_LIST_TABLE + ";";
+		string sql = "select * from " + ENEMY_DATA_LIST_TABLE + " where " + EnemyDataField.ID + " = " + id + ";";
+		Debug.Log("sql = "+ sql);
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sql);
-		List<EnemyData> enemyDataList = new List<EnemyData> ();
-		while(sqliteQuery.Step()){
-			EnemyData enemyData = new EnemyData();
-			enemyData.Id = sqliteQuery.GetInteger(EnemyDataField.ID);
-			enemyData.Name = sqliteQuery.GetString(EnemyDataField.NAME);
-			enemyData.Description = sqliteQuery.GetString(EnemyDataField.DESCRIPTION);
-			enemyData.Atack = sqliteQuery.GetInteger(EnemyDataField.ATACK);
-			enemyDataList.Add(enemyData);
+		EnemyData enemyData = new EnemyData ();
+		while (sqliteQuery.Step()) {
+			enemyData.Id = sqliteQuery.GetInteger (EnemyDataField.ID);
+			enemyData.Name = sqliteQuery.GetString (EnemyDataField.NAME);
+			enemyData.Description = sqliteQuery.GetString (EnemyDataField.DESCRIPTION);
+			enemyData.Atack = sqliteQuery.GetInteger (EnemyDataField.ATACK);
 		}
-		CloseDatabase (sqliteDB, sqliteQuery);
-		return enemyDataList;
+		return enemyData;
 	}
+
+
 }

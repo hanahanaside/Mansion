@@ -29,9 +29,12 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public void PlayBGM(int bgmClipId){
-		mBGMAudioSource.Stop();
 		mBGMAudioSource.clip = bgmClipArray[bgmClipId];
 		mBGMAudioSource.Play();
+	}
+
+	public void StopBGM(){
+		mBGMAudioSource.Stop();
 	}
 
 	public void PlaySE (int seClipId) {

@@ -13,20 +13,23 @@ public class RoomController : MonoBehaviour {
 	public UILabel generateSpeedLabel;
 	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
-	private List<GameObject> mItemList;
+	private int mMaxItemCount;
+
+	void Start () {
+		foreach (UIGrid grid in itemGridArray) {
+			List<Transform> itemList = grid.GetChildList ();
+			mMaxItemCount += itemList.Count;
+		}
+	}
 	
 	void Init (RoomData roomData) {
 		mRoomData = roomData;
 		if (mRoomData.ItemCount == 0) {
 			lockObject.SetActive (true);
-			CreateItemList ();
 			return;
 		}
-		if (mItemList == null) {
-			CreateItemList ();
-			SetActiveItem ();
-			GenerateResident (mRoomData.ItemCount);
-		}
+		SetActiveItem ();
+		GenerateResident (mRoomData.ItemCount);
 		SetTextData ();
 	}
 
@@ -37,7 +40,7 @@ public class RoomController : MonoBehaviour {
 		}
 		mRoomData.ItemCount++;
 		RoomDataDao.Instance.UpdateItemCount (mRoomData);
-		CountManager.Instance.DecreaseMoneyCount(mRoomData.ItemPrice);
+		CountManager.Instance.DecreaseMoneyCount (mRoomData.ItemPrice);
 		SetActiveItem ();
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
@@ -57,26 +60,12 @@ public class RoomController : MonoBehaviour {
 	}
 
 	public void OnBuyButtonClicked () {
-		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
-		if (CheckInActiveItemExist ()) {
-			ShowRoomItemDialog ();
-			iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButtonParent, "ExitEvent");
-			removeEvent.Play ();
-		} else {
-			//full of item
-			Debug.Log("full of item");
-		}
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		ShowRoomItemDialog ();
+		iTweenEvent removeEvent = iTweenEvent.GetEvent (buyButtonParent, "ExitEvent");
+		removeEvent.Play ();
 	}
-
-	private bool CheckInActiveItemExist () {
-		foreach (GameObject item in mItemList) {
-			if (!item.activeSelf) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	private void ShowRoomItemDialog () { 
 		GameObject roomItemDialog = Instantiate (roomItemDialogPrefab) as GameObject;
 		roomItemDialog.transform.parent = UIRootInstanceKeeper.UIRootGameObject.transform;
@@ -99,21 +88,20 @@ public class RoomController : MonoBehaviour {
 		comeBackEvent.Play ();
 	}
 
-	private void CreateItemList () {
-		mItemList = new List<GameObject> ();
-		foreach(UIGrid grid in itemGridArray){
-			List<Transform> itemList = grid.GetChildList();
-			foreach(Transform item in itemList){
-				mItemList.Add(item.gameObject);
-				item.gameObject.SetActive(false);
-			}
-		}
-	}
-
 	private void SetActiveItem () {
-		for (int i = 0; i < mRoomData.ItemCount; i++) {
-			GameObject item = mItemList [i];
-			item.SetActive (true);
+		if (mRoomData.ItemCount > mMaxItemCount) {
+			return;
+		}
+		foreach (UIGrid grid in itemGridArray) {
+			List<Transform> itemList = grid.GetChildList ();
+			for (int i = 0; i < mRoomData.ItemCount; i++) {
+				GameObject item = itemList [i].gameObject;
+				UISprite sprite = item.GetComponent<UISprite> ();
+				if (!sprite.enabled) {
+					sprite.enabled = true;
+					return;
+				}
+			}
 		}
 	}
 
@@ -123,7 +111,7 @@ public class RoomController : MonoBehaviour {
 			float y = Random.Range (-100, 50);
 			GameObject resident = Instantiate (residentPrefab) as GameObject;
 			resident.transform.parent = transform.parent;
-			resident.transform.localScale = new Vector3(1,1,1);
+			resident.transform.localScale = new Vector3 (1, 1, 1);
 			resident.transform.localPosition = new Vector3 (x, y, 0);
 		}
 	}

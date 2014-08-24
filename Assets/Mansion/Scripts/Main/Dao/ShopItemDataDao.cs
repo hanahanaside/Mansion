@@ -29,4 +29,9 @@ public class ShopItemDataDao {
 		}
 		return shopItemDataList;
 	}
+
+	public int GetPitLevel(){
+		int pitLevel = Random.Range(1,6);
+		return pitLevel;
+	}
 }

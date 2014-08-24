@@ -29,6 +29,7 @@ public class PhantomThiefController : EnemyController {
 		float y = transform.localRotation.eulerAngles.y;
 		transform.localRotation = Quaternion.Euler(0,y,10);
 		atackEvent.Play();
+		ApplyDamage();
 		yield return new WaitForSeconds (2.0f);
 		atackEvent.Stop();
 		yield return new WaitForSeconds (0.5f);
