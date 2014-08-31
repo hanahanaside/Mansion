@@ -7,9 +7,11 @@ public class StatusPanelInitializer : MonoBehaviour {
 	public UIGrid gotItemGrid;
 	public UIGrid historyGrid;
 	public GameObject historyButtonPrefab;
+	public GameObject shopItemButtonPrefab;
 
 	void OnEnable () {
 		InitHistoryGrid ();
+		InitGotItemGrid ();
 		InitWork ();
 	}
 
@@ -38,10 +40,30 @@ public class StatusPanelInitializer : MonoBehaviour {
 		}
 	}
 
+	private void InitGotItemGrid () {
+		List<ShopItemData> boughtItemList = ShopItemDataDao.Instance.GetBoughtItemList ();
+		while (gotItemGrid.GetChildList ().Count < boughtItemList.Count) {
+			GameObject shopButton = Instantiate (shopItemButtonPrefab) as GameObject;
+			gotItemGrid.AddChild (shopButton.transform);
+			shopButton.transform.localScale = new Vector3 (1, 1, 1);
+		}
+		List<Transform> childList = gotItemGrid.GetChildList ();
+		for (int i = 0; i < childList.Count; i++) {
+			GameObject childObject = childList [i].gameObject;
+			ShopItemData shopItemData = boughtItemList [i];
+			shopItemData.UnlockLevel = ShopItemData.UNLOCK_LEVEL_STATUS;
+			childObject.BroadcastMessage ("Init", shopItemData);
+		}
+	}
+
 	private void InitWork () {
 		List<Transform> childList = gotItemGrid.GetChildList ();
 		int count = childList.Count;
-		Transform finalChild = childList [count - 1];
-		work.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 610.0f, 0);
+		if (count == 0) {
+
+		} else {
+			Transform finalChild = childList [count - 1];
+			work.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 650.0f, 0);
+		}
 	}
 }

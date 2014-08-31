@@ -6,6 +6,7 @@ public class ShopItemDialogController : DialogController {
 	public UISprite itemSprite;
 	public GameObject lockObject;
 	public GameObject priceLabelObject;
+	public GameObject buyButtonObject;
 	public UILabel nameLabel;
 	public UILabel descriptionLabel;
 	private ShopItemData mShopItemData;
@@ -76,6 +77,13 @@ public class ShopItemDialogController : DialogController {
 			sb.Append (shopItemData.Description + "\n");
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
 			description = sb.ToString ();
+		}
+		if(shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS){
+			StringBuilder sb = new StringBuilder ();
+			sb.Append (shopItemData.Description + "\n");
+			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
+			description = sb.ToString ();
+			buyButtonObject.SetActive (false);
 		}
 		descriptionLabel.text = description;
 	}

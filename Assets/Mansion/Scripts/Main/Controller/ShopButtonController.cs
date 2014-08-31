@@ -83,6 +83,10 @@ public class ShopButtonController : MonoBehaviour {
 			stampSprite.enabled = true;
 			parentObject.collider.enabled = true;
 		}
+		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS){
+			ShowItemSprite();
+			parentObject.collider.enabled = true;
+		}
 	}
 
 	private void ShowItemSprite(){

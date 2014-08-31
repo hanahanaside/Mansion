@@ -61,6 +61,9 @@ public class MainController : MonoBehaviour {
 			return;
 		}
 		panel.SetActive (true);
+//		if(!mCurrentPanel.Equals(homePanel)){
+//			mCurrentPanel.SetActive (false);
+//		}
 		mCurrentPanel.SetActive (false);
 		mCurrentPanel = panel;
 		scrollView.ResetPosition ();

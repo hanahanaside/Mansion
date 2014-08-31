@@ -7,6 +7,7 @@ public class ShopItemData {
 	public static int UNLOCK_LEVEL_LOCKED = 1;
 	public static int UNLOCK_LEVEL_UNLOCKED = 2;
 	public static int UNLOCK_LEVEL_BOUGHT = 3;
+	public static int UNLOCK_LEVEL_STATUS = 4;
 
 	public static string TAG_PIT = "pit";
 	public static string TAG_ITEM = "item";

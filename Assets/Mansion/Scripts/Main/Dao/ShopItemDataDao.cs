@@ -29,6 +29,23 @@ public class ShopItemDataDao : Dao {
 		return shopItemDataList;
 	}
 
+	public List<ShopItemData> GetBoughtItemList () {
+		SQLiteDB sqliteDB = OpenDatabase ();
+		StringBuilder sb = new StringBuilder ();
+		sb.Append ("select * from " + SHOP_ITEM_DATA_LIST_TABLE + " ");
+		sb.Append ("where " + ShopItemDataField.TAG + " = '" + ShopItemData.TAG_ITEM + "'");
+		sb.Append (" and ");
+		sb.Append (ShopItemDataField.UNLOCK_LEVEL + " = " + ShopItemData.UNLOCK_LEVEL_BOUGHT + ";");
+		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
+		List<ShopItemData> shopItemDataList = new List<ShopItemData> ();
+		while (sqliteQuery.Step ()) {
+			ShopItemData shopItemData = GetShopItemDataFromQuery (sqliteQuery);
+			shopItemDataList.Add (shopItemData);
+		}
+		CloseDatabase (sqliteDB, sqliteQuery);
+		return shopItemDataList;
+	}
+
 	public List<ShopItemData> QueryByTargetRoomId (int roomId) {
 		SQLiteDB sqliteDB = OpenDatabase ();
 		StringBuilder sb = new StringBuilder ();
@@ -45,14 +62,14 @@ public class ShopItemDataDao : Dao {
 		return shopItemDataList;
 	}
 
-	public ShopItemData GetShopItemDataById(int id){
+	public ShopItemData GetShopItemDataById (int id) {
 		SQLiteDB sqliteDB = OpenDatabase ();
 		StringBuilder sb = new StringBuilder ();
 		sb.Append ("select * from " + SHOP_ITEM_DATA_LIST_TABLE + " ");
 		sb.Append ("where " + ShopItemDataField.ID + " = " + id + ";");
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
 		ShopItemData shopItemData = null;
-		while(sqliteQuery.Step()){
+		while (sqliteQuery.Step ()) {
 			shopItemData = GetShopItemDataFromQuery (sqliteQuery);
 		}
 		CloseDatabase (sqliteDB, sqliteQuery);
