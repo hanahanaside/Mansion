@@ -34,7 +34,7 @@ public class RoomItemDialogController : DialogController {
 	}
 
 	public override void OnBuyButtonClicked () {
-		int keepMoneyCount = CountManager.Instance.KeepMoneyCount;
+		long keepMoneyCount = CountManager.Instance.KeepMoneyCount;
 		if(keepMoneyCount < mRoomData.ItemPrice){
 			//short money
 			SoundManager.Instance.PlaySE(AudioClipID.SE_SHORT_MONEY);

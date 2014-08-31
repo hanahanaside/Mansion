@@ -55,13 +55,14 @@ public class PrefsManager {
 		return statusData;
 	}
 
-	public void SaveMoneyCount (int keepMoneyCount) {
-		PlayerPrefs.SetInt (KEEP_MONEY_COUNT, keepMoneyCount);
+	public void SaveMoneyCount (long keepMoneyCount) {
+		PlayerPrefs.SetString (KEEP_MONEY_COUNT,"" +keepMoneyCount);
 		PlayerPrefs.Save ();
 	}
 
-	public int GetMoneyCount () {
-		int keepMoneyCount = PlayerPrefs.GetInt (KEEP_MONEY_COUNT);
+	public long GetMoneyCount () {
+		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
+		long keepMoneyCount = System.Convert.ToInt64 (keepMoneyCountString);
 		return keepMoneyCount;
 	}
 }

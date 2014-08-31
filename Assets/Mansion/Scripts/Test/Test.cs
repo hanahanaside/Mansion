@@ -7,9 +7,9 @@ public class Test : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		List<ShopItemData> shopItemDataList = ShopItemDataDao.Instance.GetShopItemDataList();
-		Debug.Log("id = " + shopItemDataList[0].Id);
-		Debug.Log(shopItemDataList[0].Name);
+		DateTime dt = DateTime.Now;
+		string date = dt.ToString ("MM/dd HH:mm");
+		Debug.Log (date);
 	}
 	
 }

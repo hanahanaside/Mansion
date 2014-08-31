@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public abstract class EnemyController : HumanController {
 
@@ -7,6 +8,7 @@ public abstract class EnemyController : HumanController {
 	private GameObject mDamageLabelPrefab;
 	private GameObject mGetMoneyLabelPrefab;
 	private EnemyData mEnemyData;
+	private long mTotalDamage;
 
 	void Start () {
 		SetAtackIntervalTime ();
@@ -43,6 +45,9 @@ public abstract class EnemyController : HumanController {
 		getMoneyLabelObject.transform.localPosition = transform.localPosition;
 		getMoneyLabelObject.SendMessage("SetCount",getMoneyCount);
 		CountManager.Instance.AddMoneyCount(getMoneyCount);
+
+		//ヒストリーデータをインサート
+		InsertHistoryData ();
 		Destroy (gameObject);
 	}
 	
@@ -52,11 +57,23 @@ public abstract class EnemyController : HumanController {
 
 	public void ApplyDamage(){
 		int damage = mEnemyData.Atack;
+		mTotalDamage += damage;
 		GameObject damageLabelObject = Instantiate(mDamageLabelPrefab)as GameObject;
 		damageLabelObject.transform.parent = transform.parent;
 		damageLabelObject.transform.localScale = new Vector3(1,1,1);
 		damageLabelObject.transform.localPosition = transform.localPosition;
 		damageLabelObject.SendMessage("SetCount",damage);
 		CountManager.Instance.DecreaseMoneyCount(damage);
+	}
+
+	private void InsertHistoryData(){
+		DateTime dtNow = DateTime.Now;
+		string date = dtNow.ToString ("MM/dd HH:mm");
+		string damage = mTotalDamage.ToString ();
+		HistoryData historyData = new HistoryData ();
+		historyData.EnemyId = mEnemyData.Id;
+		historyData.Damage = DamageConverter.Convert(damage);
+		historyData.Date = date;
+		HistoryDataDao.Instance.InsertHistoryData (historyData);
 	}
 }

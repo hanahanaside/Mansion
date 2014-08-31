@@ -3,10 +3,21 @@ using System.Collections;
 
 public class HistoryButtonController : MonoBehaviour {
 
-	public UILabel historyLabel;
-	public UISprite historySprite;
+	public UILabel dateLabel;
+	public UILabel damageLabel;
+	private GameObject mHistoryImageObject;
+
+	void OnDisable(){
+		Destroy (mHistoryImageObject);
+	}
 
 	void Init (HistoryData historydata) {
-		historyLabel.text = historydata.Date +"\n" + historydata.Result;
+		dateLabel.text = historydata.Date;
+		damageLabel.text = historydata.Damage;
+		GameObject historyImagePrefab =  (Resources.Load ("Prefabs/Button/HistoryImage_" + historydata.EnemyId)) as GameObject;
+		mHistoryImageObject =  Instantiate (historyImagePrefab) as GameObject;
+		mHistoryImageObject.transform.parent = transform.parent;
+		mHistoryImageObject.transform.localScale = new Vector3 (1,1,1);
+		mHistoryImageObject.transform.localPosition = new Vector3 (0,0,0);
 	}
 }

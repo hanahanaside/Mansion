@@ -8,7 +8,7 @@ public class CountManager : MonoBehaviour {
 	public UILabel keepMoneyCountLabel;
 	public UILabel totalGenerateSpeedLabel;
 	private static CountManager sInstance;
-	private int mKeepMoneyCount;
+	private long mKeepMoneyCount;
 	private float mTotalGenerateSpeed;
 	private float mTime;
 
@@ -58,12 +58,12 @@ public class CountManager : MonoBehaviour {
 		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
 	}
 
-	public void DecreaseMoneyCount (int decreaseCount) {
+	public void DecreaseMoneyCount (long decreaseCount) {
 		mKeepMoneyCount -= decreaseCount;
 		SetKeepCountLabel();
 	}
 
-	public int KeepMoneyCount {
+	public long KeepMoneyCount {
 		get {
 			return mKeepMoneyCount;
 		}
