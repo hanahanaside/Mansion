@@ -31,6 +31,7 @@ public class PitController : MonoBehaviour {
 		countLabelObject.SendMessage ("SetCount", getPoint);
 		InstantiateObject (moneyParticlePrefab);
 		CountManager.Instance.AddMoneyCount (getPoint);
+		StatusDataKeeper.Instance.AddTotalPitGenerateCount (getPoint);
 		Debug.Log ("total tap count = " + StatusDataKeeper.Instance.StatusData.TotalTapPitCount);
 		CheckUnLickPitItem ();
 	}

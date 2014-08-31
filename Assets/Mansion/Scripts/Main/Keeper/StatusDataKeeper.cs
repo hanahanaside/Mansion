@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class StatusDataKeeper : MonoBehaviour {
 
@@ -9,6 +10,13 @@ public class StatusDataKeeper : MonoBehaviour {
 	void Start () {
 		sInstance = this;
 		mStatusData = PrefsManager.Instance.GetStatusData ();
+	}
+
+	void Update(){
+		long currentKeepCount = CountManager.Instance.KeepMoneyCount;
+		if(currentKeepCount > mStatusData.MaxKeepCount){
+			mStatusData.MaxKeepCount = currentKeepCount;
+		}
 	}
 
 	void OnApplicationPause (bool pauseStatus) {
@@ -34,6 +42,10 @@ public class StatusDataKeeper : MonoBehaviour {
 	}
 	
 	public void IncrementTotalTapPitCount () {
+		if(String.IsNullOrEmpty(mStatusData.FirstGenerateDate)){
+			DateTime dtNow = DateTime.Now;
+			mStatusData.FirstGenerateDate = dtNow.ToString ();
+		}
 		mStatusData.TotalTapPitCount++;
 	}
 
@@ -41,4 +53,15 @@ public class StatusDataKeeper : MonoBehaviour {
 		mStatusData.TotalPitGenerateCount += addCount;
 	}
 
+	public void IncrementCameEnemyCount(){
+		mStatusData.TotalCameEnemyCount++;
+	}
+
+	public void IncrementAtackEnemyCount(){
+		mStatusData.TotalAtackEnemyCount++;
+	}
+
+	public void AddDamagedCount(long damagedCount){
+		mStatusData.TotalDamegedCount += damagedCount;
+	}
 }

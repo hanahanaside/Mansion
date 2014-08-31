@@ -45,6 +45,7 @@ public abstract class EnemyController : HumanController {
 		getMoneyLabelObject.transform.localPosition = transform.localPosition;
 		getMoneyLabelObject.SendMessage("SetCount",getMoneyCount);
 		CountManager.Instance.AddMoneyCount(getMoneyCount);
+		StatusDataKeeper.Instance.IncrementAtackEnemyCount ();
 
 		//ヒストリーデータをインサート
 		InsertHistoryData ();
@@ -58,6 +59,7 @@ public abstract class EnemyController : HumanController {
 	public void ApplyDamage(){
 		int damage = mEnemyData.Atack;
 		mTotalDamage += damage;
+		StatusDataKeeper.Instance.AddDamagedCount (damage);
 		GameObject damageLabelObject = Instantiate(mDamageLabelPrefab)as GameObject;
 		damageLabelObject.transform.parent = transform.parent;
 		damageLabelObject.transform.localScale = new Vector3(1,1,1);

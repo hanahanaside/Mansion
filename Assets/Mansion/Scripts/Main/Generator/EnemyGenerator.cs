@@ -77,6 +77,7 @@ public class EnemyGenerator : MonoBehaviour {
 		InsertHistoryData(mEnemyDataList[enemyIndex]);
 		exSprite.enabled = true;
 		SetGenerateIntervalTime();
+		StatusDataKeeper.Instance.IncrementCameEnemyCount ();
 		IsEnemyExist = true;
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_ENEMY);

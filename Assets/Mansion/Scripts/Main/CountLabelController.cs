@@ -5,7 +5,7 @@ public class CountLabelController : MonoBehaviour {
 
 	public UILabel countLabel;
 
-	void SetCount(int count){
+	void SetCount(long count){
 		countLabel.text = count.ToString();
 	}
 

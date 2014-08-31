@@ -42,6 +42,6 @@ public class StatusPanelInitializer : MonoBehaviour {
 		List<Transform> childList = gotItemGrid.GetChildList ();
 		int count = childList.Count;
 		Transform finalChild = childList [count - 1];
-		work.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 450.0f, 0);
+		work.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 610.0f, 0);
 	}
 }
