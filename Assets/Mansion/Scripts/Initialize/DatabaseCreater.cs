@@ -20,6 +20,7 @@ public class DatabaseCreater : MonoBehaviour {
 		string filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
 #if UNITY_EDITOR
 		File.Delete(filePath);
+		PrefsManager.Instance.SaveMoneyCount(0);
 #endif
 
 		#if UNITY_IPHONE

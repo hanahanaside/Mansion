@@ -40,14 +40,31 @@ public class RoomController : MonoBehaviour {
 
 	void itemBoughtEvent () {
 		Debug.Log ("boughtEvent");
+		List<ShopItemData> shopItemDataList = ShopItemDataDao.Instance.QueryByTargetRoomId (mRoomData.Id);
 		if (mRoomData.ItemCount == 0) {
 			lockObject.SetActive (false);
+
+			//ルームIDに対応するアイテムお全てロック状態にする
+			foreach(ShopItemData shopItemData in shopItemDataList){
+				ShopItemDataDao.Instance.UpdateUnLockLevel (shopItemData.Id,ShopItemData.UNLOCK_LEVEL_LOCKED);
+			}
 		}
 		mRoomData.ItemCount++;
 		RoomDataDao.Instance.UpdateItemCount (mRoomData);
 		CountManager.Instance.DecreaseMoneyCount (mRoomData.ItemPrice);
+
+		//新規にアンロックできるアイテムがあればアンロック
+		foreach(ShopItemData shopItemData in shopItemDataList){
+			if(shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_BOUGHT){
+				continue;
+			}
+			int unlockCondition = shopItemData.UnLockCondition;
+			if(mRoomData.ItemCount >= unlockCondition){
+				ShopItemDataDao.Instance.UpdateUnLockLevel (shopItemData.Id,ShopItemData.UNLOCK_LEVEL_UNLOCKED);
+			}
+		}
 		SetActiveItem ();
-		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
+		CountManager.Instance.UpdateGenerateSpeed ();
 		SetTextData ();
 		GenerateResident (1);
 	}

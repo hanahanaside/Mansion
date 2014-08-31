@@ -25,7 +25,7 @@ public class RoomItemDialogController : DialogController {
 		itemSprite.height = spriteData.height;
 		nameLabel.text = roomData.ItemName;
 		priceLabelObject.GetComponent<UILabel>().text  = "price : " + roomData.ItemPrice;
-		countLabel.text = "所持数 : " + roomData.ItemCount;
+		UpdateItemCountLabel ();
 		descriptionLabel.text = roomData.ItemDescription;
 	}
 
@@ -42,6 +42,7 @@ public class RoomItemDialogController : DialogController {
 			StartCoroutine(StopShortTween());
 		}else {
 			base.OnBuyButtonClicked ();
+			UpdateItemCountLabel ();
 		}
 	}
 
@@ -54,5 +55,9 @@ public class RoomItemDialogController : DialogController {
 		yield return new WaitForSeconds(1.0f);
 		mShortMoneyTweenColor.enabled = false;
 		priceLabelObject.GetComponent<UILabel>().color = Color.black;
+	}
+
+	private void UpdateItemCountLabel(){
+		countLabel.text = "\u6240\u6301\u6570 : " + mRoomData.ItemCount;
 	}
 }

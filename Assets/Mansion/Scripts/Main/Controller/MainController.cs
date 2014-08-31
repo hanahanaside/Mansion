@@ -17,6 +17,7 @@ public class MainController : MonoBehaviour {
 		SecomData secomData = new SecomData ();
 		secomData.Count = 1;
 		secomData.MacxCount = 2;
+		scrollView.ResetPosition ();
 	}
 
 	void Update () {
@@ -45,6 +46,11 @@ public class MainController : MonoBehaviour {
 		Debug.Log ("status");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (statusPanel);
+	}
+
+	public void OnRecommendButtonClicked(){
+		Debug.Log ("recommend");
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 	}
 
 	private void ChangePanel (GameObject panel) {

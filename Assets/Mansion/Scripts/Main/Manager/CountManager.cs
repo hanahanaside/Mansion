@@ -14,8 +14,7 @@ public class CountManager : MonoBehaviour {
 
 	void Start () {
 		sInstance = this;
-		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
-		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		UpdateGenerateSpeed ();
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
 		SetKeepCountLabel();
 		if(mTotalGenerateSpeed != 0){
@@ -54,11 +53,9 @@ public class CountManager : MonoBehaviour {
 		SetKeepCountLabel();
 	}
 
-	public void AddGenerateSpeed (float addSpeed) {
-		mTotalGenerateSpeed += addSpeed;
+	public void UpdateGenerateSpeed(){
+		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
 		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
-		SetKeepCountLabel();
-		ResetTime();
 	}
 
 	public void DecreaseMoneyCount (int decreaseCount) {

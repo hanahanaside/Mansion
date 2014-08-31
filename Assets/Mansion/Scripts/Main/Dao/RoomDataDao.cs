@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 
 public class RoomDataDao : Dao {
-
 	private static RoomDataDao sInstance;
 
 	public static RoomDataDao Instance {
@@ -19,17 +18,11 @@ public class RoomDataDao : Dao {
 	public List<RoomData> GetRoomDataList () {
 		SQLiteDB sqliteDB = OpenDatabase ();
 		string sql = "select * from " + ROOM_DATA_LIST_TABLE + ";";
-		Debug.Log("sql = "+ sql);
+		Debug.Log ("sql = " + sql);
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sql);
 		List<RoomData> roomDataList = new List<RoomData> ();
-		while (sqliteQuery.Step()) {
-			RoomData roomData = new RoomData ();
-			roomData.Id = sqliteQuery.GetInteger (RoomDataField.ID);
-			roomData.ItemCount = sqliteQuery.GetInteger (RoomDataField.ITEM_COUNT);
-			roomData.ItemPrice = sqliteQuery.GetInteger (RoomDataField.PRICE);
-			roomData.GenerateSpeed = (float)sqliteQuery.GetDouble (RoomDataField.GENERATE_SPEED);
-			roomData.ItemName = sqliteQuery.GetString (RoomDataField.NAME);
-			roomData.ItemDescription = sqliteQuery.GetString (RoomDataField.DESCRIPTION);
+		while (sqliteQuery.Step ()) {
+			RoomData roomData = GetRoomDataFromQuery (sqliteQuery);
 			roomDataList.Add (roomData);
 		}
 		CloseDatabase (sqliteDB, sqliteQuery);
@@ -49,19 +42,30 @@ public class RoomDataDao : Dao {
 
 	public float GetTotalGenerateSpeed () {
 		float totalGenerateSpeed = 0.0f;
+		List<RoomData> roomDataList = GetRoomDataList ();
+		foreach(RoomData roomData in roomDataList){
+			int itemCount = roomData.ItemCount;
+			float generateSpeed = roomData.GenerateSpeed;
+			int effect = ShopItemDataDao.Instance.GetEffectByRoomId (roomData.Id);
+			totalGenerateSpeed += (generateSpeed * itemCount) * effect;
+			Debug.Log ("(" + generateSpeed  + " * " + itemCount + ") * " + effect);
+		}
+		return totalGenerateSpeed;
+	}
+
+	public RoomData GetRoomDataById (int id) {
 		SQLiteDB sqliteDB = OpenDatabase ();
 		StringBuilder sb = new StringBuilder ();
-		sb.Append ("select " + RoomDataField.ITEM_COUNT + ", " + RoomDataField.GENERATE_SPEED + " ");
-		sb.Append ("from " + ROOM_DATA_LIST_TABLE + ";");
-		Debug.Log("sql = "+sb.ToString());
+		sb.Append ("select * from " + ROOM_DATA_LIST_TABLE + " ");
+		sb.Append ("where " + RoomDataField.ID + " = " + id + ";");
+		Debug.Log ("sql = " + sb.ToString());
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
-		while (sqliteQuery.Step()) {
-			int itemCount = sqliteQuery.GetInteger (RoomDataField.ITEM_COUNT);
-			float generateSpeed = (float)sqliteQuery.GetDouble (RoomDataField.GENERATE_SPEED);
-			totalGenerateSpeed += generateSpeed * itemCount;
+		RoomData roomData = null;
+		while(sqliteQuery.Step()){
+			roomData = GetRoomDataFromQuery (sqliteQuery);
 		}
 		CloseDatabase (sqliteDB, sqliteQuery);
-		return totalGenerateSpeed;
+		return roomData;
 	}
 
 	public void UpdateItemCount (RoomData roomData) {
@@ -70,9 +74,20 @@ public class RoomDataDao : Dao {
 		sb.Append ("update " + ROOM_DATA_LIST_TABLE + " ");
 		sb.Append ("set " + RoomDataField.ITEM_COUNT + " = " + roomData.ItemCount + " ");
 		sb.Append ("where " + RoomDataField.ID + " = " + roomData.Id + ";");
-		Debug.Log("sql = "+sb.ToString());
+		Debug.Log ("sql = " + sb.ToString ());
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
 		sqliteQuery.Step ();
 		CloseDatabase (sqliteDB, sqliteQuery);
+	}
+
+	private RoomData GetRoomDataFromQuery (SQLiteQuery sqliteQuery) {
+		RoomData roomData = new RoomData ();
+		roomData.Id = sqliteQuery.GetInteger (RoomDataField.ID);
+		roomData.ItemCount = sqliteQuery.GetInteger (RoomDataField.ITEM_COUNT);
+		roomData.ItemPrice = sqliteQuery.GetInteger (RoomDataField.PRICE);
+		roomData.GenerateSpeed = (float)sqliteQuery.GetDouble (RoomDataField.GENERATE_SPEED);
+		roomData.ItemName = sqliteQuery.GetString (RoomDataField.NAME);
+		roomData.ItemDescription = sqliteQuery.GetString (RoomDataField.DESCRIPTION);
+		return roomData;
 	}
 }

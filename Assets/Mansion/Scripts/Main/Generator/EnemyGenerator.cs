@@ -67,10 +67,10 @@ public class EnemyGenerator : MonoBehaviour {
 		RoomData unlockRoomData = unlockRoomDataList [unlockRoomDataIndex];
 		GameObject unlockRoomObject = mHomeChildList [unlockRoomData.Id].gameObject;
 		GameObject enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;
+		enemyObject.BroadcastMessage("SetEnemyData", mEnemyDataList[enemyIndex]);
 		enemyObject.transform.parent = unlockRoomObject.transform;
 		enemyObject.transform.localScale = new Vector3 (1, 1, 1);
 		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
-		enemyObject.BroadcastMessage("SetEnemyData", mEnemyDataList[enemyIndex]);
 
 		Debug.Log("generated roomId = "+unlockRoomData.Id);
 

@@ -11,4 +11,8 @@ public class MoneyParticleDestroyer : MonoBehaviour {
 		yield return new WaitForSeconds (2.0f);
 		Destroy (gameObject);
 	}
+
+	void OnDisable(){
+		Destroy (gameObject);
+	}
 }
