@@ -6,9 +6,9 @@ public class HomePanelInitializer : MonoBehaviour {
 	public UIGrid grid;
 	public UIScrollView scrollView;
 	public GameObject pitPrefab;
-	public UICenterOnChild center;
+	public UICenterOnChild centerOnChild;
 
-	void OnEnable () {
+	public void Init () {
 		List<Transform> childList = grid.GetChildList ();
 		List<RoomData> roomDataList = RoomDataDao.Instance.GetRoomDataList ();
 		roomDataList.Reverse ();
@@ -20,20 +20,16 @@ public class HomePanelInitializer : MonoBehaviour {
 		GameObject pitObject = childList [11].gameObject;
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
 		pitObject.BroadcastMessage ("Init", pitData);
+		scrollView.ResetPosition ();
 		for(int i = 0; i < roomDataList.Count;i++){
 			RoomData roomData = roomDataList[i];
 			if(roomData.ItemCount != 0){
 				Transform child = childList[i];
-//				Debug.Log ("transform = " + child.localPosition);
-//				float y = -child.localPosition.y;
-//				if(y > 2700){
-//					y = 2700;
-//				}
-//				Debug.Log ("y = " + y);
-//				scrollView.transform.localPosition = new Vector3 (0,y,0);
-				center.CenterOn (child);
-				Debug.Log ("ddddddddddddddd");
+				centerOnChild.CenterOn (child);
+				Debug.Log ("aaaaaaaaaaaaaaaaaa");
+				return;
 			}
 		}
+
 	}
 }

@@ -3,21 +3,24 @@ using System.Collections;
 
 public class MainController : MonoBehaviour {
 
-	public GameObject homePanel;
+	public GameObject homeGrid;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
 	public UIScrollView scrollView;
 	private GameObject mCurrentPanel;
+	public HomePanelInitializer homePanelInitializer;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
-		mCurrentPanel = homePanel;
+		mCurrentPanel = homeGrid;
 		SecomData secomData = new SecomData ();
 		secomData.Count = 1;
 		secomData.MacxCount = 2;
 		scrollView.ResetPosition ();
+		mCurrentPanel = homeGrid;
+		homePanelInitializer.Init ();
 	}
 
 	void Update () {
@@ -33,19 +36,22 @@ public class MainController : MonoBehaviour {
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (homePanel);
+		ChangePanel (homeGrid);
+		homePanelInitializer.Init ();
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (shopPanel);
+		scrollView.ResetPosition ();
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		ChangePanel (statusPanel);
+		scrollView.ResetPosition ();
 	}
 
 	public void OnRecommendButtonClicked(){
@@ -53,19 +59,9 @@ public class MainController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 	}
 
-	private void ChangePanel (GameObject panel) {
-		if (mCurrentPanel.Equals (panel)) {
-			Debug.Log ("same");
-			SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-			scrollView.ResetPosition ();
-			return;
-		}
-		panel.SetActive (true);
-//		if(!mCurrentPanel.Equals(homePanel)){
-//			mCurrentPanel.SetActive (false);
-//		}
+	private void ChangePanel(GameObject panel){
 		mCurrentPanel.SetActive (false);
+		panel.SetActive (true);
 		mCurrentPanel = panel;
-		scrollView.ResetPosition ();
 	}
 }

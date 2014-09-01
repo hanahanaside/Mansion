@@ -15,12 +15,6 @@ public class RoomController : MonoBehaviour {
 	private RoomData mRoomData;
 	private List<UISprite> mItemSpriteList;
 
-	void Start(){
-		if(mRoomData.ItemCount != 0){
-			GenerateResident (mRoomData.ItemCount);
-		}
-	}
-	
 	void Init (RoomData roomData) {  
 		mRoomData = roomData;
 		if(mItemSpriteList == null){
@@ -34,6 +28,7 @@ public class RoomController : MonoBehaviour {
 		UISprite firstItemSprite = mItemSpriteList[0];
 		if(!firstItemSprite.enabled){
 			SetActiveItem ();
+			GenerateResident (mRoomData.ItemCount);
 		}
 		SetTextData (); 
 	}
