@@ -7,6 +7,8 @@ public class HistoryData {
 
 	public int EnemyId{ get; set; }
 
+	public int FlagSecom{ get; set;}
+
 	public string Damage{ get; set; }
 
 	public string Date{ get; set; }

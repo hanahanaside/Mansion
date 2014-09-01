@@ -28,9 +28,15 @@ public class ShopItemDialogController : DialogController {
 			mShortMoneyTweenColor.PlayForward ();
 			StartCoroutine (StopShortTween ());
 		} else if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
-			base.OnBuyButtonClicked ();
 			SecomData secomData = PrefsManager.Instance.GetSecomData ();
-			priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+			if(keepMoneyCount < secomData.Price){
+				SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
+				mShortMoneyTweenColor.PlayForward ();
+				StartCoroutine (StopShortTween ());
+			}else {
+				base.OnBuyButtonClicked ();
+				priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+			}
 		} else {
 			base.OnBuyButtonClicked ();
 			FenceManager.Instance.HideFence ();

@@ -10,10 +10,11 @@ public class Test : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		float f = 2000000.5f;
-		double d = 20000000000.5 + 0.1;
-		Debug.Log ("ff = " + f);
-		Debug.Log ("dd = " + d);
+		Debug.Log ("start");
+	}
+
+	void OnApplicationPause(bool state){
+		Debug.Log ("pause");
 	}
 
 	public void OnButtonClick(){

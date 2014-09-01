@@ -53,5 +53,6 @@ public abstract class Dao {
 		public const string ENEMY_ID = "enemy_id";
 		public const string DAMAGE = "damage";
 		public const string DATE = "date";
+		public const string FLAG_SECOM = "flag_secom";
 	}
 }

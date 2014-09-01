@@ -18,7 +18,9 @@ public class DialogController : MonoBehaviour {
 	
 	public virtual void OnCloseButonClicked () {
 		SoundManager.Instance.PlaySE(AudioClipID.SE_BUTTON);
-		dialogClosedEvent ();
+		if(dialogClosedEvent != null){
+			dialogClosedEvent ();
+		}
 		FenceManager.Instance.HideFence ();
 	}
 }

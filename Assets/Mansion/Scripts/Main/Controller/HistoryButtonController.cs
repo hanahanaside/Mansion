@@ -19,5 +19,13 @@ public class HistoryButtonController : MonoBehaviour {
 		mHistoryImageObject.transform.parent = transform.parent;
 		mHistoryImageObject.transform.localScale = new Vector3 (1,1,1);
 		mHistoryImageObject.transform.localPosition = new Vector3 (0,0,0);
+		switch(historydata.FlagSecom){
+		case 0:
+			mHistoryImageObject.BroadcastMessage ("HideSecuritySprite");
+			break;
+		case 1:
+			mHistoryImageObject.BroadcastMessage ("ShowSecuritySprite");
+			break;
+		}
 	}
 }

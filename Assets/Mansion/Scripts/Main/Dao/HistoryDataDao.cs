@@ -25,6 +25,7 @@ public class HistoryDataDao : Dao {
 			historyData.EnemyId = sqliteQuery.GetInteger (HistoryDataField.ENEMY_ID);
 			historyData.Damage = sqliteQuery.GetString (HistoryDataField.DAMAGE);
 			historyData.Date = sqliteQuery.GetString (HistoryDataField.DATE);
+			historyData.FlagSecom = sqliteQuery.GetInteger (HistoryDataField.FLAG_SECOM);
 			historyDataList.Add (historyData);
 			Debug.Log ("id = " + historyData.EnemyId);
 			Debug.Log ("damage = " + historyData.Damage);
@@ -37,11 +38,13 @@ public class HistoryDataDao : Dao {
 	public void InsertHistoryData (HistoryData historyData) {
 		SQLiteDB sqliteDB = OpenDatabase ();
 		StringBuilder sb = new StringBuilder ();
+		historyData.Damage = DamageConverter.Convert(historyData.Damage);
 		sb.Append ("insert into " + HISTORY_DATA_LIST_TABLE + " values(");
 		sb.Append ("null,");
 		sb.Append (historyData.EnemyId + ",");
 		sb.Append ("'" + historyData.Damage + "',");
-		sb.Append ("'" + historyData.Date + "'");
+		sb.Append ("'" + historyData.Date + "',");
+		sb.Append (historyData.FlagSecom);
 		sb.Append (");");
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
 		sqliteQuery.Step ();

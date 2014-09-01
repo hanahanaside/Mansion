@@ -38,7 +38,8 @@ public abstract class EnemyController : HumanController {
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
 		EnemyGenerator.Instance.AttackedEnemy();
-		long getMoneyCount = mEnemyData.Atack * (CountManager.Instance.KeepMoneyCount / 100) ;
+		double persent = ((double)CountManager.Instance.KeepMoneyCount / 100);
+		long getMoneyCount = (long)(mEnemyData.Atack * persent) ;
 		GameObject getMoneyLabelObject = Instantiate(mGetMoneyLabelPrefab) as GameObject;
 		getMoneyLabelObject.transform.parent = transform.parent;
 		getMoneyLabelObject.transform.localScale = new Vector3(1,1,1);
@@ -75,8 +76,9 @@ public abstract class EnemyController : HumanController {
 		string damage = mTotalDamage.ToString ();
 		HistoryData historyData = new HistoryData ();
 		historyData.EnemyId = mEnemyData.Id;
-		historyData.Damage = DamageConverter.Convert(damage);
+		historyData.Damage = damage;
 		historyData.Date = date;
+		historyData.FlagSecom = 0;
 		HistoryDataDao.Instance.InsertHistoryData (historyData);
 	}
 }

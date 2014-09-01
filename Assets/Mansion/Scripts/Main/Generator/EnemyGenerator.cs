@@ -35,7 +35,9 @@ public class EnemyGenerator : MonoBehaviour {
 			DateTime dtOld = DateTime.Parse (PrefsManager.Instance.GetExitDate ());
 			DateTime dtNow = DateTime.Now;
 			TimeSpan ts = dtNow - dtOld;
-			int sleepHours = ts.Hours;
+			//	int sleepHours = ts.Hours;
+			int sleepHours = ts.Minutes;
+			Debug.Log ("sleep Hours = " + sleepHours);
 			if (sleepHours <= 0) {
 				return;
 			}
@@ -91,7 +93,6 @@ public class EnemyGenerator : MonoBehaviour {
 
 		Debug.Log ("generated roomId = " + unlockRoomData.Id);
 
-		InsertHistoryData (mEnemyDataList [enemyIndex]);
 		exSprite.enabled = true;
 		SetGenerateIntervalTime ();
 		StatusDataKeeper.Instance.IncrementCameEnemyCount ();
@@ -101,26 +102,43 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 
 	private void GenerateEnemyWhileSleepTime (int sleepHours) {
-		int secomCount = PrefsManager.Instance.GetSecomData ().Count;
+		SecomData secomdata = PrefsManager.Instance.GetSecomData ();
+		DateTime dtNow = DateTime.Now;
+		Debug.Log ("secom count = " + secomdata.Count);
 		//セコムを持っていればセコムで撃退して履歴をセーブ
-		for (int i = 0; i < secomCount; i++) {
-			secomCount--;
+		for (int i = 0; i < secomdata.Count; i++) {
+			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1);
+			HistoryData historyData = new HistoryData ();
+			historyData.EnemyId = enemyId;
+			historyData.FlagSecom = 1;
+			historyData.Damage = "0";
+			historyData.Date = dtNow.AddHours (-sleepHours).ToString ("MM/dd HH:mm");
+			secomdata.Count--;
 			sleepHours--;
-
+			HistoryDataDao.Instance.InsertHistoryData (historyData);
+			PrefsManager.Instance.SaveSecomData (secomdata);
 			//スリープ時間が０になったら処理を終了
 			if (sleepHours <= 0) {
 				return;
 			}
 		}
-		for (int i = 0; i < sleepHours; i++) {
 
+		int j = 1;
+		//セコムで撃退しきれなかった分を減算
+		for (int i = 0; i < sleepHours; i++) {
+			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1);
+			HistoryData historyData = new HistoryData ();
+			historyData.EnemyId = enemyId;
+			historyData.FlagSecom = 0;
+			string damage = "100";
+			historyData.Damage = damage;
+			historyData.Date = dtNow.AddHours (-j).ToString ("MM/dd HH:mm");
+			HistoryDataDao.Instance.InsertHistoryData (historyData);
+			CountManager.Instance.DecreaseMoneyCount (Convert.ToInt64(damage));
+			j++;
 		}
 	}
-
-	private void InsertHistoryData (EnemyData enemyData) {
-
-	}
-
+		
 	private void SetGenerateIntervalTime () {
 		mGenerateIntervalTime = 20.0f;
 	}

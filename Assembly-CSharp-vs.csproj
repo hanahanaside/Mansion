@@ -56,14 +56,17 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\DialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\EnemyController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\HistoryButtonController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\HistoryImageController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\HumanController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\MenThiefController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\PhantomThiefController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\PitController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ResidentController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\ReviewDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\RoomController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\RoomItemDialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShareDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopButtonController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopPanelController.cs" />

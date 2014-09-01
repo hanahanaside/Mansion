@@ -4,6 +4,7 @@ using System.Collections;
 public class ShopPanelController : MonoBehaviour {
 
 	public GameObject shopItemDialogPrefab;
+	public GameObject reviewDialogPrefab;
 	public UILabel secomCountLabel;
 
 	public void OnSecomButtonClicked () {
@@ -16,16 +17,24 @@ public class ShopPanelController : MonoBehaviour {
 		shopItemData.Description = secomData.Description;
 		shopItemData.Price = secomData.Price;
 		shopItemData.Tag = ShopItemData.TAG_SECOM;
-		GameObject shopItemDialog = Instantiate (shopItemDialogPrefab) as GameObject;
-		shopItemDialog.transform.parent = UIRootInstanceKeeper.UIRootGameObject.transform;
-		shopItemDialog.transform.localScale = new Vector3 (1, 1, 1);
+		GameObject shopItemDialog = ShowDialog (shopItemDialogPrefab);
 		shopItemDialog.BroadcastMessage ("Init", shopItemData);
 		DialogController.itemBoughtEvent += itemBoughtEvent;
 		DialogController.dialogClosedEvent += dialogClosedEvent;
 	}
 
+	public void OnReviewButtonClicked(){
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		GameObject reviewDialog = ShowDialog (reviewDialogPrefab);
+	}
+
+	public void OnShareButtonClicked(){
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+	}
+
 	public void itemBoughtEvent () {
 		SecomData secomData = PrefsManager.Instance.GetSecomData ();
+		CountManager.Instance.DecreaseMoneyCount (secomData.Price);
 		secomData.Count++;
 		PrefsManager.Instance.SaveSecomData (secomData);
 		secomCountLabel.text = "×" + secomData.Count;
@@ -40,4 +49,10 @@ public class ShopPanelController : MonoBehaviour {
 		DialogController.dialogClosedEvent -= dialogClosedEvent;
 	}
 
+	private GameObject ShowDialog(GameObject dialogPrefab){
+		GameObject dialog = Instantiate (dialogPrefab) as GameObject;
+		dialog.transform.parent = UIRootInstanceKeeper.UIRootGameObject.transform;
+		dialog.transform.localScale = new Vector3 (1, 1, 1);
+		return dialog;
+	}
 }

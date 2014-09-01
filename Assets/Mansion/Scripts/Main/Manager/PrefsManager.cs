@@ -8,6 +8,7 @@ public class PrefsManager {
 	private const string STATUS_DATA = "statusData";
 	private const string KEEP_MONEY_COUNT = "keepMoneyCount";
 	private const string EXIT_DATE = "exitDate";
+	private const string FLAG_REVIEW = "flagReview";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -73,5 +74,16 @@ public class PrefsManager {
 
 	public string GetExitDate () {
 		return PlayerPrefs.GetString (EXIT_DATE, "");
+	}
+
+	public void SaveReviewed(){
+		PlayerPrefs.SetInt (FLAG_REVIEW,1);
+		PlayerPrefs.Save ();
+	}
+
+	public int FlagReview{
+		get{
+			return PlayerPrefs.GetInt (FLAG_REVIEW,0);
+		}
 	}
 }
