@@ -7,6 +7,7 @@ public class ShopPanelInitializer : MonoBehaviour {
 	public GameObject shopItemButtonPrefab;
 	public GameObject spaceSprite;
 	public UIGrid grid;
+	public UILabel secomCountLabel;
 	
 	// Use this for initialization
 	void OnEnable () {
@@ -17,6 +18,8 @@ public class ShopPanelInitializer : MonoBehaviour {
 		} else {
 			InitShopItemCells (childList, shopItemDataList);
 		}
+		SecomData secomData = PrefsManager.Instance.GetSecomData ();
+		secomCountLabel.text = "×" + secomData.Count;
 	}
 
 	private void CreateShopItemCells (List<ShopItemData> shopItemDataList) {

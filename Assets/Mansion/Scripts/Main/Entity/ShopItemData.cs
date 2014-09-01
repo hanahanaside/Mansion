@@ -11,6 +11,7 @@ public class ShopItemData {
 
 	public static string TAG_PIT = "pit";
 	public static string TAG_ITEM = "item";
+	public static string TAG_SECOM = "secom";
 
 	public int Id{ get; set; }
 

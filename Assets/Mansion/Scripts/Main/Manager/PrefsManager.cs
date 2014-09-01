@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using MiniJSON;
 
 public class PrefsManager {
-
 	private const string SECOM_Data = "secomData";
 	private const string STATUS_DATA = "statusData";
 	private const string KEEP_MONEY_COUNT = "keepMoneyCount";
+	private const string EXIT_DATE = "exitDate";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -56,7 +56,7 @@ public class PrefsManager {
 	}
 
 	public void SaveMoneyCount (long keepMoneyCount) {
-		PlayerPrefs.SetString (KEEP_MONEY_COUNT,"" +keepMoneyCount);
+		PlayerPrefs.SetString (KEEP_MONEY_COUNT, "" + keepMoneyCount);
 		PlayerPrefs.Save ();
 	}
 
@@ -64,5 +64,14 @@ public class PrefsManager {
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
 		long keepMoneyCount = System.Convert.ToInt64 (keepMoneyCountString);
 		return keepMoneyCount;
+	}
+
+	public void SaveExitDate (string exitDate) {
+		PlayerPrefs.SetString (EXIT_DATE, exitDate);
+		PlayerPrefs.Save ();
+	}
+
+	public string GetExitDate () {
+		return PlayerPrefs.GetString (EXIT_DATE, "");
 	}
 }

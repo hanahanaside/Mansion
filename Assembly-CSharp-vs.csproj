@@ -66,6 +66,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\RoomItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopButtonController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopItemDialogController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopPanelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\SpaceVikingController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\WomanThiefController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Converter\DamageConverter.cs" />

@@ -21,6 +21,10 @@ public class DatabaseCreater : MonoBehaviour {
 #if UNITY_EDITOR
 		File.Delete(filePath);
 		PrefsManager.Instance.SaveMoneyCount(0);
+		SecomData secomData = new SecomData();
+		secomData.Count = 0;
+		secomData.MacxCount = 0;
+		PrefsManager.Instance.SaveSecomData(secomData);
 #endif
 
 		#if UNITY_IPHONE

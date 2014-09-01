@@ -18,15 +18,19 @@ public class ShopItemDialogController : DialogController {
 		nameLabel.text = shopItemData.Name;
 		priceLabelObject.GetComponent<UILabel> ().text = shopItemData.Price + "\u5186";
 		itemSprite.spriteName = "shop_item_" + shopItemData.Id;
-		InitComponentsByLockLevel (shopItemData);
+		InitComponentsByTag (shopItemData);
 	}
 
 	public override void OnBuyButtonClicked () {
 		long keepMoneyCount = CountManager.Instance.KeepMoneyCount;
 		if (keepMoneyCount < mShopItemData.Price) {
-			SoundManager.Instance.PlaySE(AudioClipID.SE_SHORT_MONEY);
-			mShortMoneyTweenColor.PlayForward();
-			StartCoroutine(StopShortTween());
+			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
+			mShortMoneyTweenColor.PlayForward ();
+			StartCoroutine (StopShortTween ());
+		} else if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
+			base.OnBuyButtonClicked ();
+			SecomData secomData = PrefsManager.Instance.GetSecomData ();
+			priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
 		} else {
 			base.OnBuyButtonClicked ();
 			FenceManager.Instance.HideFence ();
@@ -39,20 +43,29 @@ public class ShopItemDialogController : DialogController {
 		Destroy (transform.parent.gameObject);
 	}
 
-	private void InitComponentsByLockLevel (ShopItemData shopItemData) {
+	private void InitComponentsByTag (ShopItemData shopItemData) {
 		string tag = shopItemData.Tag;
-		if(tag == ShopItemData.TAG_PIT){
+		if (tag == ShopItemData.TAG_PIT) {
 			InitPitComponents (shopItemData);
 		}
 
-		if(tag == ShopItemData.TAG_ITEM){
+		if (tag == ShopItemData.TAG_ITEM) {
 			InitItemComponents (shopItemData);
+		}
+
+		if (tag == ShopItemData.TAG_SECOM) {
+			InitSecomComponents (shopItemData);
 		}
 	}
 
-	private void InitPitComponents(ShopItemData shopItemData){
+	private void InitSecomComponents (ShopItemData shopItemData) {
+		descriptionLabel.text = shopItemData.Description;
+
+	}
+
+	private void InitPitComponents (ShopItemData shopItemData) {
 		StringBuilder sb = new StringBuilder ();
-		if(shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_LOCKED) {
+		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_LOCKED) {
 			lockObject.SetActive (true);
 			sb.Append ("\u9271\u5c71\u3092");
 			sb.Append (shopItemData.UnLockCondition + "\u56de\u30bf\u30c3\u30d7\u3059\u308b\u3068\u30a2\u30f3\u30ed\u30c3\u30af");
@@ -62,10 +75,10 @@ public class ShopItemDialogController : DialogController {
 			sb.Append ("1\u56de\u306e\u30bf\u30c3\u30d7\u3067");
 			sb.Append (shopItemData.Effect + "\u5186\u7372\u5f97");
 		}
-		descriptionLabel.text = sb.ToString();
+		descriptionLabel.text = sb.ToString ();
 	}
 
-	private void InitItemComponents(ShopItemData shopItemData){
+	private void InitItemComponents (ShopItemData shopItemData) {
 		string description = "";
 		RoomData roomData = RoomDataDao.Instance.GetRoomDataById (mShopItemData.TargetRoomId);
 		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_LOCKED) {
@@ -78,7 +91,7 @@ public class ShopItemDialogController : DialogController {
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
 			description = sb.ToString ();
 		}
-		if(shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS){
+		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS) {
 			StringBuilder sb = new StringBuilder ();
 			sb.Append (shopItemData.Description + "\n");
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
