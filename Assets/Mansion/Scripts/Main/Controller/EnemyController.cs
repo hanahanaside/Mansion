@@ -15,7 +15,7 @@ public abstract class EnemyController : HumanController {
 		mDamageLabelPrefab = Resources.Load("Prefabs/Effect/DamageLabel") as GameObject;
 		mGetMoneyLabelPrefab =  Resources.Load("Prefabs/Effect/GetMoneyLabel") as GameObject;
 	}
-
+		
 	void SetEnemyData (EnemyData enemyData) {
 		mEnemyData = enemyData;
 	}
@@ -38,7 +38,7 @@ public abstract class EnemyController : HumanController {
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
 		EnemyGenerator.Instance.AttackedEnemy();
-		int getMoneyCount = mEnemyData.Atack;
+		long getMoneyCount = mEnemyData.Atack * (CountManager.Instance.KeepMoneyCount / 100) ;
 		GameObject getMoneyLabelObject = Instantiate(mGetMoneyLabelPrefab) as GameObject;
 		getMoneyLabelObject.transform.parent = transform.parent;
 		getMoneyLabelObject.transform.localScale = new Vector3(1,1,1);
@@ -57,7 +57,8 @@ public abstract class EnemyController : HumanController {
 	}
 
 	public void ApplyDamage(){
-		int damage = mEnemyData.Atack;
+		double persent = ((double)CountManager.Instance.KeepMoneyCount / 100);
+		long damage = (long)(mEnemyData.Atack * persent) ;
 		mTotalDamage += damage;
 		StatusDataKeeper.Instance.AddDamagedCount (damage);
 		GameObject damageLabelObject = Instantiate(mDamageLabelPrefab)as GameObject;

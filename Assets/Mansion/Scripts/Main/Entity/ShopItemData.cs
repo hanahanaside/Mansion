@@ -14,7 +14,7 @@ public class ShopItemData {
 
 	public int Id{ get; set; }
 
-	public int Price{ get; set; }
+	public long Price{ get; set; }
 
 	public int UnlockLevel{ get; set; }
 

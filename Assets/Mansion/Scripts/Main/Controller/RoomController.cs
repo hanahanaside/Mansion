@@ -44,9 +44,9 @@ public class RoomController : MonoBehaviour {
 				ShopItemDataDao.Instance.UpdateUnLockLevel (shopItemData.Id,ShopItemData.UNLOCK_LEVEL_LOCKED);
 			}
 		}
+		CountManager.Instance.DecreaseMoneyCount (PriceCalculator.CalcRoomItemPrice (mRoomData));
 		mRoomData.ItemCount++;
 		RoomDataDao.Instance.UpdateItemCount (mRoomData);
-		CountManager.Instance.DecreaseMoneyCount (mRoomData.ItemPrice);
 
 		//新規にアンロックできるアイテムがあればアンロック
 		foreach(ShopItemData shopItemData in shopItemDataList){

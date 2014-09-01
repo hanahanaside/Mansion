@@ -9,8 +9,8 @@ public class CountManager : MonoBehaviour {
 	public UILabel totalGenerateSpeedLabel;
 	private static CountManager sInstance;
 	private long mKeepMoneyCount;
-	private float mTotalGenerateSpeed;
-	private float mTime;
+	private double mTotalGenerateSpeed;
+	private double mTime;
 
 	void Start () {
 		sInstance = this;
@@ -48,14 +48,14 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
-	public void AddMoneyCount (int addCount) {
+	public void AddMoneyCount (long addCount) {
 		mKeepMoneyCount += addCount;
 		SetKeepCountLabel();
 	}
 
 	public void UpdateGenerateSpeed(){
 		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
-		totalGenerateSpeedLabel.text = Math.Round((double)mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		totalGenerateSpeedLabel.text = Math.Round(mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
 	}
 
 	public void DecreaseMoneyCount (long decreaseCount) {

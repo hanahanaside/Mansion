@@ -128,7 +128,8 @@ public class ShopItemDataDao : Dao {
 		shopItemData.Name = sqliteQuery.GetString (ShopItemDataField.NAME);
 		shopItemData.Description = sqliteQuery.GetString (ShopItemDataField.DESCRIPTION);
 		shopItemData.Tag = sqliteQuery.GetString (ShopItemDataField.TAG);
-		shopItemData.Price = sqliteQuery.GetInteger (ShopItemDataField.PRICE);
+		string price = sqliteQuery.GetString (ShopItemDataField.PRICE);
+		shopItemData.Price = System.Convert.ToInt64 (price);
 		shopItemData.UnlockLevel = sqliteQuery.GetInteger (ShopItemDataField.UNLOCK_LEVEL);
 		shopItemData.UnLockCondition = sqliteQuery.GetInteger (ShopItemDataField.UNLOCK_CONDITION);
 		shopItemData.TargetRoomId = sqliteQuery.GetInteger (ShopItemDataField.TARGET_ROOM_ID);

@@ -24,8 +24,7 @@ public class RoomItemDialogController : DialogController {
 		itemSprite.width = spriteData.width;
 		itemSprite.height = spriteData.height;
 		nameLabel.text = roomData.ItemName;
-		priceLabelObject.GetComponent<UILabel>().text  = "price : " + roomData.ItemPrice;
-		UpdateItemCountLabel ();
+		UpdateIteminfoLabel ();
 		descriptionLabel.text = roomData.ItemDescription;
 	}
 
@@ -35,14 +34,14 @@ public class RoomItemDialogController : DialogController {
 
 	public override void OnBuyButtonClicked () {
 		long keepMoneyCount = CountManager.Instance.KeepMoneyCount;
-		if(keepMoneyCount < mRoomData.ItemPrice){
+		if(keepMoneyCount < PriceCalculator.CalcRoomItemPrice (mRoomData)){
 			//short money
 			SoundManager.Instance.PlaySE(AudioClipID.SE_SHORT_MONEY);
 			mShortMoneyTweenColor.PlayForward();
 			StartCoroutine(StopShortTween());
 		}else {
 			base.OnBuyButtonClicked ();
-			UpdateItemCountLabel ();
+			UpdateIteminfoLabel ();
 		}
 	}
 
@@ -57,7 +56,9 @@ public class RoomItemDialogController : DialogController {
 		priceLabelObject.GetComponent<UILabel>().color = Color.black;
 	}
 
-	private void UpdateItemCountLabel(){
+	private void UpdateIteminfoLabel(){
+		long totalPrice = PriceCalculator.CalcRoomItemPrice (mRoomData);
+		priceLabelObject.GetComponent<UILabel>().text  = "price : " + totalPrice+ "円";
 		countLabel.text = "\u6240\u6301\u6570 : " + mRoomData.ItemCount;
 	}
 }

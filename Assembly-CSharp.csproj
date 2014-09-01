@@ -50,6 +50,7 @@
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\AudioClipID.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Calculator\PriceCalculator.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\AssassinController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\CatController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\DialogController.cs" />
