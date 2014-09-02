@@ -169,6 +169,12 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+ <Reference Include="Assets\Editor\Prime31\Prime31MenuItem">
+ <HintPath>Assets\Editor\Prime31\Prime31MenuItem.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\P31RestKit">
+ <HintPath>Assets\Plugins\P31RestKit.dll</HintPath>
+ </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
  <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -180,12 +186,6 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="Assets\Editor\Prime31\Prime31MenuItem">
- <HintPath>Assets\Editor\Prime31\Prime31MenuItem.dll</HintPath>
- </Reference>
- <Reference Include="Assets\Plugins\P31RestKit">
- <HintPath>Assets\Plugins\P31RestKit.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

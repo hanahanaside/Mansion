@@ -17,7 +17,6 @@ public class ShopItemDialogController : DialogController {
 		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
 		nameLabel.text = shopItemData.Name;
 		priceLabelObject.GetComponent<UILabel> ().text = shopItemData.Price + "\u5186";
-		itemSprite.spriteName = "shop_item_" + shopItemData.Id;
 		InitComponentsByTag (shopItemData);
 	}
 
@@ -34,8 +33,11 @@ public class ShopItemDialogController : DialogController {
 				mShortMoneyTweenColor.PlayForward ();
 				StartCoroutine (StopShortTween ());
 			}else {
-				base.OnBuyButtonClicked ();
+				CountManager.Instance.DecreaseMoneyCount (secomData.Price);
+				secomData.Count++;
+				PrefsManager.Instance.SaveSecomData (secomData);
 				priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+				base.OnBuyButtonClicked ();
 			}
 		} else {
 			base.OnBuyButtonClicked ();
@@ -52,19 +54,23 @@ public class ShopItemDialogController : DialogController {
 	private void InitComponentsByTag (ShopItemData shopItemData) {
 		string tag = shopItemData.Tag;
 		if (tag == ShopItemData.TAG_PIT) {
+			itemSprite.spriteName = "shop_item_" + shopItemData.Id;
 			InitPitComponents (shopItemData);
 		}
 
 		if (tag == ShopItemData.TAG_ITEM) {
+			itemSprite.spriteName = "shop_item_" + shopItemData.Id;
 			InitItemComponents (shopItemData);
 		}
 
 		if (tag == ShopItemData.TAG_SECOM) {
+			itemSprite.spriteName = "bt_secom";
 			InitSecomComponents (shopItemData);
 		}
 	}
 
 	private void InitSecomComponents (ShopItemData shopItemData) {
+		nameLabel.text = "\u30a2\u30eb\u30c4\u30c3\u30af";
 		descriptionLabel.text = shopItemData.Description;
 
 	}

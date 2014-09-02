@@ -69,7 +69,7 @@ public class EnemyGenerator : MonoBehaviour {
 			return;
 		}
 
-		// no more unlock room
+		// no unlock room
 		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
 		if (unlockRoomDataList.Count == 0) {
 			Debug.Log ("return generate");
@@ -79,7 +79,9 @@ public class EnemyGenerator : MonoBehaviour {
 		}
 		Debug.Log ("generate enemy");
 
-		int enemyIndex = UnityEngine.Random.Range (0, enemyPrefabArray.Length);
+		//解放しているレベルによって出現させる泥棒を変更
+		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
+		int enemyIndex = UnityEngine.Random.Range (0, enemyPrefabArray.Length - decreaseCount);
 		int unlockRoomDataIndex = UnityEngine.Random.Range (0, unlockRoomDataList.Count);
 		Debug.Log ("unlock size = " + unlockRoomDataList.Count);
 
@@ -123,23 +125,40 @@ public class EnemyGenerator : MonoBehaviour {
 			}
 		}
 
+		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
 		int j = 1;
 		//セコムで撃退しきれなかった分を減算
 		for (int i = 0; i < sleepHours; i++) {
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1);
+			EnemyData enemyData = enemyDataList [enemyId - 1];
+			double persent = ((double)CountManager.Instance.KeepMoneyCount / 100);
+			long damage = (long)(enemyData.Atack * persent);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
 			historyData.FlagSecom = 0;
-			string damage = "100";
-			historyData.Damage = damage;
+			historyData.Damage = damage.ToString ();
 			historyData.Date = dtNow.AddHours (-j).ToString ("MM/dd HH:mm");
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
-			CountManager.Instance.DecreaseMoneyCount (Convert.ToInt64(damage));
+			CountManager.Instance.DecreaseMoneyCount (damage);
 			j++;
 		}
 	}
-		
+
 	private void SetGenerateIntervalTime () {
 		mGenerateIntervalTime = 20.0f;
+	}
+
+	private int GetDecreaseCount (List<RoomData> unlockRoomDataList) {
+		//解放しているレベルによって出現させる泥棒を変更
+		int decreaseCount = 2;
+		foreach (RoomData roomData in unlockRoomDataList) {
+			if (roomData.Id == 7) {
+				decreaseCount = 1;
+			}
+			if (roomData.Id == 8) {
+				decreaseCount = 0;
+			}
+		}
+		return decreaseCount;
 	}
 }

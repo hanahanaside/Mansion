@@ -20,7 +20,7 @@ public class HomePanelInitializer : MonoBehaviour {
 		GameObject pitObject = childList [11].gameObject;
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
 		pitObject.BroadcastMessage ("Init", pitData);
-		scrollView.ResetPosition ();
+		//	scrollView.ResetPosition ();
 		for(int i = 0; i < roomDataList.Count;i++){
 			RoomData roomData = roomDataList[i];
 			if(roomData.ItemCount != 0){

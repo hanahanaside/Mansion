@@ -34,7 +34,7 @@ public class ShopPanelInitializer : MonoBehaviour {
 		List<Transform> childList = grid.GetChildList ();
 		int count = childList.Count;
 		Transform finalChild = childList [count - 1];
-		spaceSprite.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 230.0f, 0);
+		spaceSprite.transform.localPosition = new Vector3 (0, finalChild.localPosition.y - 350.0f, 0);
 	}
 
 	private void InitShopItemCells (List<Transform> childList, List<ShopItemData> shopItemDataList) {

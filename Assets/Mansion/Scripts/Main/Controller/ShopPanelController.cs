@@ -36,9 +36,6 @@ public class ShopPanelController : MonoBehaviour {
 
 	public void itemBoughtEvent () {
 		SecomData secomData = PrefsManager.Instance.GetSecomData ();
-		CountManager.Instance.DecreaseMoneyCount (secomData.Price);
-		secomData.Count++;
-		PrefsManager.Instance.SaveSecomData (secomData);
 		secomCountLabel.text = "×" + secomData.Count;
 	}
 
