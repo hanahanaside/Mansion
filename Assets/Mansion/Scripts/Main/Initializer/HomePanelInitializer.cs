@@ -26,10 +26,10 @@ public class HomePanelInitializer : MonoBehaviour {
 			if(roomData.ItemCount != 0){
 				Transform child = childList[i];
 				centerOnChild.CenterOn (child);
-				Debug.Log ("aaaaaaaaaaaaaaaaaa");
 				return;
 			}
 		}
-
+		Transform cartonHouse = childList[10];
+		centerOnChild.CenterOn (cartonHouse);
 	}
 }
