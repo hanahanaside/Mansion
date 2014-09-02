@@ -6,6 +6,7 @@ public class MainController : MonoBehaviour {
 	public GameObject homeGrid;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
+	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
 	private GameObject mCurrentPanel;
 	public HomePanelInitializer homePanelInitializer;
@@ -36,21 +37,21 @@ public class MainController : MonoBehaviour {
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (homeGrid);
+		ChangePanel (homeGrid,0);
 		homePanelInitializer.Init ();
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (shopPanel);
+		ChangePanel (shopPanel,1);
 		scrollView.ResetPosition ();
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (statusPanel);
+		ChangePanel (statusPanel,2);
 		scrollView.ResetPosition ();
 	}
 
@@ -59,7 +60,15 @@ public class MainController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 	}
 
-	private void ChangePanel(GameObject panel){
+	private void ChangePanel(GameObject panel,int buttonIndex){
+		for(int i = 0;i < colorFilterArray.Length;i++){
+			GameObject colorFilter = colorFilterArray[i];
+			if(i == buttonIndex){
+				colorFilter.SetActive (false);
+				continue;
+			}
+			colorFilter.SetActive (true);
+		}
 		mCurrentPanel.SetActive (false);
 		panel.SetActive (true);
 		mCurrentPanel = panel;

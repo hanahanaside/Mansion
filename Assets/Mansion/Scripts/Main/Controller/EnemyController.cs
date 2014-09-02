@@ -5,6 +5,7 @@ using System;
 public abstract class EnemyController : HumanController {
 
 	public UISpriteAnimation atackAnimation;
+	public UISpriteAnimation destroyAnimation;
 	private GameObject mDamageLabelPrefab;
 	private GameObject mGetMoneyLabelPrefab;
 	private EnemyData mEnemyData;
@@ -34,6 +35,7 @@ public abstract class EnemyController : HumanController {
 
 	public void OnClick () {
 		Debug.Log ("clicked");
+		IsAtacking = true;
 		SoundManager.Instance.PlaySE(AudioClipID.SE_ATACK);
 		SoundManager.Instance.StopBGM();
 		SoundManager.Instance.PlayBGM(AudioClipID.BGM_MAIN);
@@ -48,11 +50,21 @@ public abstract class EnemyController : HumanController {
 		CountManager.Instance.AddMoneyCount(getMoneyCount);
 		StatusDataKeeper.Instance.IncrementAtackEnemyCount ();
 
+		if(destroyAnimation != null){
+			destroyAnimation.enabled = true;
+		}
+
+		TweenColor.Begin (gameObject,2.0f,Color.clear);
 		//ヒストリーデータをインサート
 		InsertHistoryData ();
+		StartCoroutine (DestroyCoroutine());
+	}
+
+	private IEnumerator DestroyCoroutine(){
+		yield return new WaitForSeconds (2.0f);
 		Destroy (gameObject);
 	}
-	
+		
 	public void SetAtackIntervalTime () {
 		AtackIntervalTime = 5.0f;
 	}

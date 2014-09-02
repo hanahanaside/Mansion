@@ -65,7 +65,7 @@ public class CountManager : MonoBehaviour {
 	}
 
 	public void StartBoost () {
-		mBoostPower = 2;
+		mBoostPower = 3;
 		totalGenerateSpeedLabel.color = new Color (1f, 0.7f, 0.016f, 1f);
 		boostEvent.Play ();
 	}
