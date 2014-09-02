@@ -16,6 +16,10 @@ public abstract class EnemyController : HumanController {
 		mDamageLabelPrefab = Resources.Load("Prefabs/Effect/DamageLabel") as GameObject;
 		mGetMoneyLabelPrefab =  Resources.Load("Prefabs/Effect/GetMoneyLabel") as GameObject;
 	}
+
+	void OnDisable(){
+		Destroy (gameObject);
+	}
 		
 	void SetEnemyData (EnemyData enemyData) {
 		mEnemyData = enemyData;

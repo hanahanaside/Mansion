@@ -105,11 +105,14 @@ public class EnemyGenerator : MonoBehaviour {
 
 	private void GenerateEnemyWhileSleepTime (int sleepHours) {
 		SecomData secomdata = PrefsManager.Instance.GetSecomData ();
+		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
+		//解放しているレベルによって出現させる泥棒を変更
+		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
 		//セコムを持っていればセコムで撃退して履歴をセーブ
 		for (int i = 0; i < secomdata.Count; i++) {
-			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1);
+			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
 			historyData.FlagSecom = 1;
@@ -129,7 +132,7 @@ public class EnemyGenerator : MonoBehaviour {
 		int j = 1;
 		//セコムで撃退しきれなかった分を減算
 		for (int i = 0; i < sleepHours; i++) {
-			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1);
+			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			EnemyData enemyData = enemyDataList [enemyId - 1];
 			double persent = ((double)CountManager.Instance.KeepMoneyCount / 100);
 			long damage = (long)(enemyData.Atack * persent);
@@ -145,7 +148,7 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 
 	private void SetGenerateIntervalTime () {
-		mGenerateIntervalTime = 20.0f;
+		mGenerateIntervalTime = 10.0f;
 	}
 
 	private int GetDecreaseCount (List<RoomData> unlockRoomDataList) {
