@@ -43,6 +43,7 @@ public class ShopButtonController : MonoBehaviour {
 		if(tag == ShopItemData.TAG_ITEM){
 			CountManager.Instance.UpdateGenerateSpeed ();
 		}
+		//次のピットをロック状態にする
 		if(tag == ShopItemData.TAG_PIT){
 			if(mShopItemData.Id < 5){
 				ShopItemDataDao.Instance.UpdateUnLockLevel (mShopItemData.Id + 1, ShopItemData.UNLOCK_LEVEL_LOCKED);

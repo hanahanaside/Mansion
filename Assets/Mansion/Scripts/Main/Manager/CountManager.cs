@@ -54,6 +54,12 @@ public class CountManager : MonoBehaviour {
 		SetKeepCountLabel ();
 	}
 
+	public void AddGenerateSpeed(double addSpeed){
+		mTotalGenerateSpeed += addSpeed;
+		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		ResetTime ();
+	}
+
 	public void UpdateGenerateSpeed () {
 		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
 		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
