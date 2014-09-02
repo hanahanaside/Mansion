@@ -9,6 +9,9 @@ public class HomePanelInitializer : MonoBehaviour {
 	public UICenterOnChild centerOnChild;
 
 	public void Init () {
+		if(centerOnChild.enabled){
+			centerOnChild.enabled = false;
+		}
 		List<Transform> childList = grid.GetChildList ();
 		List<RoomData> roomDataList = RoomDataDao.Instance.GetRoomDataList ();
 		roomDataList.Reverse ();
@@ -20,7 +23,6 @@ public class HomePanelInitializer : MonoBehaviour {
 		GameObject pitObject = childList [11].gameObject;
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
 		pitObject.BroadcastMessage ("Init", pitData);
-		//	scrollView.ResetPosition ();
 		for(int i = 0; i < roomDataList.Count;i++){
 			RoomData roomData = roomDataList[i];
 			if(roomData.ItemCount != 0){
