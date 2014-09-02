@@ -5,20 +5,26 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	public UIGrid grid;
-	public UICenterOnChild center;
+	public UILabel label;
 
-	// Use this for initialization
-	void Start () {
-		Debug.Log ("start");
+	void OnEnable () {
+		label.color = Color.cyan;
+		TwitterManager.tweetSheetCompletedEvent += tweetSheetCompletedEvent;
 	}
 
-	void OnApplicationPause(bool state){
-		Debug.Log ("pause");
+	void OnDisable () {
+		TwitterManager.tweetSheetCompletedEvent -= tweetSheetCompletedEvent;
 	}
 
-	public void OnButtonClick(){
-		List<Transform> childList = grid.GetChildList ();
-		center.CenterOn (childList[2]);
+	void tweetSheetCompletedEvent (bool didSucceed) {
+		Debug.Log ("tweetSheetCompletedEvent " + didSucceed);
+		if (didSucceed) {
+
+		}
+	}
+
+
+	public void OnButtonClicked(){
+		TwitterBinding.showTweetComposer ("test");
 	}
 }

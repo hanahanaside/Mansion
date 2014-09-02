@@ -5,6 +5,7 @@ public class ShopPanelController : MonoBehaviour {
 
 	public GameObject shopItemDialogPrefab;
 	public GameObject reviewDialogPrefab;
+	public GameObject shareDialogPrefab;
 	public UILabel secomCountLabel;
 
 	public void OnSecomButtonClicked () {
@@ -25,11 +26,12 @@ public class ShopPanelController : MonoBehaviour {
 
 	public void OnReviewButtonClicked(){
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		GameObject reviewDialog = ShowDialog (reviewDialogPrefab);
+		ShowDialog (reviewDialogPrefab);
 	}
 
 	public void OnShareButtonClicked(){
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		ShowDialog (shareDialogPrefab);
 	}
 
 	public void itemBoughtEvent () {

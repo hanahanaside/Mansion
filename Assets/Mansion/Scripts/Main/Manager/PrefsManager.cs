@@ -9,6 +9,7 @@ public class PrefsManager {
 	private const string KEEP_MONEY_COUNT = "keepMoneyCount";
 	private const string EXIT_DATE = "exitDate";
 	private const string FLAG_REVIEW = "flagReview";
+	private const string BOOST_TIME = "boostTime";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -76,14 +77,24 @@ public class PrefsManager {
 		return PlayerPrefs.GetString (EXIT_DATE, "");
 	}
 
-	public void SaveReviewed(){
-		PlayerPrefs.SetInt (FLAG_REVIEW,1);
+	public void SaveReviewed () {
+		PlayerPrefs.SetInt (FLAG_REVIEW, 1);
 		PlayerPrefs.Save ();
 	}
 
-	public int FlagReview{
-		get{
-			return PlayerPrefs.GetInt (FLAG_REVIEW,0);
+	public int FlagReview {
+		get {
+			return PlayerPrefs.GetInt (FLAG_REVIEW, 0);
+		}
+	}
+
+	public float BoostTime {
+		set {
+			PlayerPrefs.SetFloat (BOOST_TIME, value);
+			PlayerPrefs.Save ();
+		}
+		get {
+			return PlayerPrefs.GetFloat (BOOST_TIME, 0);
 		}
 	}
 }

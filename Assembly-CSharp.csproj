@@ -92,6 +92,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Initializer\StatusPanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\JaonParser\AbstractJsonParser.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\JaonParser\JsonParser.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Keeper\ShareBoostTimeKeeper.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Keeper\StatusDataKeeper.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Keeper\UIRootInstanceKeeper.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Manager\CountManager.cs" />
@@ -370,6 +371,9 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+ <Reference Include="Assets\Plugins\P31RestKit">
+ <HintPath>Assets\Plugins\P31RestKit.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
