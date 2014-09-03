@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Mansion\Scripts\Initialize\DatabaseCreater.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Initialize\NotificationManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\AudioClipID.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Calculator\PriceCalculator.cs" />
