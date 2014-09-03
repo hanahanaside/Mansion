@@ -21,8 +21,8 @@ public class RoomItemDialogController : DialogController {
 		string spriteName = "room_item_" + roomData.Id;
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
 		itemSprite.spriteName = "room_item_" + roomData.Id;
-		itemSprite.width = spriteData.width;
-		itemSprite.height = spriteData.height;
+		itemSprite.width = (int)(spriteData.width * 1.5); 
+		itemSprite.height = (int)(spriteData.height * 1.5);
 		nameLabel.text = roomData.ItemName;
 		UpdateIteminfoLabel ();
 		descriptionLabel.text = roomData.ItemDescription;
@@ -58,7 +58,7 @@ public class RoomItemDialogController : DialogController {
 
 	private void UpdateIteminfoLabel(){
 		long totalPrice = PriceCalculator.CalcRoomItemPrice (mRoomData);
-		priceLabelObject.GetComponent<UILabel>().text  = "price : " + totalPrice+ "円";
+		priceLabelObject.GetComponent<UILabel>().text  = totalPrice+ "円";
 		countLabel.text = "\u6240\u6301\u6570 : " + mRoomData.ItemCount;
 	}
 }

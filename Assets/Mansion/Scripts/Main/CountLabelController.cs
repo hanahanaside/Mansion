@@ -9,8 +9,8 @@ public class CountLabelController : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	void SetCount(long count){
-		countLabel.text = count.ToString();
+	void SetCount(string count){
+		countLabel.text = count;
 	}
 
 	void OnComplete(){

@@ -13,6 +13,6 @@ public class InitializeController : MonoBehaviour {
 
 	void OnDatabaseCreatedEvent(){
 		Debug.Log("Database created");
-		Application.LoadLevel("Main");
+		Application.LoadLevel("Opening");
 	}
 }

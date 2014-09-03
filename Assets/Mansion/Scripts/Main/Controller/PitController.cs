@@ -28,7 +28,7 @@ public class PitController : MonoBehaviour {
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
 		countLabelObject.transform.Translate (0, 0.2f, 0);
 		int getPoint = mCurrentPitData.Effect;
-		countLabelObject.SendMessage ("SetCount", getPoint);
+		countLabelObject.SendMessage ("SetCount", "+" + getPoint);
 		InstantiateObject (moneyParticlePrefab);
 		CountManager.Instance.AddMoneyCount (getPoint);
 		StatusDataKeeper.Instance.AddTotalPitGenerateCount (getPoint);

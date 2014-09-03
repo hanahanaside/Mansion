@@ -61,6 +61,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\HumanController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\MainController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\MenThiefController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\OpeningController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\PhantomThiefController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\PitController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ResidentController.cs" />
