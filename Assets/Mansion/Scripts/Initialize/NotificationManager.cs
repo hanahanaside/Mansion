@@ -16,9 +16,7 @@ public class NotificationManager : MonoBehaviour {
 				ScheduleLocalNotification ();
 			}
 		}else {
-			#if UNITY_IPHONE
-			ClearBadgeNumber();
-			#endif
+			ClearNotifications();
 		}
 	}
 
@@ -41,15 +39,28 @@ public class NotificationManager : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-
+		long secondsFromNow =  60L;
+		string title = "ウハウハ";
+		string subTitle = "泥棒に襲われています";
+		string tickerText = "泥棒に襲われています";
+		string extraData = "extraData";
+		EtceteraAndroid.scheduleNotification(secondsFromNow,title,subTitle,tickerText,extraData);
 		#endif
 	}
 
-	#if UNITY_IPHONE
-	private void ClearBadgeNumber(){
+
+	private void ClearNotifications(){
+		#if UNITY_IPHONE
 		LocalNotification localNtification = new LocalNotification ();
 		localNtification.applicationIconBadgeNumber = -1;
 		NotificationServices.PresentLocalNotificationNow (localNtification);
+		NotificationServices.CancelAllLocalNotifications ();
+		#endif
+
+		#if UNITY_ANDROID
+		EtceteraAndroid.cancelAllNotifications();
+		#endif
+
+
 	}
-	#endif
 }
