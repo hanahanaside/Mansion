@@ -32,7 +32,7 @@ public class NotificationManager : MonoBehaviour {
 		#if UNITY_IPHONE
 		LocalNotification localNotification = new LocalNotification ();
 		localNotification.applicationIconBadgeNumber = 1;
-		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
+		localNotification.fireDate = System.DateTime.Now.AddSeconds (10);
 		localNotification.alertBody = "泥棒に襲われています";
 		NotificationServices.CancelAllLocalNotifications ();
 		NotificationServices.ScheduleLocalNotification (localNotification);

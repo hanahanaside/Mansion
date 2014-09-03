@@ -1,0 +1,13 @@
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/flower/Unity/Repogitories/Mansion/obj/Debug/Assembly-CSharp.dll
+/Users/flower/Unity/Repogitories/Mansion/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/UnityEngine.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/UnityEditor.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/P31RestKit.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Mono.Cecil.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/nunit.framework.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/Unity.DataContract.dll
+/Users/flower/Unity/Repogitories/Mansion/Temp/bin/Debug/ICSharpCode.NRefactory.dll
