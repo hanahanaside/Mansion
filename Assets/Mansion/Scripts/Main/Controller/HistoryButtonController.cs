@@ -13,7 +13,6 @@ public class HistoryButtonController : MonoBehaviour {
 
 	void Init (HistoryData historydata) {
 		dateLabel.text = historydata.Date;
-		damageLabel.text = historydata.Damage;
 		GameObject historyImagePrefab =  (Resources.Load ("Prefabs/Button/HistoryImage_" + historydata.EnemyId)) as GameObject;
 		mHistoryImageObject =  Instantiate (historyImagePrefab) as GameObject;
 		mHistoryImageObject.transform.parent = transform.parent;
@@ -21,9 +20,11 @@ public class HistoryButtonController : MonoBehaviour {
 		mHistoryImageObject.transform.localPosition = new Vector3 (0,0,0);
 		switch(historydata.FlagSecom){
 		case 0:
+			damageLabel.text = historydata.Damage;
 			mHistoryImageObject.BroadcastMessage ("HideSecuritySprite");
 			break;
 		case 1:
+			damageLabel.text = "\u30a2\u30eb\u30c4\u30c3\u30af発動";
 			mHistoryImageObject.BroadcastMessage ("ShowSecuritySprite");
 			break;
 		}

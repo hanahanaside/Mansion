@@ -6,6 +6,7 @@ public class PitController : MonoBehaviour {
 	public GameObject countLabelPrefab;
 	public GameObject moneyParticlePrefab;
 	public GameObject pit;
+	public GameObject effectPoint;
 	private ShopItemData mCurrentPitData;
 	private ShopItemData mNextPitData;
 
@@ -26,10 +27,11 @@ public class PitController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);
 		StatusDataKeeper.Instance.IncrementTotalTapPitCount ();
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
-		countLabelObject.transform.Translate (0, 0.2f, 0);
+		countLabelObject.transform.Translate (0, 0.02f, 0);
 		int getPoint = mCurrentPitData.Effect;
 		countLabelObject.SendMessage ("SetCount", "+" + getPoint);
-		InstantiateObject (moneyParticlePrefab);
+		GameObject effectObject = InstantiateObject (moneyParticlePrefab);
+		effectObject.transform.Translate (0,-0.2f,0);
 		CountManager.Instance.AddMoneyCount (getPoint);
 		StatusDataKeeper.Instance.AddTotalPitGenerateCount (getPoint);
 		Debug.Log ("total tap count = " + StatusDataKeeper.Instance.StatusData.TotalTapPitCount);
@@ -40,7 +42,7 @@ public class PitController : MonoBehaviour {
 		if (mCurrentPitData.Id >= 5) {
 			return;
 		}
-		if(mNextPitData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED){
+		if (mNextPitData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED) {
 			return;
 		}
 		if (StatusDataKeeper.Instance.StatusData.TotalTapPitCount >= mNextPitData.UnLockCondition) {

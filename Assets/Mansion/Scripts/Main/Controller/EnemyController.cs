@@ -35,6 +35,7 @@ public abstract class EnemyController : HumanController {
 	public void OnClick () {
 		Debug.Log ("clicked");
 		IsAtacking = true;
+		collider.enabled = false;
 		SoundManager.Instance.PlaySE (AudioClipID.SE_ATACK);
 		SoundManager.Instance.StopBGM ();
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);

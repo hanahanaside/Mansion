@@ -26,19 +26,15 @@ public class ShopItemDialogController : DialogController {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
 			mShortMoneyTweenColor.PlayForward ();
 			StartCoroutine (StopShortTween ());
-		} else if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
+			return;
+		} 
+		CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
+		if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
 			SecomData secomData = PrefsManager.Instance.GetSecomData ();
-			if(keepMoneyCount < secomData.Price){
-				SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
-				mShortMoneyTweenColor.PlayForward ();
-				StartCoroutine (StopShortTween ());
-			}else {
-				CountManager.Instance.DecreaseMoneyCount (secomData.Price);
-				secomData.Count++;
-				PrefsManager.Instance.SaveSecomData (secomData);
-				priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
-				base.OnBuyButtonClicked ();
-			}
+			secomData.Count++;
+			PrefsManager.Instance.SaveSecomData (secomData);
+			priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+			base.OnBuyButtonClicked ();
 		} else {
 			base.OnBuyButtonClicked ();
 			FenceManager.Instance.HideFence ();
@@ -72,7 +68,6 @@ public class ShopItemDialogController : DialogController {
 	private void InitSecomComponents (ShopItemData shopItemData) {
 		nameLabel.text = "\u30a2\u30eb\u30c4\u30c3\u30af";
 		descriptionLabel.text = shopItemData.Description;
-
 	}
 
 	private void InitPitComponents (ShopItemData shopItemData) {

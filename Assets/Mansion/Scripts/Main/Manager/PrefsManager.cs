@@ -63,8 +63,12 @@ public class PrefsManager {
 	}
 
 	public long GetMoneyCount () {
+		Debug.Log ("GetMoneyCount");
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
-		long keepMoneyCount = System.Convert.ToInt64 (keepMoneyCountString);
+		long keepMoneyCount = 0;
+		if(!string.IsNullOrEmpty(keepMoneyCountString)){
+			keepMoneyCount = System.Convert.ToInt64 (keepMoneyCountString);
+		}
 		return keepMoneyCount;
 	}
 

@@ -17,6 +17,7 @@ public class CountManager : MonoBehaviour {
 		sInstance = this;
 		UpdateGenerateSpeed ();
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
+		Debug.Log ("count = " + mKeepMoneyCount);
 		SetKeepCountLabel ();
 		if (mTotalGenerateSpeed != 0) {
 			ResetTime ();

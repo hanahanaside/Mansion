@@ -16,8 +16,8 @@ public class NotificationManager : MonoBehaviour {
 //			if (enemyObject == null) {
 //				ScheduleLocalNotification ();
 //			}
-		}else {
-			ClearNotifications();
+		} else {
+			ClearNotifications ();
 		}
 	}
 
@@ -31,12 +31,11 @@ public class NotificationManager : MonoBehaviour {
 		Debug.Log ("ScheduleLocalNotification");
 
 		#if UNITY_IPHONE
-		LocalNotification localNotification = new LocalNotification ();
-		localNotification.applicationIconBadgeNumber = 1;
-		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
-		localNotification.alertBody = "ドロボーにおそわれました";
 		NotificationServices.CancelAllLocalNotifications ();
-		NotificationServices.ScheduleLocalNotification (localNotification);
+		_ScheduleLocalNotification ("ドロボーにおそわれました1");
+		_ScheduleLocalNotification ("ドロボーにおそわれました2");
+		_ScheduleLocalNotification ("ドロボーにおそわれました3");
+		_ScheduleLocalNotification ("ドロボーにおそわれました4");
 		#endif
 
 		#if UNITY_ANDROID
@@ -49,8 +48,15 @@ public class NotificationManager : MonoBehaviour {
 		#endif
 	}
 
+	private void _ScheduleLocalNotification (string title) {
+		LocalNotification localNotification = new LocalNotification ();
+		localNotification.applicationIconBadgeNumber = 4;
+		localNotification.alertBody = title;
+		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
+		NotificationServices.ScheduleLocalNotification (localNotification);
+	}
 
-	private void ClearNotifications(){
+	private void ClearNotifications () {
 		#if UNITY_IPHONE
 		LocalNotification localNtification = new LocalNotification ();
 		localNtification.applicationIconBadgeNumber = -1;
