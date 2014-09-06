@@ -46,13 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\Etcetera\EtceteraBinding.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\EtceteraManager.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\demo\CubeRotator.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\demo\EtceteraEventListener.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\demo\EtceteraGUIManager.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\demo\EtceteraGUIManagerThree.cs" />
-     <Compile Include="Assets\Plugins\Etcetera\demo\EtceteraGUIManagerTwo.cs" />
      <Compile Include="Assets\Plugins\EtceteraAndroid\EtceteraAndroid.cs" />
      <Compile Include="Assets\Plugins\EtceteraAndroid\EtceteraAndroidManager.cs" />
      <Compile Include="Assets\Plugins\EtceteraAndroid\demo\EtceteraAndroidEventListener.cs" />

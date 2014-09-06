@@ -26,6 +26,12 @@ public class ShareDialogController : DialogController {
 	public void OnShareButtonClicked () {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 
+		#if UNITY_EDITOR
+		ShareBoostTimeKeeper.Instance.StartBoost ();
+		CountManager.Instance.StartBoost();
+		return;
+		#endif
+
 		#if UNITY_IPHONE
 		StringBuilder sb = new StringBuilder();
 		sb.Append("text\n");
