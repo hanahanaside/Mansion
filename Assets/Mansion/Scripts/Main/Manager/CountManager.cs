@@ -56,7 +56,7 @@ public class CountManager : MonoBehaviour {
 
 	public void AddGenerateSpeed(double addSpeed){
 		mTotalGenerateSpeed += addSpeed;
-		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + "/\u79d2";
 		ResetTime ();
 	}
 

@@ -148,7 +148,7 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 
 	private void SetGenerateIntervalTime () {
-		mGenerateIntervalTime = 10.0f;
+		mGenerateIntervalTime = 30.0f;
 	}
 
 	private int GetDecreaseCount (List<RoomData> unlockRoomDataList) {

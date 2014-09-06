@@ -11,10 +11,11 @@ public class NotificationManager : MonoBehaviour {
 
 	void OnApplicationPause (bool pauseStatus) {
 		if (pauseStatus) {
-			GameObject enemyObject = GameObject.FindWithTag ("Enemy");
-			if (enemyObject == null) {
-				ScheduleLocalNotification ();
-			}
+			ScheduleLocalNotification ();
+//			GameObject enemyObject = GameObject.FindWithTag ("Enemy");
+//			if (enemyObject == null) {
+//				ScheduleLocalNotification ();
+//			}
 		}else {
 			ClearNotifications();
 		}
@@ -32,8 +33,8 @@ public class NotificationManager : MonoBehaviour {
 		#if UNITY_IPHONE
 		LocalNotification localNotification = new LocalNotification ();
 		localNotification.applicationIconBadgeNumber = 1;
-		localNotification.fireDate = System.DateTime.Now.AddSeconds (10);
-		localNotification.alertBody = "泥棒に襲われています";
+		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
+		localNotification.alertBody = "ドロボーにおそわれました";
 		NotificationServices.CancelAllLocalNotifications ();
 		NotificationServices.ScheduleLocalNotification (localNotification);
 		#endif
