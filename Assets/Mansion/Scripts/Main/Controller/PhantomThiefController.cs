@@ -14,7 +14,7 @@ public class PhantomThiefController : EnemyController {
 		}
 		AtackIntervalTime -= Time.deltaTime;
 		if (AtackIntervalTime < 0) {
-			StartCoroutine (Atack ());
+			StartAtacking ();
 		} else {
 			Walk ();
 		}

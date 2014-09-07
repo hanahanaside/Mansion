@@ -36,6 +36,16 @@ public class RoomController : MonoBehaviour {
 		SetTextData (); 
 	}
 
+	void EnemyGenerated(){
+		nameLabel.color = Color.red;
+		generateSpeedLabel.color = Color.red;
+	}
+
+	void EnemyDestroyed(){
+		nameLabel.color = Color.white;
+		generateSpeedLabel.color = Color.white;
+	}
+
 	void itemBoughtEvent () {
 		Debug.Log ("boughtEvent");
 

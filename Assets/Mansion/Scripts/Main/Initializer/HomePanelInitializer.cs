@@ -28,10 +28,14 @@ public class HomePanelInitializer : MonoBehaviour {
 		GameObject pitObject = childList [11].gameObject;
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
 		pitObject.BroadcastMessage ("Init", pitData);
-		for (int i = 1; i < roomDataList.Count; i++) {
+		for (int i = 0; i < roomDataList.Count; i++) {
 			RoomData roomData = roomDataList [i];
 			if (roomData.ItemCount != 0) {
 				mTargetChildTransform = childList [i];
+				//神の国をセンターにするとずれるので１つ下げる
+				if(i == 0){
+					mTargetChildTransform = childList [1];
+				}
 				//最初は１番下から始める
 				centerOnChild.CenterOn (childList [10]);
 				return;

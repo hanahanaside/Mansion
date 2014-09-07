@@ -92,6 +92,7 @@ public class EnemyGenerator : MonoBehaviour {
 		enemyObject.transform.parent = unlockRoomObject.transform;
 		enemyObject.transform.localScale = new Vector3 (1, 1, 1);
 		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
+		unlockRoomObject.BroadcastMessage ("EnemyGenerated");
 
 		Debug.Log ("generated roomId = " + unlockRoomData.Id);
 
@@ -155,10 +156,10 @@ public class EnemyGenerator : MonoBehaviour {
 		//解放しているレベルによって出現させる泥棒を変更
 		int decreaseCount = 2;
 		foreach (RoomData roomData in unlockRoomDataList) {
-			if (roomData.Id == 7) {
+			if (roomData.Id >= 7) {
 				decreaseCount = 1;
 			}
-			if (roomData.Id == 8) {
+			if (roomData.Id >= 8) {
 				decreaseCount = 0;
 			}
 		}

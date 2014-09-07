@@ -11,7 +11,7 @@ public class WomanThiefController : EnemyController {
 		AtackIntervalTime -= Time.deltaTime;
 		if (AtackIntervalTime < 0) {
 			StopWalkAnimation ();
-			StartCoroutine (Atack ());
+			StartAtacking ();
 		} else {
 			Walk ();
 		}

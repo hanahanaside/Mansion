@@ -57,6 +57,7 @@ public abstract class EnemyController : HumanController {
 		TweenColor.Begin (gameObject, 2.0f, Color.clear);
 		//ヒストリーデータをインサート
 		InsertHistoryData ();
+		transform.parent.gameObject.BroadcastMessage ("EnemyDestroyed");
 		StartCoroutine (DestroyCoroutine ());
 	}
 
@@ -67,6 +68,31 @@ public abstract class EnemyController : HumanController {
 
 	public void SetAtackIntervalTime () {
 		AtackIntervalTime = 5.0f;
+	}
+
+	public void StartAtacking () {
+		IsAtacking = true;
+		float x = 0;
+		float y = UnityEngine.Random.Range(limitBottom,limitTop);
+		if(transform.eulerAngles.y == 0){
+			x =  UnityEngine.Random.Range(limitLeft,transform.localPosition.x);
+		}else {
+			x =  UnityEngine.Random.Range(transform.localPosition.x,limitRight);
+		}
+		Hashtable hash = new Hashtable ();
+		hash.Add ("x", x);
+		hash.Add ("y", y);
+		hash.Add ("speed", 1000.0f);
+		hash.Add ("delay", 1);
+		hash.Add ("islocal", true);
+		hash.Add ("oncomplete", "OnMoveAnimationCompleted");
+		hash.Add ("easetype", iTween.EaseType.linear);
+		iTween.MoveTo (gameObject, hash);
+
+	}
+
+	private void OnMoveAnimationCompleted () {
+		StartCoroutine (Atack ());
 	}
 
 	public void ApplyDamage () {

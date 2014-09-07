@@ -14,7 +14,7 @@ public class SpaceVikingController : EnemyController {
 		}
 		AtackIntervalTime -= Time.deltaTime;
 		if (AtackIntervalTime < 0) {
-			StartCoroutine (Atack ());
+			StartAtacking ();
 		} else {
 			Walk ();
 		}
