@@ -82,7 +82,7 @@ public class CountManager : MonoBehaviour {
 		mBoostPower = 1;
 		boostEvent.Stop ();
 		totalGenerateSpeedLabel.transform.localScale = new Vector3 (1, 1, 1);
-		totalGenerateSpeedLabel.color = Color.white;
+		totalGenerateSpeedLabel.color = Color.black;
 	}
 
 	public decimal KeepMoneyCount {

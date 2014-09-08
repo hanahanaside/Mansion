@@ -26,7 +26,7 @@ public class ShareBoostTimeKeeper : MonoBehaviour {
 		shareLabel.color = new Color (1f, 0.7f, 0.016f, 1f);
 		if(mBoostTime <= 0){
 			shareLabel.text = "シェアしてGET！";
-			shareLabel.color = Color.black;
+			shareLabel.color = Color.white;
 			CountManager.Instance.StopBoost ();
 		}
 	}

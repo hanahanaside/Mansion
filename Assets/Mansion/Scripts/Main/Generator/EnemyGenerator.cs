@@ -137,6 +137,7 @@ public class EnemyGenerator : MonoBehaviour {
 			EnemyData enemyData = enemyDataList [enemyId - 1];
 			decimal persent = CountManager.Instance.KeepMoneyCount / 100;
 			decimal damage = enemyData.Atack * persent;
+			damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
 			historyData.FlagSecom = 0;

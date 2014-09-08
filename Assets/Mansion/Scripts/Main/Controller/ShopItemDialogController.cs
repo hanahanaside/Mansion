@@ -30,16 +30,24 @@ public class ShopItemDialogController : DialogController {
 		} 
 		CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
 		if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
-			SecomData secomData = PrefsManager.Instance.GetSecomData ();
-			secomData.Count++;
-			PrefsManager.Instance.SaveSecomData (secomData);
-			priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
-			base.OnBuyButtonClicked ();
+			BuySecom ();
 		} else {
 			base.OnBuyButtonClicked ();
 			FenceManager.Instance.HideFence ();
 			Destroy (transform.parent.gameObject);
 		}
+	}
+
+	private void BuySecom(){
+		SecomData secomData = PrefsManager.Instance.GetSecomData ();
+		if(secomData.Count >= 10){
+			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
+			return;
+		}
+		secomData.Count++;
+		PrefsManager.Instance.SaveSecomData (secomData);
+		priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+		base.OnBuyButtonClicked ();
 	}
 
 	public override void OnCloseButonClicked () {

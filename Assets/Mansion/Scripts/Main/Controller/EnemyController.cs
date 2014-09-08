@@ -113,6 +113,7 @@ public abstract class EnemyController : HumanController {
 	private void InsertHistoryData () {
 		DateTime dtNow = DateTime.Now;
 		string date = dtNow.ToString ("MM/dd HH:mm");
+		mTotalDamage =  Math.Round (mTotalDamage, 0, MidpointRounding.AwayFromZero);
 		string damage = mTotalDamage.ToString ();
 		HistoryData historyData = new HistoryData ();
 		historyData.EnemyId = mEnemyData.Id;

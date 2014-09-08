@@ -22,6 +22,10 @@ public class PitController : MonoBehaviour {
 		pit.GetComponent<UISprite> ().spriteName = spriteName;
 	}
 
+	void A(){
+		Debug.Log ("aaaaaaaaaaaaaaaaaaa");
+	}
+
 	public void OnPitClicked () {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_MONEY);
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);

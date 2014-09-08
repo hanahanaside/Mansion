@@ -81,7 +81,8 @@ public class ShopItemDataDao : Dao {
 		StringBuilder sb = new StringBuilder ();
 		sb.Append ("update " + SHOP_ITEM_DATA_LIST_TABLE + " ");
 		sb.Append ("set " + ShopItemDataField.UNLOCK_LEVEL + " = " + unlockLevel + " ");
-		sb.Append ("where " + ShopItemDataField.ID + " = " + id + ";");
+		sb.Append ("where " + ShopItemDataField.ID + " = " + id + " ");
+		sb.Append ("and " + ShopItemDataField.UNLOCK_LEVEL + " < " + unlockLevel + ";");
 		Debug.Log ("sql = " + sb.ToString ());
 		SQLiteQuery sqliteQuery = new SQLiteQuery (sqliteDB, sb.ToString ());
 		sqliteQuery.Step ();
