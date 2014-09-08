@@ -46,6 +46,7 @@ public abstract class EnemyController : HumanController {
 		getMoneyLabelObject.transform.parent = transform.parent;
 		getMoneyLabelObject.transform.localScale = new Vector3 (1, 1, 1);
 		getMoneyLabelObject.transform.localPosition = transform.localPosition;
+		getMoneyCount = Math.Round (getMoneyCount, 0, MidpointRounding.AwayFromZero);
 		getMoneyLabelObject.SendMessage ("SetCount", "+" + getMoneyCount);
 		CountManager.Instance.AddMoneyCount (getMoneyCount);
 		StatusDataKeeper.Instance.IncrementAtackEnemyCount ();
@@ -104,6 +105,7 @@ public abstract class EnemyController : HumanController {
 		damageLabelObject.transform.parent = transform.parent;
 		damageLabelObject.transform.localScale = new Vector3 (1, 1, 1);
 		damageLabelObject.transform.localPosition = transform.localPosition;
+		damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
 		damageLabelObject.SendMessage ("SetCount", "-" + damage);
 		CountManager.Instance.DecreaseMoneyCount (damage);
 	}
