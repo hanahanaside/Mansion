@@ -5,8 +5,15 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
+	public UILabel label;
+	private long mCount;
+
 	void Start(){
-		decimal d = 1.5m;
-		Debug.Log ("" + d);
+
+	}
+
+	void Update(){
+		mCount += 1000;
+		label.text =   " " + mCount + " ";
 	}
 }

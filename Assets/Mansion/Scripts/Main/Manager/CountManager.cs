@@ -96,6 +96,6 @@ public class CountManager : MonoBehaviour {
 	}
 
 	private void SetKeepCountLabel () {
-		keepMoneyCountLabel.text = Math.Round (mKeepMoneyCount, 1, MidpointRounding.AwayFromZero) + " \u5186";
+		keepMoneyCountLabel.text = Math.Round (mKeepMoneyCount, 0, MidpointRounding.AwayFromZero) + " \u5186";
 	}
 }
