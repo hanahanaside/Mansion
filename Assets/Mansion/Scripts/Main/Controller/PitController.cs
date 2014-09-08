@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class PitController : MonoBehaviour {
+
+	public GameObject[] hideObjectArray;
 	public UISprite backGroundSprite;
 	public GameObject countLabelPrefab;
 	public GameObject moneyParticlePrefab;
@@ -12,6 +14,9 @@ public class PitController : MonoBehaviour {
 
 	void Init (ShopItemData pitData) {
 		mCurrentPitData = pitData;
+		foreach(GameObject hideObject in hideObjectArray){
+			hideObject.SetActive (true);
+		}
 		if (mCurrentPitData.Id < 5) {
 			mNextPitData = ShopItemDataDao.Instance.GetShopItemDataById (mCurrentPitData.Id + 1);
 		}
@@ -22,10 +27,12 @@ public class PitController : MonoBehaviour {
 		pit.GetComponent<UISprite> ().spriteName = spriteName;
 	}
 
-	void A(){
-		Debug.Log ("aaaaaaaaaaaaaaaaaaa");
+	void Hide(){
+		foreach(GameObject hideObject in hideObjectArray){
+			hideObject.SetActive (false);
+		}
 	}
-
+		
 	public void OnPitClicked () {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_MONEY);
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);

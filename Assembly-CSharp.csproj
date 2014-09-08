@@ -90,7 +90,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Entity\ShopItemData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Entity\StatusData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Generator\EnemyGenerator.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\Initializer\HomePanelInitializer.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Initializer\HomePanelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Initializer\ShopPanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Initializer\StatusPanelInitializer.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\JaonParser\AbstractJsonParser.cs" />

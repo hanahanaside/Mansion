@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PhantomThiefController : EnemyController {
 
-	public UISprite sprite;
 	public UIAtlas charactorAtlas;
 	public iTweenEvent atackEvent;
 

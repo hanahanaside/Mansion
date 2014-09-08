@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SpaceVikingController : EnemyController {
 
-	public UISprite sprite;
 	public UIAtlas charactorAtlas;
 	public iTweenEvent[] atackEventArray;
 	

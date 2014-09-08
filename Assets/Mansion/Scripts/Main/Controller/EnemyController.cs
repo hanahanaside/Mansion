@@ -20,6 +20,16 @@ public abstract class EnemyController : HumanController {
 		mEnemyData = enemyData;
 	}
 
+	void Init () {
+		sprite.enabled = true;
+		collider.enabled = true;
+	}
+
+	void Hide () {
+		sprite.enabled = false;
+		collider.enabled = false;
+	}
+
 	public float AtackIntervalTime {
 		set;
 		get;
@@ -74,11 +84,11 @@ public abstract class EnemyController : HumanController {
 	public void StartAtacking () {
 		IsAtacking = true;
 		float x = 0;
-		float y = UnityEngine.Random.Range(limitBottom,limitTop);
-		if(transform.eulerAngles.y == 0){
-			x =  UnityEngine.Random.Range(limitLeft,transform.localPosition.x);
-		}else {
-			x =  UnityEngine.Random.Range(transform.localPosition.x,limitRight);
+		float y = UnityEngine.Random.Range (limitBottom, limitTop);
+		if (transform.eulerAngles.y == 0) {
+			x = UnityEngine.Random.Range (limitLeft, transform.localPosition.x);
+		} else {
+			x = UnityEngine.Random.Range (transform.localPosition.x, limitRight);
 		}
 		Hashtable hash = new Hashtable ();
 		hash.Add ("x", x);
@@ -101,19 +111,21 @@ public abstract class EnemyController : HumanController {
 		decimal damage = mEnemyData.Atack * persent;
 		mTotalDamage += damage;
 		StatusDataKeeper.Instance.AddDamagedCount (damage);
-		GameObject damageLabelObject = Instantiate (mDamageLabelPrefab)as GameObject;
-		damageLabelObject.transform.parent = transform.parent;
-		damageLabelObject.transform.localScale = new Vector3 (1, 1, 1);
-		damageLabelObject.transform.localPosition = transform.localPosition;
-		damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
-		damageLabelObject.SendMessage ("SetCount", "-" + damage);
 		CountManager.Instance.DecreaseMoneyCount (damage);
+		if(sprite.enabled){
+			GameObject damageLabelObject = Instantiate (mDamageLabelPrefab)as GameObject;
+			damageLabelObject.transform.parent = transform.parent;
+			damageLabelObject.transform.localScale = new Vector3 (1, 1, 1);
+			damageLabelObject.transform.localPosition = transform.localPosition;
+			damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
+			damageLabelObject.SendMessage ("SetCount", "-" + damage);
+		}
 	}
 
 	private void InsertHistoryData () {
 		DateTime dtNow = DateTime.Now;
 		string date = dtNow.ToString ("MM/dd HH:mm");
-		mTotalDamage =  Math.Round (mTotalDamage, 0, MidpointRounding.AwayFromZero);
+		mTotalDamage = Math.Round (mTotalDamage, 0, MidpointRounding.AwayFromZero);
 		string damage = mTotalDamage.ToString ();
 		HistoryData historyData = new HistoryData ();
 		historyData.EnemyId = mEnemyData.Id;

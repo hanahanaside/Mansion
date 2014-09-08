@@ -3,25 +3,21 @@ using System.Collections;
 
 public class MainController : MonoBehaviour {
 
-	public GameObject homeGrid;
+	public GameObject homePanel;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
 	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
 	private GameObject mCurrentPanel;
-	public HomePanelInitializer homePanelInitializer;
+	public HomePanelController homePanelController;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
-		mCurrentPanel = homeGrid;
-		SecomData secomData = new SecomData ();
-		secomData.Count = 1;
-		secomData.MacxCount = 2;
 		scrollView.ResetPosition ();
-		mCurrentPanel = homeGrid;
-		homePanelInitializer.Init ();
+		mCurrentPanel = homePanel;
+		homePanelController.Init ();
 	}
 
 	void Update () {
@@ -37,22 +33,47 @@ public class MainController : MonoBehaviour {
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (homeGrid,0);
-		homePanelInitializer.Init ();
+		if(CheckSamePanel(homePanel)){
+			return;
+		}
+		mCurrentPanel.SetActive (false);
+		mCurrentPanel = homePanel;
+		ChangeButtonFilter (0);
+		homePanelController.Init ();
 	}
 
 	public void OnShopButtonClicked () {
 		Debug.Log ("shop");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (shopPanel,1);
 		scrollView.ResetPosition ();
+		if(CheckSamePanel(shopPanel)){
+			return;
+		}
+		if(mCurrentPanel.Equals(homePanel)){
+			homePanelController.HideRoomObjects ();
+		}else {
+			statusPanel.SetActive (false);
+		}
+		mCurrentPanel = shopPanel;
+		shopPanel.SetActive (true);
+		ChangeButtonFilter (1);
 	}
 
 	public void OnStatusButtonClicked () {
 		Debug.Log ("status");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		ChangePanel (statusPanel,2);
 		scrollView.ResetPosition ();
+		if(CheckSamePanel(statusPanel)){
+			return;
+		}
+		if(mCurrentPanel.Equals(homePanel)){
+			homePanelController.HideRoomObjects ();
+		}else {
+			shopPanel.SetActive (false);
+		}
+		mCurrentPanel = statusPanel;
+		statusPanel.SetActive (true);
+		ChangeButtonFilter (2);
 	}
 
 	public void OnRecommendButtonClicked(){
@@ -60,7 +81,19 @@ public class MainController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 	}
 
-	private void ChangePanel(GameObject panel,int buttonIndex){
+	public bool CheckCurrentIsHomePanel(){
+		return mCurrentPanel.Equals (homePanel);
+	}
+
+	private bool CheckSamePanel(GameObject panelObject){
+		if(mCurrentPanel.Equals(panelObject)){
+			Debug.Log ("same");
+			return true;
+		}
+		return false;
+	}
+
+	private void ChangeButtonFilter(int buttonIndex){
 		for(int i = 0;i < colorFilterArray.Length;i++){
 			GameObject colorFilter = colorFilterArray[i];
 			if(i == buttonIndex){
@@ -69,8 +102,5 @@ public class MainController : MonoBehaviour {
 			}
 			colorFilter.SetActive (true);
 		}
-		mCurrentPanel.SetActive (false);
-		panel.SetActive (true);
-		mCurrentPanel = panel;
 	}
 }

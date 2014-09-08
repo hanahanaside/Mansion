@@ -2,60 +2,69 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class HomePanelInitializer : MonoBehaviour {
+public class HomePanelController : MonoBehaviour {
 	public UIGrid grid;
-	public UIScrollView scrollView;
-	public GameObject pitPrefab;
 	public UICenterOnChild centerOnChild;
 	private Transform mTargetChildTransform;
 	private bool mCenterd;
+	private GameObject mPitObject;
+	private List<Transform> mChildList;
+
+	void Awake () {
+		mChildList = grid.GetChildList ();
+		mPitObject = mChildList [11].gameObject;
+	}
 
 	public void Init () {
 		if (centerOnChild.enabled) {
-				centerOnChild.enabled = false;
+			centerOnChild.enabled = false;
 		}
 		mCenterd = false;
-		centerOnChild.onCenter = Hoge;
+		centerOnChild.onCenter = OnCenter;
 		centerOnChild.springStrength = 100.0f;
-		List<Transform> childList = grid.GetChildList ();
 		List<RoomData> roomDataList = RoomDataDao.Instance.GetRoomDataList ();
 		roomDataList.Reverse ();
 		for (int i = 10; i >= 0; i--) {
-			GameObject childObject = childList [i].gameObject;
+			GameObject childObject = mChildList [i].gameObject;
 			RoomData roomData = roomDataList [i];
 			childObject.BroadcastMessage ("Init", roomData);
 		}
-		GameObject pitObject = childList [11].gameObject;
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
-		pitObject.BroadcastMessage ("Init", pitData);
+		mPitObject.BroadcastMessage ("Init", pitData);
 		for (int i = 0; i < roomDataList.Count; i++) {
 			RoomData roomData = roomDataList [i];
 			if (roomData.ItemCount != 0) {
-				mTargetChildTransform = childList [i];
+				mTargetChildTransform = mChildList [i];
 				//神の国をセンターにするとずれるので１つ下げる
-				if(i == 0){
-					mTargetChildTransform = childList [1];
+				if (i == 0) {
+					mTargetChildTransform = mChildList [1];
 				}
 				//最初は１番下から始める
-				centerOnChild.CenterOn (childList [10]);
+				centerOnChild.CenterOn (mChildList [10]);
 				return;
 			}
 		}
 		//最初は１番下から始める
-		centerOnChild.CenterOn (childList [10]);
+		centerOnChild.CenterOn (mChildList [10]);
 	}
 
-	private void Hoge (GameObject a) {
-		if(mCenterd){
+	public void HideRoomObjects () {
+		foreach (Transform roomTransform in mChildList) {
+			roomTransform.gameObject.BroadcastMessage ("Hide");
+		}
+	}
+
+	private void OnCenter (GameObject a) {
+		if (mCenterd) {
 			return;
 		}
 		mCenterd = true;
-		StartCoroutine (reset());
+		StartCoroutine (reset ());
 	}
 
-	private IEnumerator reset(){
+	private IEnumerator reset () {
 		yield return new WaitForSeconds (0.1f);
-		if(mTargetChildTransform != null){
+		if (mTargetChildTransform != null) {
 			centerOnChild.springStrength = 8.0f;
 			centerOnChild.CenterOn (mTargetChildTransform);
 		}

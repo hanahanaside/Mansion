@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RoomController : MonoBehaviour {
+	public GameObject[] hideObjectsArray;
 	public GameObject lockObject;
 	public GameObject buyButtonParent;
 	public GameObject buyButton;
@@ -17,6 +18,9 @@ public class RoomController : MonoBehaviour {
 
 	void Init (RoomData roomData) {  
 		mRoomData = roomData;
+		foreach (GameObject hideObject in hideObjectsArray) {
+			hideObject.SetActive (true);
+		}
 		if (mShopItemDataList == null) {
 			mShopItemDataList = ShopItemDataDao.Instance.QueryByTargetRoomId (mRoomData.Id);
 		}
@@ -24,9 +28,10 @@ public class RoomController : MonoBehaviour {
 			CreateItemSpriteList ();
 		}
 		if (mRoomData.ItemCount == 0) {
-			lockObject.SetActive (true);
 			return;
 		}
+		lockObject.SetActive (false);
+
 		// only first
 		UISprite firstItemSprite = mItemSpriteList [0];
 		if (!firstItemSprite.enabled) {
@@ -36,12 +41,18 @@ public class RoomController : MonoBehaviour {
 		SetTextData (); 
 	}
 
-	void EnemyGenerated(){
+	void Hide () {
+		foreach (GameObject hideObject in hideObjectsArray) {
+			hideObject.SetActive (false);
+		}
+	}
+
+	void EnemyGenerated () {
 		nameLabel.color = Color.red;
 		generateSpeedLabel.color = Color.red;
 	}
 
-	void EnemyDestroyed(){
+	void EnemyDestroyed () {
 		nameLabel.color = Color.white;
 		generateSpeedLabel.color = Color.white;
 	}

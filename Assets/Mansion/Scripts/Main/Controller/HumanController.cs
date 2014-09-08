@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class HumanController : MonoBehaviour {
 
 	public UISpriteAnimation walkAnimation;
+	public UISprite sprite;
 	public float limitLeft;
 	public float limitRight;
 	public float limitTop;

@@ -5,6 +5,7 @@ using System;
 
 public class EnemyGenerator : MonoBehaviour {
 	public GameObject[] enemyPrefabArray;
+	public MainController mainController;
 	public UIGrid homePanelGrid;
 	public UISprite exSprite;
 	private List<Transform> mHomeChildList;
@@ -22,9 +23,28 @@ public class EnemyGenerator : MonoBehaviour {
 
 	void Update () {
 		mGenerateIntervalTime -= Time.deltaTime;
-		if (mGenerateIntervalTime < 0) {
-			GenerateEnemy ();
+		if (mGenerateIntervalTime > 0) {
+			return;
 		}
+
+		// アンロックされている部屋がなければ処理を終了
+		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
+		if (unlockRoomDataList.Count == 0) {
+			Debug.Log ("return generate");
+			Debug.Log ("not unlock room");
+			SetGenerateIntervalTime ();
+			return;
+		}
+
+		//泥棒が存在していなければ生成
+		GameObject enemyObject = GameObject.FindWithTag ("Enemy");
+		if(enemyObject != null){
+			Debug.Log ("enemy exist");
+			Debug.Log ("return generate");
+			SetGenerateIntervalTime ();
+			return;
+		}
+		GenerateEnemy (unlockRoomDataList);
 	}
 
 	void OnApplicationPause (bool pauseStatus) {
@@ -51,32 +71,11 @@ public class EnemyGenerator : MonoBehaviour {
 		}
 	}
 
-	private bool IsEnemyExist {
-		set;
-		get;
-	}
-
 	public void AttackedEnemy () {
 		exSprite.enabled = false;
-		IsEnemyExist = false;
 	}
 
-	private void GenerateEnemy () {
-		// enemy exist
-		if (IsEnemyExist) {
-			Debug.Log ("return generate");
-			SetGenerateIntervalTime ();
-			return;
-		}
-
-		// no unlock room
-		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
-		if (unlockRoomDataList.Count == 0) {
-			Debug.Log ("return generate");
-			Debug.Log ("not unlock room");
-			SetGenerateIntervalTime ();
-			return;
-		}
+	private void GenerateEnemy (List<RoomData> unlockRoomDataList) {
 		Debug.Log ("generate enemy");
 
 		//解放しているレベルによって出現させる泥棒を変更
@@ -94,12 +93,15 @@ public class EnemyGenerator : MonoBehaviour {
 		enemyObject.transform.localPosition = new Vector3 (0, 0, 0);
 		unlockRoomObject.BroadcastMessage ("EnemyGenerated");
 
+		//現在の画面がホームでなければ、生成した泥棒を非表示にする
+		if (!mainController.CheckCurrentIsHomePanel ()) {
+			enemyObject.BroadcastMessage ("Hide");
+		}
 		Debug.Log ("generated roomId = " + unlockRoomData.Id);
 
 		exSprite.enabled = true;
 		SetGenerateIntervalTime ();
 		StatusDataKeeper.Instance.IncrementCameEnemyCount ();
-		IsEnemyExist = true;
 		SoundManager.Instance.StopBGM ();
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_ENEMY);
 	}
