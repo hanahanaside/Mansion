@@ -95,6 +95,7 @@ public class CountManager : MonoBehaviour {
 	}
 
 	private void SetKeepCountLabel () {
-		keepMoneyCountLabel.text = mKeepMoneyCount + " \u5186";
+		//	keepMoneyCountLabel.text = mKeepMoneyCount + " \u5186";
+		keepMoneyCountLabel.text = mKeepMoneyCount + "";
 	}
 }
