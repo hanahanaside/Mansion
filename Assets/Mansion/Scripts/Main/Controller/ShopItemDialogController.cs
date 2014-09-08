@@ -21,7 +21,7 @@ public class ShopItemDialogController : DialogController {
 	}
 
 	public override void OnBuyButtonClicked () {
-		long keepMoneyCount = CountManager.Instance.KeepMoneyCount;
+		decimal keepMoneyCount = CountManager.Instance.KeepMoneyCount;
 		if (keepMoneyCount < mShopItemData.Price) {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
 			mShortMoneyTweenColor.PlayForward ();

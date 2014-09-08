@@ -135,8 +135,8 @@ public class EnemyGenerator : MonoBehaviour {
 		for (int i = 0; i < sleepHours; i++) {
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			EnemyData enemyData = enemyDataList [enemyId - 1];
-			double persent = ((double)CountManager.Instance.KeepMoneyCount / 100);
-			long damage = (long)(enemyData.Atack * persent);
+			decimal persent = CountManager.Instance.KeepMoneyCount / 100;
+			decimal damage = enemyData.Atack * persent;
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
 			historyData.FlagSecom = 0;

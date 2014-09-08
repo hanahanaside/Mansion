@@ -8,8 +8,8 @@ public class CountManager : MonoBehaviour {
 	public UILabel totalGenerateSpeedLabel;
 	public iTweenEvent boostEvent;
 	private static CountManager sInstance;
-	private long mKeepMoneyCount;
-	private double mTotalGenerateSpeed;
+	private decimal mKeepMoneyCount;
+	private decimal mTotalGenerateSpeed;
 	private double mTime;
 	private int mBoostPower = 1;
 
@@ -17,7 +17,6 @@ public class CountManager : MonoBehaviour {
 		sInstance = this;
 		UpdateGenerateSpeed ();
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
-		Debug.Log ("count = " + mKeepMoneyCount);
 		SetKeepCountLabel ();
 		if (mTotalGenerateSpeed != 0) {
 			ResetTime ();
@@ -30,10 +29,11 @@ public class CountManager : MonoBehaviour {
 			return;
 		}
 		mTime -= Time.deltaTime * mBoostPower;
-		if (mTime < 0.0f) {
-			mKeepMoneyCount++;
+		if (mTime <= 0f) {
+			decimal addCount = mTotalGenerateSpeed / 100m;
+			mKeepMoneyCount += addCount;
 			SetKeepCountLabel ();
-			StatusDataKeeper.Instance.IncrementTotalGenerateCount ();
+			StatusDataKeeper.Instance.AddTotalGenerateCount (addCount);
 			ResetTime ();
 		}
 	}
@@ -50,12 +50,13 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
-	public void AddMoneyCount (long addCount) {
+	public void AddMoneyCount (decimal addCount) {
 		mKeepMoneyCount += addCount;
 		SetKeepCountLabel ();
 	}
 
-	public void AddGenerateSpeed(double addSpeed){
+	public void AddGenerateSpeed (decimal addSpeed) {
+		Debug.Log ("speed = " + addSpeed);
 		mTotalGenerateSpeed += addSpeed;
 		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + "/\u79d2";
 		ResetTime ();
@@ -66,7 +67,7 @@ public class CountManager : MonoBehaviour {
 		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
 	}
 
-	public void DecreaseMoneyCount (long decreaseCount) {
+	public void DecreaseMoneyCount (decimal decreaseCount) {
 		mKeepMoneyCount -= decreaseCount;
 		SetKeepCountLabel ();
 	}
@@ -84,18 +85,17 @@ public class CountManager : MonoBehaviour {
 		totalGenerateSpeedLabel.color = Color.white;
 	}
 
-	public long KeepMoneyCount {
+	public decimal KeepMoneyCount {
 		get {
 			return mKeepMoneyCount;
 		}
 	}
 
 	private void ResetTime () {
-		mTime = 1.0f / mTotalGenerateSpeed;
+		mTime = 0.01f;
 	}
 
 	private void SetKeepCountLabel () {
-		//	keepMoneyCountLabel.text = mKeepMoneyCount + " \u5186";
-		keepMoneyCountLabel.text = mKeepMoneyCount + "";
+		keepMoneyCountLabel.text = Math.Round (mKeepMoneyCount, 1, MidpointRounding.AwayFromZero) + " \u5186";
 	}
 }

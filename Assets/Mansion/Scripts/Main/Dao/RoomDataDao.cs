@@ -40,12 +40,12 @@ public class RoomDataDao : Dao {
 		return unlockRoomDataList;
 	}
 
-	public double GetTotalGenerateSpeed () {
-		double totalGenerateSpeed = 0.0f;
+	public decimal GetTotalGenerateSpeed () {
+		decimal totalGenerateSpeed = 0.0m;
 		List<RoomData> roomDataList = GetRoomDataList ();
 		foreach(RoomData roomData in roomDataList){
 			int itemCount = roomData.ItemCount;
-			double generateSpeed = roomData.GenerateSpeed;
+			decimal generateSpeed = roomData.GenerateSpeed;
 			int effect = ShopItemDataDao.Instance.GetEffectByRoomId (roomData.Id);
 			totalGenerateSpeed += (generateSpeed * itemCount) * effect;
 			Debug.Log ("(" + generateSpeed  + " * " + itemCount + ") * " + effect);
@@ -86,7 +86,7 @@ public class RoomDataDao : Dao {
 		roomData.ItemCount = sqliteQuery.GetInteger (RoomDataField.ITEM_COUNT);
 		string price = sqliteQuery.GetString (RoomDataField.PRICE);
 		roomData.ItemPrice = System.Convert.ToInt64 (price);
-		roomData.GenerateSpeed = sqliteQuery.GetDouble (RoomDataField.GENERATE_SPEED);
+		roomData.GenerateSpeed = (decimal)sqliteQuery.GetDouble (RoomDataField.GENERATE_SPEED);
 		roomData.ItemName = sqliteQuery.GetString (RoomDataField.NAME);
 		roomData.ItemDescription = sqliteQuery.GetString (RoomDataField.DESCRIPTION);
 		return roomData;

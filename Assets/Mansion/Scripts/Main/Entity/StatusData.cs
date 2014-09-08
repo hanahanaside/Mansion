@@ -3,9 +3,9 @@ using System.Collections;
 
 public class StatusData {
 
-	public long TotalGenerateCount{ get; set; }
+	public decimal TotalGenerateCount{ get; set; }
 
-	public long MaxKeepCount{ get; set; }
+	public decimal MaxKeepCount{ get; set; }
 
 	public long TotalPitGenerateCount{ get; set; }
 
@@ -17,7 +17,7 @@ public class StatusData {
 
 	public long TotalUsedSecomCount{ get; set; }
 
-	public long TotalDamegedCount{ get; set; }
+	public decimal TotalDamegedCount{ get; set; }
 
 	public string FirstGenerateDate{ get; set; }
 

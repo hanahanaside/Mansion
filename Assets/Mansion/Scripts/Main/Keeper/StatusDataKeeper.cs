@@ -13,7 +13,7 @@ public class StatusDataKeeper : MonoBehaviour {
 	}
 
 	void Update(){
-		long currentKeepCount = CountManager.Instance.KeepMoneyCount;
+		decimal currentKeepCount = CountManager.Instance.KeepMoneyCount;
 		if(currentKeepCount > mStatusData.MaxKeepCount){
 			mStatusData.MaxKeepCount = currentKeepCount;
 		}
@@ -37,8 +37,8 @@ public class StatusDataKeeper : MonoBehaviour {
 		}
 	}
 
-	public void IncrementTotalGenerateCount () {
-		mStatusData.TotalGenerateCount ++;
+	public void AddTotalGenerateCount (decimal addCount) {
+		mStatusData.TotalGenerateCount += addCount;
 	}
 	
 	public void IncrementTotalTapPitCount () {
@@ -61,7 +61,7 @@ public class StatusDataKeeper : MonoBehaviour {
 		mStatusData.TotalAtackEnemyCount++;
 	}
 
-	public void AddDamagedCount(long damagedCount){
+	public void AddDamagedCount(decimal damagedCount){
 		mStatusData.TotalDamegedCount += damagedCount;
 	}
 }

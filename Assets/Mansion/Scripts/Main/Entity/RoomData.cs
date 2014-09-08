@@ -9,7 +9,7 @@ public class RoomData {
 
 	public long ItemPrice{ get; set; }
 
-	public double GenerateSpeed{ get; set; }
+	public decimal GenerateSpeed{ get; set; }
 
 	public string ItemName{ get; set; }
 

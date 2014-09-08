@@ -57,18 +57,19 @@ public class PrefsManager {
 		return statusData;
 	}
 
-	public void SaveMoneyCount (long keepMoneyCount) {
+	public void SaveMoneyCount (decimal keepMoneyCount) {
 		PlayerPrefs.SetString (KEEP_MONEY_COUNT, "" + keepMoneyCount);
 		PlayerPrefs.Save ();
 	}
 
-	public long GetMoneyCount () {
+	public decimal GetMoneyCount () {
 		Debug.Log ("GetMoneyCount");
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
-		keepMoneyCountString = "1000000000000";
-		long keepMoneyCount = 0;
+		//	keepMoneyCountString = "1000000000000";
+		keepMoneyCountString = "1000000000000000";
+		decimal keepMoneyCount = 0;
 		if(!string.IsNullOrEmpty(keepMoneyCountString)){
-			keepMoneyCount = System.Convert.ToInt64 (keepMoneyCountString);
+			keepMoneyCount = decimal.Parse (keepMoneyCountString);
 		}
 		return keepMoneyCount;
 	}
