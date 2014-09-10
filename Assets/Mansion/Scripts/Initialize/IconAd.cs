@@ -8,19 +8,28 @@ public class IconAd : MonoBehaviour {
 	
 	void Start () {
 		sInstance = this;
-		#if !UNITY_EDITOR
+		#if UNITY_EDITOR
+
+		#elif UNITY_IPHONE
 		DontDestroyOnLoad (gameObject);
 		webViewObject.Init (); //初期化
 		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
 		webViewObject.SetMargins (-260, 120, 520, 900); //上に100pxマージンを取る
+		#elif UNITY_ANDROID
+
 		#endif
 	}
 
 	void OnApplicationPause(bool pauseStatus){
-		#if !UNITY_EDITOR
+		#if UNITY_EDITOR
+
+		#elif UNITY_IPHONE
 		if(!pauseStatus){
-			webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
+		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
 		}
+
+		#elif UNITY_ANDROID
+
 		#endif
 	}
 

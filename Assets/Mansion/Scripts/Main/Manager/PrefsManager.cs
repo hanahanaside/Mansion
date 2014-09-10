@@ -66,8 +66,7 @@ public class PrefsManager {
 	public decimal GetMoneyCount () {
 		Debug.Log ("GetMoneyCount");
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
-		//	keepMoneyCountString = "1000000000000";
-		keepMoneyCountString = "1000000000000000";
+		//	keepMoneyCountString = "1000000000000000";
 		decimal keepMoneyCount = 0;
 		if (!string.IsNullOrEmpty (keepMoneyCountString)) {
 			keepMoneyCount = decimal.Parse (keepMoneyCountString);

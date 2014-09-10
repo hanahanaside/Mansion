@@ -30,7 +30,10 @@ public class CountManager : MonoBehaviour {
 		}
 		mTime -= Time.deltaTime * mBoostPower;
 		if (mTime <= 0f) {
-			decimal addCount = mTotalGenerateSpeed / 100m;
+			decimal addCount = 0;
+			#if UNITY_IPHONE
+			addCount = mTotalGenerateSpeed / 30m;
+			#endif
 			mKeepMoneyCount += addCount;
 			SetKeepCountLabel ();
 			StatusDataKeeper.Instance.AddTotalGenerateCount (addCount);
@@ -93,6 +96,7 @@ public class CountManager : MonoBehaviour {
 
 	private void ResetTime () {
 		mTime = 0.01f;
+		//mTime = 1f;
 	}
 
 	private void SetKeepCountLabel () {

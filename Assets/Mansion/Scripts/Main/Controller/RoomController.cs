@@ -148,6 +148,7 @@ public class RoomController : MonoBehaviour {
 			List<Transform> itemList = grid.GetChildList ();
 			foreach (Transform item in itemList) {
 				UISprite sprite = item.GetComponent<UISprite> ();
+				sprite.enabled = false;
 				mItemSpriteList.Add (sprite);
 			}
 		}

@@ -5,15 +5,10 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	public UILabel label;
-	private long mCount;
-
-	void Start(){
-
-	}
+	private float mTime = 1.0f;
 
 	void Update(){
-		mCount += 1000;
-		label.text =   " " + mCount + " ";
+		mTime -= Time.deltaTime;
+		Debug.Log ("time = " + mTime);
 	}
 }

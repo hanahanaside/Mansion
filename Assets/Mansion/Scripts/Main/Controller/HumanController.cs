@@ -2,7 +2,6 @@
 using System.Collections;
 
 public abstract class HumanController : MonoBehaviour {
-
 	public UISpriteAnimation walkAnimation;
 	public UISprite sprite;
 	public float limitLeft;
@@ -12,7 +11,7 @@ public abstract class HumanController : MonoBehaviour {
 	private float mSpeedX;
 	private float mSpeedY;
 	private float mTime;
-	
+
 	public void Walk () {
 		mTime -= Time.deltaTime;
 		if (mTime < 0) {
@@ -30,23 +29,25 @@ public abstract class HumanController : MonoBehaviour {
 			TurnLeft ();
 		}
 		if (y > limitTop) {
+			transform.Translate (0,-0.001f,0);
 			mSpeedY = -mSpeedY;
 		}
 		if (y < limitBottom) {
+			transform.Translate (0,0.001f,0);
 			mSpeedY = -mSpeedY;
 		}
 		transform.Translate (mSpeedX, mSpeedY, 0);
 	}
 
 	public void StopWalkAnimation () {
-		if(walkAnimation!= null){
+		if (walkAnimation != null) {
 			walkAnimation.enabled = false;
 		}
 	}
 
 	public void RestartWalkAnimation () {
-		SetSpeed();
-		if(walkAnimation != null){
+		SetSpeed ();
+		if (walkAnimation != null) {
 			walkAnimation.enabled = true;
 		}
 	}

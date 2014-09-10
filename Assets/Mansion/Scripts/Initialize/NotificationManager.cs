@@ -49,11 +49,13 @@ public class NotificationManager : MonoBehaviour {
 	}
 
 	private void _ScheduleLocalNotification (string title) {
+		#if UNITY_IPHONE
 		LocalNotification localNotification = new LocalNotification ();
 		localNotification.applicationIconBadgeNumber = 4;
 		localNotification.alertBody = title;
 		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
 		NotificationServices.ScheduleLocalNotification (localNotification);
+		#endif
 	}
 
 	private void ClearNotifications () {
