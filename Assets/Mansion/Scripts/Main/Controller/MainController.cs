@@ -13,6 +13,8 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
+		BannerAd.Instance.ShowBannerAd ();
+		IconAd.Instance.ShowIconAd ();
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
 		scrollView.ResetPosition ();
@@ -36,6 +38,7 @@ public class MainController : MonoBehaviour {
 		if(CheckSamePanel(homePanel)){
 			return;
 		}
+		IconAd.Instance.ShowIconAd ();
 		mCurrentPanel.SetActive (false);
 		mCurrentPanel = homePanel;
 		ChangeButtonFilter (0);
@@ -54,6 +57,7 @@ public class MainController : MonoBehaviour {
 		}else {
 			statusPanel.SetActive (false);
 		}
+		IconAd.Instance.HideIconAd ();
 		mCurrentPanel = shopPanel;
 		shopPanel.SetActive (true);
 		ChangeButtonFilter (1);
@@ -71,6 +75,7 @@ public class MainController : MonoBehaviour {
 		}else {
 			shopPanel.SetActive (false);
 		}
+		IconAd.Instance.HideIconAd ();
 		mCurrentPanel = statusPanel;
 		statusPanel.SetActive (true);
 		ChangeButtonFilter (2);

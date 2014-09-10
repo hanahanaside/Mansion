@@ -2,17 +2,21 @@
 using System.Collections;
 
 public class InitializeController : MonoBehaviour {
-
-	void OnEnable(){
+	void OnEnable () {
 		DatabaseCreater.createdDatabaseEvent += OnDatabaseCreatedEvent;
 	}
 
-	void OnDisable(){
+	void OnDisable () {
 		DatabaseCreater.createdDatabaseEvent -= OnDatabaseCreatedEvent;
 	}
 
-	void OnDatabaseCreatedEvent(){
-		Debug.Log("Database created");
-		Application.LoadLevel("Main");
+	void OnDatabaseCreatedEvent () {
+		Debug.Log ("Database created");
+
+		if (PrefsManager.Instance.FlagOpeningFinished == 0) {
+			Application.LoadLevel ("Opening");
+		} else {
+			Application.LoadLevel ("Main");
+		}
 	}
 }

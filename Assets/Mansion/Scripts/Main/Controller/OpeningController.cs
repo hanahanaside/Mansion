@@ -2,23 +2,23 @@
 using System.Collections;
 
 public class OpeningController : MonoBehaviour {
+	public TweenAlpha fadeOutAnimation;
 
-	public TweenColor fadeOutAnimation;
-
-	void OnLabelAnimationFinished(){
+	public  void OnLabelAnimationFinished () {
 		fadeOutAnimation.PlayForward ();
 	}
 
-	public void FadeOutAnimationFinished(){
+	public void FadeOutAnimationFinished () {
 		Transition ();
 	}
 
-	public void OnSkipButtonClicked(){
+	public void OnSkipButtonClicked () {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		fadeOutAnimation.PlayForward ();
 	}
 
-	private void Transition(){
+	private void Transition () {
+		PrefsManager.Instance.FlagOpeningFinished = 1;
 		Application.LoadLevel ("Main");
 	}
 }

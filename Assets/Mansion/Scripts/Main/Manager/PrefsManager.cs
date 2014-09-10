@@ -10,6 +10,7 @@ public class PrefsManager {
 	private const string EXIT_DATE = "exitDate";
 	private const string FLAG_REVIEW = "flagReview";
 	private const string BOOST_TIME = "boostTime";
+	private const string OPENING_FINISHED = "openingFinished";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -68,7 +69,7 @@ public class PrefsManager {
 		//	keepMoneyCountString = "1000000000000";
 		keepMoneyCountString = "1000000000000000";
 		decimal keepMoneyCount = 0;
-		if(!string.IsNullOrEmpty(keepMoneyCountString)){
+		if (!string.IsNullOrEmpty (keepMoneyCountString)) {
 			keepMoneyCount = decimal.Parse (keepMoneyCountString);
 		}
 		return keepMoneyCount;
@@ -91,6 +92,16 @@ public class PrefsManager {
 	public int FlagReview {
 		get {
 			return PlayerPrefs.GetInt (FLAG_REVIEW, 0);
+		}
+	}
+
+	public int FlagOpeningFinished {
+		get {
+			return PlayerPrefs.GetInt (OPENING_FINISHED, 0);
+		}
+		set {
+			PlayerPrefs.SetInt (OPENING_FINISHED, value);
+			PlayerPrefs.Save ();
 		}
 	}
 

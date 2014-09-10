@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Mansion\Scripts\Initialize\BannerAd.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\DatabaseCreater.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Initialize\IconAd.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\NotificationManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />

@@ -25,6 +25,7 @@ public class DatabaseCreater : MonoBehaviour {
 		secomData.Count = 0;
 		secomData.MacxCount = 0;
 		PrefsManager.Instance.SaveSecomData(secomData);
+		PrefsManager.Instance.FlagOpeningFinished = 0;
 #endif
 
 		#if UNITY_IPHONE
