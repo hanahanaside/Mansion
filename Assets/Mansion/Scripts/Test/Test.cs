@@ -5,10 +5,9 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	private float mTime = 1.0f;
-
-	void Update(){
-		mTime -= Time.deltaTime;
-		Debug.Log ("time = " + mTime);
+	void Start(){
+		string dm = "10.5";
+		decimal d = Convert.ToDecimal(dm);
+		Debug.Log ("d = " + d);
 	}
 }

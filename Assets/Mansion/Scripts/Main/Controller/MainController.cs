@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class MainController : MonoBehaviour {
-
 	public GameObject homePanel;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
@@ -35,7 +34,7 @@ public class MainController : MonoBehaviour {
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
-		if(CheckSamePanel(homePanel)){
+		if (CheckSamePanel (homePanel)) {
 			return;
 		}
 		IconAd.Instance.ShowIconAd ();
@@ -49,12 +48,12 @@ public class MainController : MonoBehaviour {
 		Debug.Log ("shop");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		scrollView.ResetPosition ();
-		if(CheckSamePanel(shopPanel)){
+		if (CheckSamePanel (shopPanel)) {
 			return;
 		}
-		if(mCurrentPanel.Equals(homePanel)){
+		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
-		}else {
+		} else {
 			statusPanel.SetActive (false);
 		}
 		IconAd.Instance.HideIconAd ();
@@ -67,12 +66,12 @@ public class MainController : MonoBehaviour {
 		Debug.Log ("status");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		scrollView.ResetPosition ();
-		if(CheckSamePanel(statusPanel)){
+		if (CheckSamePanel (statusPanel)) {
 			return;
 		}
-		if(mCurrentPanel.Equals(homePanel)){
+		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
-		}else {
+		} else {
 			shopPanel.SetActive (false);
 		}
 		IconAd.Instance.HideIconAd ();
@@ -81,27 +80,27 @@ public class MainController : MonoBehaviour {
 		ChangeButtonFilter (2);
 	}
 
-	public void OnRecommendButtonClicked(){
+	public void OnRecommendButtonClicked () {
 		Debug.Log ("recommend");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 	}
 
-	public bool CheckCurrentIsHomePanel(){
+	public bool CheckCurrentIsHomePanel () {
 		return mCurrentPanel.Equals (homePanel);
 	}
 
-	private bool CheckSamePanel(GameObject panelObject){
-		if(mCurrentPanel.Equals(panelObject)){
+	private bool CheckSamePanel (GameObject panelObject) {
+		if (mCurrentPanel.Equals (panelObject)) {
 			Debug.Log ("same");
 			return true;
 		}
 		return false;
 	}
 
-	private void ChangeButtonFilter(int buttonIndex){
-		for(int i = 0;i < colorFilterArray.Length;i++){
-			GameObject colorFilter = colorFilterArray[i];
-			if(i == buttonIndex){
+	private void ChangeButtonFilter (int buttonIndex) {
+		for (int i = 0; i < colorFilterArray.Length; i++) {
+			GameObject colorFilter = colorFilterArray [i];
+			if (i == buttonIndex) {
 				colorFilter.SetActive (false);
 				continue;
 			}

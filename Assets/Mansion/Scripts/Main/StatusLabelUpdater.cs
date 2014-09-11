@@ -11,7 +11,7 @@ public class StatusLabelUpdater : MonoBehaviour {
 	void Update () {
 		StatusData statusData = StatusDataKeeper.Instance.StatusData;
 		decimal totalGenerateCount = Math.Round (statusData.TotalGenerateCount, 0, MidpointRounding.AwayFromZero);
-		decimal maxKeepCount = Math.Round (statusData.TotalDamegedCount, 0, MidpointRounding.AwayFromZero);
+		decimal maxKeepCount = Math.Round (statusData.MaxKeepCount, 0, MidpointRounding.AwayFromZero);
 		decimal totaldamegedCount =  Math.Round (statusData.TotalDamegedCount, 0, MidpointRounding.AwayFromZero);
 		statusParamlabelArray [0].text = totalGenerateCount + "円";
 		statusParamlabelArray [1].text = maxKeepCount + "円";

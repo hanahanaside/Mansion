@@ -15,7 +15,6 @@ public class DatabaseCreater : MonoBehaviour {
 	
 	// Use this for initialization
 	private void CreateDatabase () {
-		Debug.Log("create Database");
 		string baseFilePath = Application.streamingAssetsPath + "/" + DATABASE_FILE_NAME;
 		string filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
 #if UNITY_EDITOR
@@ -31,7 +30,7 @@ public class DatabaseCreater : MonoBehaviour {
 		#if UNITY_IPHONE
 		if(!File.Exists(filePath)){
 			File.Copy( baseFilePath, filePath); 
-			Debug.Log("create Database");
+			Debug.Log("new Database Created");
 		}
 		createdDatabaseEvent();
 		#endif

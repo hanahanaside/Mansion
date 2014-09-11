@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
+using System;
 
 public class JsonParser : AbstractJsonParser {
-	
 	public static string SerializeStatusData (StatusData statusData) {
 		Dictionary<string,object> dictionary = new Dictionary<string, object> ();
 		dictionary.Add (StatusDataKies.TOTAL_GENERATE_COUNT, statusData.TotalGenerateCount);
@@ -21,17 +21,18 @@ public class JsonParser : AbstractJsonParser {
 	}
 
 	public static StatusData DeserializeStatusData (string json) {
-		IDictionary dictionary = (IDictionary)Json.Deserialize (json);
+		Debug.Log ("json = " + json);
+		Dictionary<string,object> dictionary = (Dictionary<string,object>)Json.Deserialize (json);
 		StatusData statusData = new StatusData ();
-		statusData.TotalGenerateCount = (long)dictionary [StatusDataKies.TOTAL_GENERATE_COUNT];
-		statusData.MaxKeepCount = (long)dictionary [StatusDataKies.MAX_KEEP_COUNT];
-		statusData.TotalPitGenerateCount = (long)dictionary [StatusDataKies.TOTAL_PIT_GENERATE_COUNT];
-		statusData.TotalTapPitCount = (long)dictionary [StatusDataKies.TOTAL_TAP_PIT_COUNT];
-		statusData.TotalCameEnemyCount = (long)dictionary [StatusDataKies.TOTAL_CAME_ENEMY_COUNT];
-		statusData.TotalAtackEnemyCount = (long)dictionary [StatusDataKies.TOTAL_ATACK_ENEMY_COUNT];
-		statusData.TotalUsedSecomCount = (long)dictionary [StatusDataKies.TOTAL_USED_SECOM_COUNT];
-		statusData.TotalDamegedCount = (long)dictionary [StatusDataKies.TOTAL_DAMEGED_COUNT];
-		statusData.FirstGenerateDate = (string)dictionary [StatusDataKies.FIRST_GENERATE_DATE];
+		statusData.TotalGenerateCount = Convert.ToDecimal (dictionary [StatusDataKies.TOTAL_GENERATE_COUNT]);
+		statusData.MaxKeepCount = Convert.ToDecimal (dictionary [StatusDataKies.MAX_KEEP_COUNT]); 
+		statusData.TotalPitGenerateCount = Convert.ToInt64 (dictionary [StatusDataKies.TOTAL_PIT_GENERATE_COUNT]);
+		statusData.TotalTapPitCount = Convert.ToInt64 (dictionary [StatusDataKies.TOTAL_TAP_PIT_COUNT]); 
+		statusData.TotalCameEnemyCount = Convert.ToInt64 (dictionary [StatusDataKies.TOTAL_CAME_ENEMY_COUNT]); 
+		statusData.TotalAtackEnemyCount = Convert.ToInt64 (dictionary [StatusDataKies.TOTAL_ATACK_ENEMY_COUNT]); 
+		statusData.TotalUsedSecomCount = Convert.ToInt64 (dictionary [StatusDataKies.TOTAL_USED_SECOM_COUNT]); 
+		statusData.TotalDamegedCount = Convert.ToDecimal (dictionary [StatusDataKies.TOTAL_DAMEGED_COUNT]); 
+		statusData.FirstGenerateDate = Convert.ToString (dictionary [StatusDataKies.FIRST_GENERATE_DATE]); 
 		return statusData;
 	}
 
