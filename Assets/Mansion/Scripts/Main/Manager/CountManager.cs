@@ -33,7 +33,10 @@ public class CountManager : MonoBehaviour {
 			decimal addCount = 0;
 			#if UNITY_IPHONE
 			decimal disCountPower = 30 / mBoostPower;
-			Debug.Log("disCount Power = " + disCountPower);
+			addCount = mTotalGenerateSpeed / disCountPower;
+			#endif
+			#if UNITY_ANDROID
+			decimal disCountPower = 55 / mBoostPower;
 			addCount = mTotalGenerateSpeed / disCountPower;
 			#endif
 			mKeepMoneyCount += addCount;
