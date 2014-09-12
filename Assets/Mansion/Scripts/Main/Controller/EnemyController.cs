@@ -68,13 +68,23 @@ public abstract class EnemyController : HumanController {
 		TweenColor.Begin (gameObject, 2.0f, Color.clear);
 		//ヒストリーデータをインサート
 		InsertHistoryData ();
-		transform.parent.gameObject.BroadcastMessage ("EnemyDestroyed");
+		//宇宙海賊の場合は親の親オブジェクトにメッセージングする
+		if (mEnemyData.Id == 6) {
+			transform.parent.gameObject.transform.parent.gameObject.BroadcastMessage ("EnemyDestroyed");
+		} else {
+			transform.parent.gameObject.BroadcastMessage ("EnemyDestroyed");
+		}
 		StartCoroutine (DestroyCoroutine ());
 	}
 
 	private IEnumerator DestroyCoroutine () {
 		yield return new WaitForSeconds (2.0f);
-		Destroy (gameObject);
+		//宇宙海賊の場合は親オブジェクトごとDestroyする
+		if (mEnemyData.Id == 6) {
+			Destroy (transform.parent.gameObject);
+		} else {
+			Destroy (gameObject);
+		}
 	}
 
 	public void SetAtackIntervalTime () {
@@ -107,12 +117,16 @@ public abstract class EnemyController : HumanController {
 	}
 
 	public void ApplyDamage () {
+		//攻撃前にタッチされていたら中止
+		if (!collider.enabled) {
+			return;
+		}
 		decimal persent = CountManager.Instance.KeepMoneyCount / 100;
 		decimal damage = mEnemyData.Atack * persent;
 		mTotalDamage += damage;
 		StatusDataKeeper.Instance.AddDamagedCount (damage);
 		CountManager.Instance.DecreaseMoneyCount (damage);
-		if(sprite.enabled){
+		if (sprite.enabled) {
 			GameObject damageLabelObject = Instantiate (mDamageLabelPrefab)as GameObject;
 			damageLabelObject.transform.parent = transform.parent;
 			damageLabelObject.transform.localScale = new Vector3 (1, 1, 1);

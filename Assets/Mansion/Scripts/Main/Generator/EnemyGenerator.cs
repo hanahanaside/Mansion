@@ -38,7 +38,7 @@ public class EnemyGenerator : MonoBehaviour {
 
 		//泥棒が存在していなければ生成
 		GameObject enemyObject = GameObject.FindWithTag ("Enemy");
-		if(enemyObject != null){
+		if (enemyObject != null) {
 			Debug.Log ("enemy exist");
 			Debug.Log ("return generate");
 			SetGenerateIntervalTime ();
@@ -56,7 +56,7 @@ public class EnemyGenerator : MonoBehaviour {
 			DateTime dtNow = DateTime.Now;
 			TimeSpan ts = dtNow - dtOld;
 			//	int sleepHours = ts.Hours;
-			int sleepHours = ts.Minutes;
+			int sleepHours = ts.Seconds;
 			Debug.Log ("sleep Hours = " + sleepHours);
 			if (sleepHours <= 0) {
 				return;
@@ -113,8 +113,7 @@ public class EnemyGenerator : MonoBehaviour {
 		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
-		//セコムを持っていればセコムで撃退して履歴をセーブ
-		for (int i = 0; i < secomdata.Count; i++) {
+		while (sleepHours > 0) {
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
@@ -125,16 +124,16 @@ public class EnemyGenerator : MonoBehaviour {
 			sleepHours--;
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			PrefsManager.Instance.SaveSecomData (secomdata);
-			//スリープ時間が０になったら処理を終了
-			if (sleepHours <= 0) {
-				return;
+			Debug.Log ("secom count = " + secomdata.Count);
+			if (secomdata.Count <= 0) {
+				break;
 			}
 		}
 
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
 		int j = 1;
 		//セコムで撃退しきれなかった分を減算
-		for (int i = 0; i < sleepHours; i++) {
+		while (sleepHours > 0) {
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			EnemyData enemyData = enemyDataList [enemyId - 1];
 			decimal persent = CountManager.Instance.KeepMoneyCount / 100;
@@ -148,6 +147,7 @@ public class EnemyGenerator : MonoBehaviour {
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			CountManager.Instance.DecreaseMoneyCount (damage);
 			j++;
+			sleepHours--;
 		}
 	}
 

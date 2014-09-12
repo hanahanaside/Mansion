@@ -28,11 +28,13 @@ public class CountManager : MonoBehaviour {
 			// frist launch
 			return;
 		}
-		mTime -= Time.deltaTime * mBoostPower;
+		mTime -= Time.deltaTime;
 		if (mTime <= 0f) {
 			decimal addCount = 0;
 			#if UNITY_IPHONE
-			addCount = mTotalGenerateSpeed / 30m;
+			decimal disCountPower = 30 / mBoostPower;
+			Debug.Log("disCount Power = " + disCountPower);
+			addCount = mTotalGenerateSpeed / disCountPower;
 			#endif
 			mKeepMoneyCount += addCount;
 			SetKeepCountLabel ();
