@@ -52,6 +52,7 @@
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\InterstitialAdRoader.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\NotificationManager.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Initialize\RectangleAd.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\ShareManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\AudioClipID.cs" />

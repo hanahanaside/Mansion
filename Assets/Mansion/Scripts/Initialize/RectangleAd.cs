@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BannerAd : MonoBehaviour {
+public class RectangleAd : MonoBehaviour {
 	public WebViewObject webViewObject;
-	private static BannerAd sInstance;
+	private static RectangleAd sInstance;
 
 	void Start () {
 		sInstance = this;
@@ -13,34 +13,48 @@ public class BannerAd : MonoBehaviour {
 		#endif
 	}
 
-	public static BannerAd Instance {
+	void OnApplicationPause (bool pauseStatus) {
+		#if !UNITY_EDITOR
+		if (!pauseStatus) {
+			LoadURL();
+		}
+		#endif
+	}
+
+	public static RectangleAd Instance {
 		get {
 			return sInstance;
 		}
 	}
 
-	public void ShowBannerAd () {
+	public void Show () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (true); //WebViewを表示する
 		#endif
 	}
 
-	public void HideBannerAd () {
+	public void Hide () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (false);
 		#endif
 	}
 
-	private void Init(){
+	private void Init () {
+		DontDestroyOnLoad (gameObject);
+		webViewObject.Init (); //初期化
+		LoadURL ();
+		webViewObject.SetMargins (0, 300, 0, 300); //下に100pxマージンを取る
+	}
+
+	private void LoadURL () {
 		string url = "";
 		#if UNITY_IPHONE
-		url = "http://ad.graasb.com/shakky/money/ios/top/";
+		url = "http://ad.graasb.com/shakky/money/ios/rectangle/";
 		#endif
 		#if UNITY_ANDROID
 		url = "http://ad.graasb.com/shakky/money/android/top/";
 		#endif
-		webViewObject.Init (); //初期化
 		webViewObject.LoadURL (url); //ページの読み込み
-		webViewObject.SetMargins (0, 890, 0, 146); //下に100pxマージンを取る
 	}
+
 }

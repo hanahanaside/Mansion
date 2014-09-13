@@ -5,6 +5,7 @@ public class MainController : MonoBehaviour {
 	public GameObject homePanel;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
+	public GameObject closeRetangleButton;
 	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
@@ -70,6 +71,9 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (statusPanel)) {
 			return;
 		}
+		RectangleAd.Instance.Show ();
+		closeRetangleButton.SetActive (true);
+		FenceManager.Instance.ShowFence ();
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {
@@ -85,6 +89,14 @@ public class MainController : MonoBehaviour {
 		Debug.Log ("recommend");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		APUnityPlugin.ShowAppliPromotionWall ();
+	}
+
+	public void OnCloseRectangleButtonClicked(){
+		Debug.Log ("close");
+		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		closeRetangleButton.SetActive (false);
+		RectangleAd.Instance.Hide ();
+		FenceManager.Instance.HideFence ();
 	}
 
 	public bool CheckCurrentIsHomePanel () {
