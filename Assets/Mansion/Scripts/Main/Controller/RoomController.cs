@@ -162,6 +162,7 @@ public class RoomController : MonoBehaviour {
 			resident.transform.parent = transform.parent;
 			resident.transform.localScale = new Vector3 (1, 1, 1);
 			resident.transform.localPosition = new Vector3 (x, y, 0);
+			resident.SendMessage ("SetDepth", mRoomData.Id);
 		}
 	}
 }

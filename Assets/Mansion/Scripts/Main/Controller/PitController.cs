@@ -2,19 +2,19 @@ using UnityEngine;
 using System.Collections;
 
 public class PitController : MonoBehaviour {
-
 	public GameObject[] hideObjectArray;
 	public UISprite backGroundSprite;
 	public GameObject countLabelPrefab;
 	public GameObject moneyParticlePrefab;
 	public GameObject pit;
 	public GameObject effectPoint;
+	public iTweenEvent pitScaleEvent;
 	private ShopItemData mCurrentPitData;
 	private ShopItemData mNextPitData;
 
 	void Init (ShopItemData pitData) {
 		mCurrentPitData = pitData;
-		foreach(GameObject hideObject in hideObjectArray){
+		foreach (GameObject hideObject in hideObjectArray) {
 			hideObject.SetActive (true);
 		}
 		if (mCurrentPitData.Id < 5) {
@@ -27,26 +27,35 @@ public class PitController : MonoBehaviour {
 		pit.GetComponent<UISprite> ().spriteName = spriteName;
 	}
 
-	void Hide(){
-		foreach(GameObject hideObject in hideObjectArray){
+	void Hide () {
+		foreach (GameObject hideObject in hideObjectArray) {
 			hideObject.SetActive (false);
 		}
 	}
-		
+
 	public void OnPitClicked () {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_MONEY);
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);
+		pitScaleEvent.Play ();
+		StartCoroutine (StopScaleEventCorutine ());
 		StatusDataKeeper.Instance.IncrementTotalTapPitCount ();
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
 		countLabelObject.transform.Translate (0, 0.02f, 0);
 		int getPoint = mCurrentPitData.Effect;
 		countLabelObject.SendMessage ("SetCount", "+" + getPoint);
-		GameObject effectObject = InstantiateObject (moneyParticlePrefab);
-		effectObject.transform.Translate (0,-0.2f,0);
+		if (GameObject.FindGameObjectWithTag ("MoneyEffect") == null) {
+			Instantiate (moneyParticlePrefab, effectPoint.transform.position, Quaternion.identity);
+		}
 		CountManager.Instance.AddMoneyCount (getPoint);
 		StatusDataKeeper.Instance.AddTotalPitGenerateCount (getPoint);
 		Debug.Log ("total tap count = " + StatusDataKeeper.Instance.StatusData.TotalTapPitCount);
 		CheckUnLickPitItem ();
+	}
+
+	private IEnumerator StopScaleEventCorutine () {
+		yield return new WaitForSeconds (1.0f);
+		pitScaleEvent.Stop ();
+		pit.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	private void CheckUnLickPitItem () {

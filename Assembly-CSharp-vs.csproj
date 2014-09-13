@@ -86,7 +86,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\HistoryDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\RoomDataDao.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Dao\ShopItemDataDao.cs" />
-     <Compile Include="Assets\Mansion\Scripts\Main\Destroyer\MoneyParticleDestroyer.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Destroyer\MoneyEffectManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Entity\EnemyData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Entity\HistoryData.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Entity\RoomData.cs" />
