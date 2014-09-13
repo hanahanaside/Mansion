@@ -7,8 +7,8 @@ public class MainController : MonoBehaviour {
 	public GameObject statusPanel;
 	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
-	private GameObject mCurrentPanel;
 	public HomePanelController homePanelController;
+	private GameObject mCurrentPanel;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
@@ -51,6 +51,7 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (shopPanel)) {
 			return;
 		}
+		NendAdInterstitial.Instance.Show ();
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {

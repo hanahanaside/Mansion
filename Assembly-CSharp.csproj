@@ -50,6 +50,7 @@
      <Compile Include="Assets\Mansion\Scripts\Initialize\DatabaseCreater.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\IconAd.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\InitializeController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Initialize\InterstitialAdRoader.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\NotificationManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\ShareManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Initialize\SoundManager.cs" />
@@ -347,6 +348,7 @@
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\Plugins\iOS\NADView_readme.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Masked Colored.shader" />
@@ -372,6 +374,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\Plugins\Android\readme.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />

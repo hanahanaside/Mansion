@@ -53,6 +53,11 @@
      <Compile Include="Assets\Plugins\EtceteraAndroid\demo\EtceteraUIManager.cs" />
      <Compile Include="Assets\Plugins\EtceteraAndroid\demo\EtceteraUIManagerTwo.cs" />
      <Compile Include="Assets\Plugins\MiniJSON.cs" />
+     <Compile Include="Assets\Plugins\Nend\NendAd.cs" />
+     <Compile Include="Assets\Plugins\Nend\NendAdBanner.cs" />
+     <Compile Include="Assets\Plugins\Nend\NendAdIcon.cs" />
+     <Compile Include="Assets\Plugins\Nend\NendAdInterstitial.cs" />
+     <Compile Include="Assets\Plugins\Nend\NendUtils.cs" />
      <Compile Include="Assets\Plugins\SocialConnector\Sample\Sample.cs" />
      <Compile Include="Assets\Plugins\SocialConnector\SocialConnector.cs" />
      <Compile Include="Assets\Plugins\SocialNetworkingCommon\Facebook\Facebook.cs" />
@@ -76,6 +81,7 @@
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\Plugins\iOS\NADView_readme.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Masked Colored.shader" />
@@ -101,6 +107,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\Plugins\Android\readme.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
