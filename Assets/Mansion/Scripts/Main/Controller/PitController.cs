@@ -12,6 +12,10 @@ public class PitController : MonoBehaviour {
 	private ShopItemData mCurrentPitData;
 	private ShopItemData mNextPitData;
 
+	void Start(){
+		transform.parent.Translate (0,0.1f,0);
+	}
+
 	void Init (ShopItemData pitData) {
 		mCurrentPitData = pitData;
 		foreach (GameObject hideObject in hideObjectArray) {
