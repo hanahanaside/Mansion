@@ -83,6 +83,7 @@ public class MainController : MonoBehaviour {
 	public void OnRecommendButtonClicked () {
 		Debug.Log ("recommend");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		APUnityPlugin.ShowAppliPromotionWall ();
 	}
 
 	public bool CheckCurrentIsHomePanel () {
