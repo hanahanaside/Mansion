@@ -27,13 +27,13 @@ public class BannerAd : MonoBehaviour {
 		}
 	}
 
-	public void ShowBannerAd () {
+	public void Show () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (true); //WebViewを表示する
 		#endif
 	}
 
-	public void HideBannerAd () {
+	public void Hide () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (false);
 		#endif

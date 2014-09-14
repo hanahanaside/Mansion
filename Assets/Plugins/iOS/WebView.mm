@@ -39,11 +39,26 @@ extern "C" void UnitySendMessage(const char *, const char *, const char *);
 
 	UIView *view = UnityGetGLViewController().view;
 	webView = [[UIWebView alloc] initWithFrame:view.frame];
+
+    
+    //追加
+    webView.delegate = self;
+    webView.scalesPageToFit = YES;
+    NSString* innerHTML = @"<span style=\"color: #F00;\">hogehoge</span>";
+    NSString* outerHTML = @"<body style=\"background-color: transparent\">%@</body>";
+    NSString* htmlString = [NSString stringWithFormat:outerHTML, innerHTML];
+    [webView setBackgroundColor:[UIColor clearColor]];
+    [webView setOpaque:NO];
+    [webView loadHTMLString:htmlString baseURL:nil];
+    
+    
 	webView.delegate = self;
 	webView.hidden = YES;
 	[view addSubview:webView];
 	gameObjectName = [[NSString stringWithUTF8String:gameObjectName_] retain];
-
+    
+    
+    
 	return self;
 }
 

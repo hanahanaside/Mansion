@@ -13,7 +13,7 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
-		BannerAd.Instance.ShowBannerAd ();
+		BannerAd.Instance.Show ();
 		IconAd.Instance.ShowIconAd ();
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
@@ -71,6 +71,7 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (statusPanel)) {
 			return;
 		}
+		BannerAd.Instance.Hide ();
 		RectangleAd.Instance.Show ();
 		closeRetangleButton.SetActive (true);
 		FenceManager.Instance.ShowFence ();
@@ -94,6 +95,7 @@ public class MainController : MonoBehaviour {
 	public void OnCloseRectangleButtonClicked () {
 		Debug.Log ("close");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		BannerAd.Instance.Show ();
 		closeRetangleButton.SetActive (false);
 		RectangleAd.Instance.Hide ();
 		FenceManager.Instance.HideFence ();

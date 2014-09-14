@@ -21,7 +21,7 @@ public class MoneyEffectManager : MonoBehaviour {
 
 	void Init () {
 		foreach (ParticleSystem moneyParticle in moneyArray) {
-			moneyParticle.startLifetime = Random.Range (0.4f, 0.5f);
+			moneyParticle.startLifetime = Random.Range (0.3f, 0.35f);
 			moneyParticle.startSpeed = Random.Range (2.0f, 2.5f);
 			moneyParticle.startSize = Random.Range (0.07f, 0.1f);
 			moneyParticle.startRotation = Random.Range (0, 70.0f);
