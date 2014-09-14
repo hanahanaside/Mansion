@@ -16,7 +16,7 @@ public class ShopItemDialogController : DialogController {
 		mShopItemData = shopItemData;
 		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
 		nameLabel.text = shopItemData.Name;
-		priceLabelObject.GetComponent<UILabel> ().text = shopItemData.Price + "\u5186";
+		SetPriceLabel (shopItemData.Price);
 		InitComponentsByTag (shopItemData);
 	}
 
@@ -38,15 +38,15 @@ public class ShopItemDialogController : DialogController {
 		}
 	}
 
-	private void BuySecom(){
+	private void BuySecom () {
 		SecomData secomData = PrefsManager.Instance.GetSecomData ();
-		if(secomData.Count >= 10){
+		if (secomData.Count >= 10) {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
 			return;
 		}
 		secomData.Count++;
 		PrefsManager.Instance.SaveSecomData (secomData);
-		priceLabelObject.GetComponent<UILabel> ().text = secomData.Price + "\u5186";
+		SetPriceLabel (secomData.Price);
 		base.OnBuyButtonClicked ();
 	}
 
@@ -120,5 +120,10 @@ public class ShopItemDialogController : DialogController {
 		yield return new WaitForSeconds (1.0f);
 		mShortMoneyTweenColor.enabled = false;
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
+	}
+
+	private void SetPriceLabel(long price){
+		priceLabelObject.GetComponent<UILabel> ().text = CommaMarker.MarkLongCount (price) + "\u5186";
+
 	}
 }

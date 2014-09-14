@@ -61,6 +61,10 @@ public class StatusDataKeeper : MonoBehaviour {
 		mStatusData.TotalAtackEnemyCount++;
 	}
 
+	public void IncrementUseSecomCount(){
+		mStatusData.TotalUsedSecomCount++;
+	}
+
 	public void AddDamagedCount(decimal damagedCount){
 		mStatusData.TotalDamegedCount += damagedCount;
 	}

@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 
 public class RoomItemDialogController : DialogController {
-
 	public GameObject closeButton;
 	public GameObject priceLabelObject;
 	public UIAtlas roomItemAtlas;
@@ -17,7 +16,7 @@ public class RoomItemDialogController : DialogController {
 	void Init (RoomData roomData) {
 		Debug.Log ("roomId = " + roomData.Id);
 		mRoomData = roomData;
-		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor>();
+		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
 		string spriteName = "room_item_" + roomData.Id;
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
 		itemSprite.spriteName = "room_item_" + roomData.Id;
@@ -29,17 +28,17 @@ public class RoomItemDialogController : DialogController {
 	}
 
 	void OnButtonEntranceEventFinished () {
-		iTweenEvent.GetEvent(closeButton,"RotateEvent").Play();
+		iTweenEvent.GetEvent (closeButton, "RotateEvent").Play ();
 	}
 
 	public override void OnBuyButtonClicked () {
 		decimal keepMoneyCount = CountManager.Instance.KeepMoneyCount;
-		if(keepMoneyCount < PriceCalculator.CalcRoomItemPrice (mRoomData)){
+		if (keepMoneyCount < PriceCalculator.CalcRoomItemPrice (mRoomData)) {
 			//short money
-			SoundManager.Instance.PlaySE(AudioClipID.SE_SHORT_MONEY);
-			mShortMoneyTweenColor.PlayForward();
-			StartCoroutine(StopShortTween());
-		}else {
+			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
+			mShortMoneyTweenColor.PlayForward ();
+			StartCoroutine (StopShortTween ());
+		} else {
 			base.OnBuyButtonClicked ();
 			UpdateIteminfoLabel ();
 		}
@@ -50,15 +49,15 @@ public class RoomItemDialogController : DialogController {
 		Destroy (transform.parent.gameObject);
 	}
 
-	private IEnumerator StopShortTween(){
-		yield return new WaitForSeconds(1.0f);
+	private IEnumerator StopShortTween () {
+		yield return new WaitForSeconds (1.0f);
 		mShortMoneyTweenColor.enabled = false;
-		priceLabelObject.GetComponent<UILabel>().color = Color.black;
+		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
 	}
 
-	private void UpdateIteminfoLabel(){
+	private void UpdateIteminfoLabel () {
 		long totalPrice = PriceCalculator.CalcRoomItemPrice (mRoomData);
-		priceLabelObject.GetComponent<UILabel>().text  = totalPrice+ "円";
+		priceLabelObject.GetComponent<UILabel> ().text = CommaMarker.MarkLongCount (totalPrice) + "円";
 		countLabel.text = "\u6240\u6301\u6570 : " + mRoomData.ItemCount;
 	}
 }

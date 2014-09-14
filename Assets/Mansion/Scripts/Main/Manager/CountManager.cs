@@ -66,13 +66,13 @@ public class CountManager : MonoBehaviour {
 	public void AddGenerateSpeed (decimal addSpeed) {
 		Debug.Log ("speed = " + addSpeed);
 		mTotalGenerateSpeed += addSpeed;
-		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + "/\u79d2";
+		SetGenerateSpeedLabel ();
 		ResetTime ();
 	}
 
 	public void UpdateGenerateSpeed () {
 		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
-		totalGenerateSpeedLabel.text = Math.Round (mTotalGenerateSpeed, 1, MidpointRounding.AwayFromZero) + " / \u79d2";
+		SetGenerateSpeedLabel ();
 	}
 
 	public void DecreaseMoneyCount (decimal decreaseCount) {
@@ -105,6 +105,11 @@ public class CountManager : MonoBehaviour {
 	}
 
 	private void SetKeepCountLabel () {
-		keepMoneyCountLabel.text = Math.Round (mKeepMoneyCount, 0, MidpointRounding.AwayFromZero) + " \u5186";
+		keepMoneyCountLabel.text = CommaMarker.MarkDecimalCount(mKeepMoneyCount) + " \u5186";
+	}
+
+	private void SetGenerateSpeedLabel(){
+		totalGenerateSpeedLabel.text = CommaMarker.MarkGenerateSpeed(mTotalGenerateSpeed) + " / \u79d2";
+
 	}
 }

@@ -56,7 +56,7 @@ public class EnemyGenerator : MonoBehaviour {
 			DateTime dtNow = DateTime.Now;
 			TimeSpan ts = dtNow - dtOld;
 			//	int sleepHours = ts.Hours;
-			int sleepHours = ts.Seconds;
+			int sleepHours = ts.Minutes;
 			Debug.Log ("sleep Hours = " + sleepHours);
 			if (sleepHours <= 0) {
 				return;
@@ -114,6 +114,9 @@ public class EnemyGenerator : MonoBehaviour {
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
 		while (sleepHours > 0) {
+			if (secomdata.Count <= 0) {
+				break;
+			}
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
@@ -122,12 +125,10 @@ public class EnemyGenerator : MonoBehaviour {
 			historyData.Date = dtNow.AddHours (-sleepHours).ToString ("MM/dd HH:mm");
 			secomdata.Count--;
 			sleepHours--;
+			StatusDataKeeper.Instance.IncrementUseSecomCount ();
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			PrefsManager.Instance.SaveSecomData (secomdata);
 			Debug.Log ("secom count = " + secomdata.Count);
-			if (secomdata.Count <= 0) {
-				break;
-			}
 		}
 
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();

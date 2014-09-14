@@ -105,6 +105,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Manager\CountManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Manager\FenceManager.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Manager\PrefsManager.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Marker\CommaMarker.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\StatusLabelUpdater.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test2.cs" />

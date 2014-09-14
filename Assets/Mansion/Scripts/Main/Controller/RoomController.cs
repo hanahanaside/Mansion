@@ -11,6 +11,8 @@ public class RoomController : MonoBehaviour {
 	public GameObject residentPrefab;
 	public UILabel nameLabel;
 	public UILabel generateSpeedLabel;
+	public UISprite leftBackGround;
+	public UISprite rightBackGround;
 	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
 	private List<UISprite> mItemSpriteList;
@@ -48,13 +50,13 @@ public class RoomController : MonoBehaviour {
 	}
 
 	void EnemyGenerated () {
-		nameLabel.color = Color.red;
-		generateSpeedLabel.color = Color.red;
+		leftBackGround.color = Color.red;
+		rightBackGround.color = Color.red;
 	}
 
 	void EnemyDestroyed () {
-		nameLabel.color = Color.white;
-		generateSpeedLabel.color = Color.white;
+		leftBackGround.color = Color.white;
+		rightBackGround.color = Color.white;
 	}
 
 	void itemBoughtEvent () {
