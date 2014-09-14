@@ -13,6 +13,14 @@ public class BannerAd : MonoBehaviour {
 		#endif
 	}
 
+	void OnApplicationPause (bool pauseStatus) {
+		#if !UNITY_EDITOR
+		if(!pauseStatus){
+			LoadURL();
+		}
+		#endif
+	}
+
 	public static BannerAd Instance {
 		get {
 			return sInstance;
@@ -31,7 +39,13 @@ public class BannerAd : MonoBehaviour {
 		#endif
 	}
 
-	private void Init(){
+	private void Init () {
+		webViewObject.Init (); //初期化
+		LoadURL ();
+		webViewObject.SetMargins (0, 890, 0, 146); //下に100pxマージンを取る
+	}
+
+	private void LoadURL () {
 		string url = "";
 		#if UNITY_IPHONE
 		url = "http://ad.graasb.com/shakky/money/ios/top/";
@@ -39,8 +53,6 @@ public class BannerAd : MonoBehaviour {
 		#if UNITY_ANDROID
 		url = "http://ad.graasb.com/shakky/money/android/top/";
 		#endif
-		webViewObject.Init (); //初期化
 		webViewObject.LoadURL (url); //ページの読み込み
-		webViewObject.SetMargins (0, 890, 0, 146); //下に100pxマージンを取る
 	}
 }

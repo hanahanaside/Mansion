@@ -51,7 +51,8 @@ public class IconAd : MonoBehaviour {
 		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
 		#endif
 
-		webViewObject.SetMargins (-260, 120, 520, 900); //上に100pxマージンを取る
+		//	webViewObject.SetMargins (-260, 120, 520, 900); //上に100pxマージンを取る
+		webViewObject.SetMargins (0, 120, 0, 900); //上に100pxマージンを取る
 	}
 
 }
