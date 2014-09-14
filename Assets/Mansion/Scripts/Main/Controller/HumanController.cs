@@ -29,11 +29,11 @@ public abstract class HumanController : MonoBehaviour {
 			TurnLeft ();
 		}
 		if (y > limitTop) {
-			transform.Translate (0,-0.001f,0);
+			transform.Translate (0, -0.001f, 0);
 			mSpeedY = -mSpeedY;
 		}
 		if (y < limitBottom) {
-			transform.Translate (0,0.001f,0);
+			transform.Translate (0, 0.001f, 0);
 			mSpeedY = -mSpeedY;
 		}
 		transform.Translate (mSpeedX, mSpeedY, 0);
@@ -71,7 +71,7 @@ public abstract class HumanController : MonoBehaviour {
 
 	private void SetSpeed () {
 		mSpeedX = Random.Range (-0.002f, 0);
-		mSpeedY = Random.Range (-0.002f, 0);
+		mSpeedY = Random.Range (-0.002f, 0.002f);
 		int turn = Random.Range (0, 2);
 		switch (turn) {
 		case 0:

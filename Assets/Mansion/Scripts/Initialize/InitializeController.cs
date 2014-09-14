@@ -12,11 +12,10 @@ public class InitializeController : MonoBehaviour {
 
 	void OnDatabaseCreatedEvent () {
 		Debug.Log ("OnDatabaseCreatedEvent");
-		Application.LoadLevel ("Main");
-//		if (PrefsManager.Instance.FlagOpeningFinished == 0) {
-//			Application.LoadLevel ("Opening");
-//		} else {
-//			Application.LoadLevel ("Main");
-//		}
+		if (PrefsManager.Instance.FlagOpeningFinished == 0) {
+			Application.LoadLevel ("Opening");
+		} else {
+			Application.LoadLevel ("Main");
+		}
 	}
 }

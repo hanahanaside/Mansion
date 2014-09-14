@@ -22,12 +22,10 @@ public abstract class EnemyController : HumanController {
 
 	void Init () {
 		sprite.enabled = true;
-		collider.enabled = true;
 	}
 
 	void Hide () {
 		sprite.enabled = false;
-		collider.enabled = false;
 	}
 
 	public float AtackIntervalTime {
