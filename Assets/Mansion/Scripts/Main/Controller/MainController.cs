@@ -91,7 +91,7 @@ public class MainController : MonoBehaviour {
 		APUnityPlugin.ShowAppliPromotionWall ();
 	}
 
-	public void OnCloseRectangleButtonClicked(){
+	public void OnCloseRectangleButtonClicked () {
 		Debug.Log ("close");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		closeRetangleButton.SetActive (false);
