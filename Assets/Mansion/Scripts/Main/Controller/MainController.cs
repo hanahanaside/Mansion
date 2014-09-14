@@ -5,7 +5,7 @@ public class MainController : MonoBehaviour {
 	public GameObject homePanel;
 	public GameObject shopPanel;
 	public GameObject statusPanel;
-	public GameObject closeRetangleButton;
+	public GameObject rectanglePanel;
 	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
@@ -73,7 +73,7 @@ public class MainController : MonoBehaviour {
 		}
 		BannerAd.Instance.Hide ();
 		RectangleAd.Instance.Show ();
-		closeRetangleButton.SetActive (true);
+		rectanglePanel.SetActive (true);
 		FenceManager.Instance.ShowFence ();
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
@@ -96,7 +96,7 @@ public class MainController : MonoBehaviour {
 		Debug.Log ("close");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		BannerAd.Instance.Show ();
-		closeRetangleButton.SetActive (false);
+		rectanglePanel.SetActive (false);
 		RectangleAd.Instance.Hide ();
 		FenceManager.Instance.HideFence ();
 	}
