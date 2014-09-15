@@ -86,10 +86,13 @@ public class RoomController : MonoBehaviour {
 			}
 		}
 
-		SetActiveItem ();
+		if (mRoomData.ItemCount < mItemSpriteList.Count) {
+			SetActiveItem ();
+			GenerateResident (1);
+		}
+
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
-		GenerateResident (1);
 	}
 
 	void dialogClosedEvent () {
@@ -133,10 +136,10 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void SetActiveItem () {
-		if (mRoomData.ItemCount > mItemSpriteList.Count) {
-			return;
-		}
 		for (int i = 0; i < mRoomData.ItemCount; i++) {
+			if (i >= mItemSpriteList.Count) {
+				break;
+			}
 			UISprite sprite = mItemSpriteList [i];
 			if (!sprite.enabled) {
 				sprite.enabled = true;
