@@ -23,4 +23,9 @@ public class DialogController : MonoBehaviour {
 		}
 		FenceManager.Instance.HideFence ();
 	}
+
+	public void FirstItemBought(){
+		itemBoughtEvent ();
+		OnCloseButonClicked ();
+	}
 }

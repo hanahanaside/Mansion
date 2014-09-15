@@ -38,6 +38,9 @@ public class RoomItemDialogController : DialogController {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
 			mShortMoneyTweenColor.PlayForward ();
 			StartCoroutine (StopShortTween ());
+		} else if (mRoomData.ItemCount == 0) {
+			FirstItemBought ();
+			Destroy (transform.parent.gameObject);
 		} else {
 			base.OnBuyButtonClicked ();
 			UpdateIteminfoLabel ();

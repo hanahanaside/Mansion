@@ -13,6 +13,7 @@ public class RoomController : MonoBehaviour {
 	public UILabel generateSpeedLabel;
 	public UISprite leftBackGround;
 	public UISprite rightBackGround;
+	public UnLockAnimator unlockAnimator;
 	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
 	private List<UISprite> mItemSpriteList;
@@ -63,7 +64,7 @@ public class RoomController : MonoBehaviour {
 		Debug.Log ("boughtEvent");
 
 		if (mRoomData.ItemCount == 0) {
-			lockObject.SetActive (false);
+			unlockAnimator.PlayAnimation ();
 
 			//ルームIDに対応するアイテムを全てロック状態にする
 			foreach (ShopItemData shopItemData in mShopItemDataList) {
@@ -86,10 +87,13 @@ public class RoomController : MonoBehaviour {
 			}
 		}
 
-		SetActiveItem ();
+		if (mRoomData.ItemCount < mItemSpriteList.Count) {
+			SetActiveItem ();
+			GenerateResident (1);
+		}
+
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
-		GenerateResident (1);
 	}
 
 	void dialogClosedEvent () {
@@ -133,17 +137,16 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void SetActiveItem () {
-		if (mRoomData.ItemCount > mItemSpriteList.Count) {
-			return;
-		}
 		for (int i = 0; i < mRoomData.ItemCount; i++) {
+			if (i >= mItemSpriteList.Count) {
+				break;
+			}
 			UISprite sprite = mItemSpriteList [i];
 			if (!sprite.enabled) {
 				sprite.enabled = true;
 			}
 		}
 	}
-
 	private void CreateItemSpriteList () {
 		mItemSpriteList = new List<UISprite> ();
 		foreach (UIGrid grid in itemGridArray) {

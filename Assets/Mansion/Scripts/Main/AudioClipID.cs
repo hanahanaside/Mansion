@@ -13,4 +13,5 @@ public class AudioClipID : MonoBehaviour {
 	public static int SE_DIG = 2;
 	public static int SE_MONEY = 3;
 	public static int SE_SHORT_MONEY = 4;
+	public static int SE_UNLOCK_ROOM = 5;
 }
