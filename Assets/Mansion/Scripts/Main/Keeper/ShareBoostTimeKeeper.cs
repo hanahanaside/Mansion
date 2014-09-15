@@ -38,7 +38,7 @@ public class ShareBoostTimeKeeper : MonoBehaviour {
 	}
 
 	public void StartBoost () {
-		mBoostTime = 10.0f;
+		mBoostTime = 180.0f;
 	}
 
 	public static ShareBoostTimeKeeper Instance {

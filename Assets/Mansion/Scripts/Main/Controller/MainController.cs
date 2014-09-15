@@ -10,6 +10,7 @@ public class MainController : MonoBehaviour {
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
 	private GameObject mCurrentPanel;
+	private int mSwitchStatusCount;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
@@ -71,10 +72,13 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (statusPanel)) {
 			return;
 		}
-		BannerAd.Instance.Hide ();
-		RectangleAd.Instance.Show ();
-		rectanglePanel.SetActive (true);
-		FenceManager.Instance.ShowFence ();
+		mSwitchStatusCount++;
+		if(mSwitchStatusCount % 5 == 0){
+			BannerAd.Instance.Hide ();
+			RectangleAd.Instance.Show ();
+			rectanglePanel.SetActive (true);
+			FenceManager.Instance.ShowFence ();
+		}
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {

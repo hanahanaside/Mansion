@@ -39,7 +39,12 @@ public class RoomController : MonoBehaviour {
 		UISprite firstItemSprite = mItemSpriteList [0];
 		if (!firstItemSprite.enabled) {
 			SetActiveItem ();
-			GenerateResident (mRoomData.ItemCount);
+			//所持アイテム数が表示アイテム数より多い場合は表示アイテム数の最大数を生成する
+			if (mRoomData.ItemCount > mItemSpriteList.Count) {
+				GenerateResident (mItemSpriteList.Count);
+			} else {
+				GenerateResident (mRoomData.ItemCount);
+			}
 		}
 		SetTextData (); 
 	}
@@ -51,13 +56,13 @@ public class RoomController : MonoBehaviour {
 	}
 
 	void EnemyGenerated () {
-		leftBackGround.color = Color.red;
-		rightBackGround.color = Color.red;
+		leftBackGround.spriteName = "bg_header_red";
+		rightBackGround.spriteName = "bg_header_red";
 	}
 
 	void EnemyDestroyed () {
-		leftBackGround.color = Color.white;
-		rightBackGround.color = Color.white;
+		leftBackGround.spriteName = "bg_header";
+		rightBackGround.spriteName = "bg_header";
 	}
 
 	void itemBoughtEvent () {
@@ -125,7 +130,8 @@ public class RoomController : MonoBehaviour {
 
 	private void SetTextData () {
 		nameLabel.text = mRoomData.ItemName + " : " + mRoomData.ItemCount;
-		generateSpeedLabel.text = (mRoomData.GenerateSpeed * mRoomData.ItemCount) + " / \u79d2";
+		decimal generateSpeed = mRoomData.GenerateSpeed * mRoomData.ItemCount;
+		generateSpeedLabel.text = CommaMarker.MarkDecimalCount(generateSpeed) + " / \u79d2";
 	}
 
 	private void Reset () {
@@ -147,6 +153,7 @@ public class RoomController : MonoBehaviour {
 			}
 		}
 	}
+
 	private void CreateItemSpriteList () {
 		mItemSpriteList = new List<UISprite> ();
 		foreach (UIGrid grid in itemGridArray) {

@@ -8,9 +8,10 @@ public class UnLockAnimator : MonoBehaviour {
 	public GameObject fenceObject;
 
 	public void PlayAnimation () {
+		SoundManager.Instance.PlaySE (AudioClipID.SE_UNLOCK_ROOM);
 		PlayRotateLockAnimation ();
 	}
-
+		
 	void OnCompleteRotateLockAnimation () {
 		PlayMoveLockAnimation ();
 	}
