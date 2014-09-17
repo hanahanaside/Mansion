@@ -150,6 +150,7 @@ public class RoomController : MonoBehaviour {
 			UISprite sprite = mItemSpriteList [i];
 			if (!sprite.enabled) {
 				sprite.enabled = true;
+				sprite.gameObject.BroadcastMessage ("Show");
 			}
 		}
 	}

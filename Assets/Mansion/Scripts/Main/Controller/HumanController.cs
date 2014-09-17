@@ -12,6 +12,14 @@ public abstract class HumanController : MonoBehaviour {
 	private float mSpeedY;
 	private float mTime;
 
+	void MoveDepth(int roomDepth){
+		if(mSpeedY < 0f ){
+			sprite.depth = roomDepth + 1;
+		}else if(mSpeedY > 0f){
+			sprite.depth = roomDepth - 1;
+		}
+	}
+
 	public void Walk () {
 		mTime -= Time.deltaTime;
 		if (mTime < 0) {

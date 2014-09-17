@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	public GameObject effect;
+	public UISprite sprite;
 
-	public void OnButtonClick(){
-		Instantiate (effect);
+	void Start(){
+		Vector3 position = sprite.gameObject.transform.position;
+		Debug.Log ("p = " + position);
 	}
 }

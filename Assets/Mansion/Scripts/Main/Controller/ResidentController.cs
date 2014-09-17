@@ -5,7 +5,7 @@ public class ResidentController : HumanController {
 	void SetDepth (int roomId) {
 		switch (roomId) {
 		case 1:
-			sprite.depth = 101;
+			sprite.depth = 1001;
 			break;
 		case 2:
 			sprite.depth = 91;
