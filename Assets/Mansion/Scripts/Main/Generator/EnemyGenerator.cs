@@ -83,7 +83,7 @@ public class EnemyGenerator : MonoBehaviour {
 		int enemyIndex = UnityEngine.Random.Range (0, enemyPrefabArray.Length - decreaseCount);
 		int unlockRoomDataIndex = UnityEngine.Random.Range (0, unlockRoomDataList.Count);
 		Debug.Log ("unlock size = " + unlockRoomDataList.Count);
-
+		enemyIndex = 0;
 		RoomData unlockRoomData = unlockRoomDataList [unlockRoomDataIndex];
 		GameObject unlockRoomObject = mHomeChildList [unlockRoomData.Id].gameObject;
 		GameObject enemyObject = Instantiate (enemyPrefabArray [enemyIndex]) as GameObject;

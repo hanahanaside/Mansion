@@ -86,7 +86,7 @@ public class ShopItemDialogController : DialogController {
 			sb.Append (shopItemData.UnLockCondition + "\u56de\u30bf\u30c3\u30d7\u3059\u308b\u3068\u30a2\u30f3\u30ed\u30c3\u30af");
 		}
 		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED) {
-			sb.Append (shopItemData.Description + "\n");
+				sb.Append (shopItemData.Description + "\n");
 			sb.Append ("1\u56de\u306e\u30bf\u30c3\u30d7\u3067");
 			sb.Append (shopItemData.Effect + "\u5186\u7372\u5f97");
 		}
@@ -102,7 +102,7 @@ public class ShopItemDialogController : DialogController {
 		}
 		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED) {
 			StringBuilder sb = new StringBuilder ();
-			sb.Append (shopItemData.Description + "\n");
+			sb.Append (shopItemData.Description);
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
 			description = sb.ToString ();
 		}
