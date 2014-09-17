@@ -92,7 +92,7 @@ public class RoomController : MonoBehaviour {
 			}
 		}
 
-		if (mRoomData.ItemCount < mItemSpriteList.Count) {
+		if (mRoomData.ItemCount <= mItemSpriteList.Count) {
 			SetActiveItem ();
 			GenerateResident (1);
 		}
