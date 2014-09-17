@@ -42,7 +42,7 @@ public class RoomItemDialogController : DialogController {
 			FirstItemBought ();
 			Destroy (transform.parent.gameObject);
 		} else {
-			base.OnBuyButtonClicked ();
+			OnBuyApart ();
 			UpdateIteminfoLabel ();
 		}
 	}

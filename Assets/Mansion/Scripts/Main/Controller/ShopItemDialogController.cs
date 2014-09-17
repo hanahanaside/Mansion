@@ -32,7 +32,7 @@ public class ShopItemDialogController : DialogController {
 		if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
 			BuySecom ();
 		} else {
-			base.OnBuyButtonClicked ();
+			OnBuyShopItem ();
 			FenceManager.Instance.HideFence ();
 			Destroy (transform.parent.gameObject);
 		}

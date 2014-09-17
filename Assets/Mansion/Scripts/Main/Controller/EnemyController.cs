@@ -119,6 +119,7 @@ public abstract class EnemyController : HumanController {
 		if (!collider.enabled) {
 			return;
 		}
+		SoundManager.Instance.PlaySE (AudioClipID.SE_DAMAGED);
 		decimal persent = CountManager.Instance.KeepMoneyCount / 100;
 		decimal damage = mEnemyData.Atack * persent;
 		mTotalDamage += damage;

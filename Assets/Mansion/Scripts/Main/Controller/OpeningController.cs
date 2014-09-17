@@ -4,6 +4,10 @@ using System.Collections;
 public class OpeningController : MonoBehaviour {
 	public TweenAlpha fadeOutAnimation;
 
+	void Start(){
+		SoundManager.Instance.PlayBGM (AudioClipID.BGM_OPENING);
+	}
+
 	public  void OnLabelAnimationFinished () {
 		fadeOutAnimation.PlayForward ();
 	}

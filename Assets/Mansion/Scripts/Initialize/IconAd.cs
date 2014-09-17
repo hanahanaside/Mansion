@@ -5,7 +5,6 @@ public class IconAd : MonoBehaviour {
 	public WebViewObject webViewObject;
 	private static IconAd sInstance;
 
-	
 	void Start () {
 		sInstance = this;
 		DontDestroyOnLoad (gameObject);
@@ -14,7 +13,7 @@ public class IconAd : MonoBehaviour {
 		#endif
 	}
 
-	void OnApplicationPause(bool pauseStatus){
+	void OnApplicationPause (bool pauseStatus) {
 		#if UNITY_EDITOR
 
 		#elif UNITY_IPHONE
@@ -33,26 +32,31 @@ public class IconAd : MonoBehaviour {
 		}
 	}
 
-	public void ShowIconAd(){
+	public void ShowIconAd () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (true);
 		#endif
 	}
 
-	public void HideIconAd(){
+	public void HideIconAd () {
 		#if !UNITY_EDITOR
 		webViewObject.SetVisibility (false);
 		#endif
 	}
 
-	private void InitAd(){
+	private void InitAd () {
 		webViewObject.Init (); //初期化
 		#if UNITY_IPHONE
 		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
+		int height = Screen.height;
+
+		//iPhone4
+		if (height == 960) {
+			webViewObject.SetMargins (0, 120, 0, 900); 
+		} else {
+			webViewObject.SetMargins (0, 120, 0, 900); 
+		}
 		#endif
 
-		//	webViewObject.SetMargins (-260, 120, 520, 900); //上に100pxマージンを取る
-		webViewObject.SetMargins (0, 120, 0, 900); //上に100pxマージンを取る
 	}
-
 }

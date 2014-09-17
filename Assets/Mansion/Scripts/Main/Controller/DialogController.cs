@@ -26,6 +26,18 @@ public class DialogController : MonoBehaviour {
 
 	public void FirstItemBought(){
 		itemBoughtEvent ();
-		OnCloseButonClicked ();
+		SoundManager.Instance.PlaySE (AudioClipID.SE_ADD_APART);
+		dialogClosedEvent ();
+		FenceManager.Instance.HideFence ();
+	}
+
+	public void OnBuyApart(){
+		SoundManager.Instance.PlaySE (AudioClipID.SE_ADD_APART);
+		itemBoughtEvent ();
+	}
+
+	public void OnBuyShopItem(){
+		SoundManager.Instance.PlaySE (AudioClipID.SE_GET_SHOP_ITEM);
+		itemBoughtEvent ();
 	}
 }

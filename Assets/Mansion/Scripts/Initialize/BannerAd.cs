@@ -42,7 +42,16 @@ public class BannerAd : MonoBehaviour {
 	private void Init () {
 		webViewObject.Init (); //初期化
 		LoadURL ();
-		webViewObject.SetMargins (0, 890, 0, 146); //下に100pxマージンを取る
+		#if UNITY_IPHONE
+		int height = Screen.height;
+		//iPhone4
+		if(height == 960){
+			webViewObject.SetMargins (0, 890, 0, 146); 
+		}else {
+			webViewObject.SetMargins (0, 890, 0, 146); 
+		}
+		#endif
+
 	}
 
 	private void LoadURL () {
