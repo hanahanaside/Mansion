@@ -131,7 +131,7 @@ public abstract class EnemyController : HumanController {
 			damageLabelObject.transform.localScale = new Vector3 (1, 1, 1);
 			damageLabelObject.transform.localPosition = transform.localPosition;
 			damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
-			damageLabelObject.SendMessage ("SetCount", "-" + damage);
+			damageLabelObject.SendMessage ("SetCount", "-" + CommaMarker.MarkDecimalCount(damage));
 		}
 	}
 

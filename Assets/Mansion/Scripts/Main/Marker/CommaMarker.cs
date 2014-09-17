@@ -21,4 +21,8 @@ public class CommaMarker {
 	public static string MarkLongCount(long priceCount){
 		return priceCount.ToString ("#,0");
 	}
+
+	public static string MarkIntCount(int count){
+		return count.ToString ("#,0");
+	}
 }

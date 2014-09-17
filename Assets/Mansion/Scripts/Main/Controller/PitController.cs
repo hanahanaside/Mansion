@@ -41,9 +41,9 @@ public class PitController : MonoBehaviour {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_DIG);
 		StatusDataKeeper.Instance.IncrementTotalTapPitCount ();
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
-		countLabelObject.transform.Translate (0, 0.02f, 0);
+		countLabelObject.transform.Translate (0, 0.07f, 0);
 		int getPoint = mCurrentPitData.Effect;
-		countLabelObject.SendMessage ("SetCount", "+" + getPoint);
+		countLabelObject.SendMessage ("SetCount", "+" + CommaMarker.MarkIntCount(getPoint));
 		Instantiate (moneyParticlePrefab, effectPoint.transform.position, Quaternion.identity);
 		CountManager.Instance.AddMoneyCount (getPoint);
 		StatusDataKeeper.Instance.AddTotalPitGenerateCount (getPoint);
