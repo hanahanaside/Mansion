@@ -51,4 +51,16 @@ public class ResidentController : HumanController {
 	void Hide () {
 		sprite.enabled = false;
 	}
+
+	void MoveDepth (UISprite sprite) {
+
+		Vector3 roomPosition = sprite.transform.position;
+		float roomY = roomPosition.y - (float)(sprite.height /2000f);
+		float residentY = transform.position.y;
+		if (residentY > roomPosition.y) {
+			this.sprite.depth = sprite.depth - 1;
+		} else {
+			this.sprite.depth = sprite.depth + 1;
+		}
+	}
 }

@@ -12,23 +12,6 @@ public abstract class HumanController : MonoBehaviour {
 	private float mSpeedY;
 	private float mTime;
 
-	void MoveDepth(UISprite sprite){
-
-		Vector3 roomPosition = sprite.transform.position;
-		float roomY = roomPosition.y - 0.03f;
-		float residentY = transform.position.y;
-		if(residentY > roomY){
-			this.sprite.depth = sprite.depth - 1;
-		}else {
-			this.sprite.depth = sprite.depth + 1;
-		}
-//		if(mSpeedY < 0f ){
-//			this.sprite.depth = sprite.depth + 1;
-//		}else if(mSpeedY > 0f){
-//			this.sprite.depth = sprite.depth - 1;
-//		}
-	}
-
 	public void Walk () {
 		mTime -= Time.deltaTime;
 		if (mTime < 0) {

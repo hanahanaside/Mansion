@@ -17,6 +17,19 @@ public class CatController : EnemyController {
 		}
 	}
 
+	void MoveDepth(UISprite sprite){
+
+		Vector3 roomPosition = sprite.transform.position;
+		float roomY = roomPosition.y + 0.1f;
+		float residentY = transform.position.y;
+		if(residentY > roomY){
+			this.sprite.depth = sprite.depth - 1;
+		}else {
+			this.sprite.depth = sprite.depth + 1;
+		}
+	}
+
+
 	public override IEnumerator Atack () {
 		Debug.Log ("atack");
 		IsAtacking = true;
