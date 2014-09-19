@@ -8,7 +8,7 @@ public class CharactorSensor : MonoBehaviour {
 
 	void Start () {
 		int width = sprite.width;
-		boxCollider.size = new Vector3 (width, 0.5f, 0);
+		boxCollider.size = new Vector3 (width, sprite.height, 0);
 	}
 
 }

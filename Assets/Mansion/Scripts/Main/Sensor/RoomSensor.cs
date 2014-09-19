@@ -7,7 +7,7 @@ public class RoomSensor : MonoBehaviour {
 
 	void Start () {
 		int width = sprite.width;
-		boxCollider.size = new Vector3 (width, 0.5f, 0);
+		boxCollider.size = new Vector3 (width, sprite.height, 0);
 	}
 
 	void Update(){
@@ -19,11 +19,13 @@ public class RoomSensor : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider collider){
-		//ChangeDepth (collider);
+
+		ChangeDepth (collider);
 	}
 
 	void OnTriggerStay(Collider collider){
-		//	ChangeDepth (collider);
+		Debug.Log ("stay");
+			ChangeDepth (collider);
 	}
 
 	void Show(){
@@ -31,7 +33,7 @@ public class RoomSensor : MonoBehaviour {
 	}
 
 	private void ChangeDepth(Collider collider){
-		string tag = collider.gameObject.tag;
+		string tag = collider.tag;
 		if (tag == "CharactorSensor") {
 //			if(sprite.color == Color.red){
 //				sprite.color = Color.blue;
@@ -39,7 +41,7 @@ public class RoomSensor : MonoBehaviour {
 //				sprite.color = Color.red;
 //			}
 			GameObject parentObject = collider.gameObject.transform.parent.gameObject;
-			parentObject.BroadcastMessage ("MoveDepth", sprite.depth);
+			parentObject.BroadcastMessage ("MoveDepth", sprite);
 		}
 
 	}
