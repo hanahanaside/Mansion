@@ -38,10 +38,6 @@ public class ShopPanelInitializer : MonoBehaviour {
 			ShopItemData shopItemData = shopItemDataList [i];
 			shopButton.BroadcastMessage ("Init", shopItemData);
 		}
-		List<Transform> childList = shopItemGrid.GetChildList ();
-		int count = childList.Count;
-		Transform finalChild = childList [count - 1];
-		spaceSprite.transform.localPosition = finalChild.localPosition;
 	}
 
 	private void InitShopItemCells (List<Transform> shopItemChildList, List<ShopItemData> shopItemDataList) {

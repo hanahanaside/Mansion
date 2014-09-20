@@ -123,7 +123,7 @@ public class ShopItemDialogController : DialogController {
 	}
 
 	private void SetPriceLabel(long price){
-		priceLabelObject.GetComponent<UILabel> ().text = CommaMarker.MarkLongCount (price) + "\u5186";
-
+		UILabel priceLael = priceLabelObject.GetComponent<UILabel> ();
+		priceLael.text = CommaMarker.MarkLongCount (price) + "\u5186";
 	}
 }

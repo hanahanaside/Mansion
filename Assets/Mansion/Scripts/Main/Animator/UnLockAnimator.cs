@@ -23,7 +23,7 @@ public class UnLockAnimator : MonoBehaviour {
 
 	void OnCompleteMoveKeepOutAnimation () {
 		Destroy (keepOutObject);
-		TweenColor tc = TweenColor.Begin (fenceObject, 2, Color.clear);
+		TweenColor.Begin (fenceObject, 2, Color.clear);
 	}
 
 	private void PlayMoveKeepOutAnimation () {

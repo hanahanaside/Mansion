@@ -12,10 +12,6 @@ public class NotificationManager : MonoBehaviour {
 	void OnApplicationPause (bool pauseStatus) {
 		if (pauseStatus) {
 			ScheduleLocalNotification ();
-//			GameObject enemyObject = GameObject.FindWithTag ("Enemy");
-//			if (enemyObject == null) {
-//				ScheduleLocalNotification ();
-//			}
 		} else {
 			ClearNotifications ();
 		}
@@ -51,7 +47,7 @@ public class NotificationManager : MonoBehaviour {
 	private void _ScheduleLocalNotification (string title) {
 		#if UNITY_IPHONE
 		LocalNotification localNotification = new LocalNotification ();
-		localNotification.applicationIconBadgeNumber = 4;
+		localNotification.applicationIconBadgeNumber = 1;
 		localNotification.alertBody = title;
 		localNotification.soundName = LocalNotification.defaultSoundName;
 		localNotification.hasAction = true;
