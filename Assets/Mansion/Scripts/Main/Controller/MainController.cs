@@ -9,6 +9,7 @@ public class MainController : MonoBehaviour {
 	public GameObject[] colorFilterArray;
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
+	public UISprite exSprite;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
 
@@ -52,6 +53,9 @@ public class MainController : MonoBehaviour {
 		scrollView.ResetPosition ();
 		if (CheckSamePanel (shopPanel)) {
 			return;
+		}
+		if(exSprite.enabled){
+			exSprite.enabled = false;
 		}
 		NendAdInterstitial.Instance.Show ();
 		if (mCurrentPanel.Equals (homePanel)) {

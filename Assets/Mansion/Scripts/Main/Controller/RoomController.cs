@@ -13,6 +13,7 @@ public class RoomController : MonoBehaviour {
 	public UILabel generateSpeedLabel;
 	public UISprite leftBackGround;
 	public UISprite rightBackGround;
+	public UISprite exSprite;
 	public UnLockAnimator unlockAnimator;
 	public UIGrid[] itemGridArray;
 	private RoomData mRoomData;
@@ -74,6 +75,7 @@ public class RoomController : MonoBehaviour {
 			//ルームIDに対応するアイテムを全てロック状態にする
 			foreach (ShopItemData shopItemData in mShopItemDataList) {
 				ShopItemDataDao.Instance.UpdateUnLockLevel (shopItemData.Id, ShopItemData.UNLOCK_LEVEL_LOCKED);
+				mShopItemDataList = ShopItemDataDao.Instance.QueryByTargetRoomId (mRoomData.Id);
 			}
 		}
 		CountManager.Instance.DecreaseMoneyCount (PriceCalculator.CalcRoomItemPrice (mRoomData));
@@ -83,12 +85,14 @@ public class RoomController : MonoBehaviour {
 
 		//新規にアンロックできるアイテムがあればアンロック
 		foreach (ShopItemData shopItemData in mShopItemDataList) {
-			if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_BOUGHT) {
+			if(shopItemData.UnlockLevel != ShopItemData.UNLOCK_LEVEL_LOCKED){
 				continue;
 			}
 			int unlockCondition = shopItemData.UnLockCondition;
 			if (mRoomData.ItemCount >= unlockCondition) {
 				ShopItemDataDao.Instance.UpdateUnLockLevel (shopItemData.Id, ShopItemData.UNLOCK_LEVEL_UNLOCKED);
+				mShopItemDataList = ShopItemDataDao.Instance.QueryByTargetRoomId (mRoomData.Id);
+				exSprite.enabled = true;
 			}
 		}
 
