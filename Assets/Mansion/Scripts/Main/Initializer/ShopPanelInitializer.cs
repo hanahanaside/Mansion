@@ -7,7 +7,6 @@ public class ShopPanelInitializer : MonoBehaviour {
 	public UIGrid shopItemGrid;
 	public UIGrid stageItemGrid;
 	public UILabel secomCountLabel; 
-	public UISprite spaceSprite;
 	// Use this for initialization
 	void OnEnable () {
 		List<ShopItemData> shopItemDataList = ShopItemDataDao.Instance.GetShopItemDataList ();

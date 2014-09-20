@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class NotificationManager : MonoBehaviour {
 	private static NotificationManager sInstance;
@@ -28,10 +29,7 @@ public class NotificationManager : MonoBehaviour {
 
 		#if UNITY_IPHONE
 		NotificationServices.CancelAllLocalNotifications ();
-		_ScheduleLocalNotification ("ドロボーにおそわれました1");
-		_ScheduleLocalNotification ("ドロボーにおそわれました2");
-		_ScheduleLocalNotification ("ドロボーにおそわれました3");
-		_ScheduleLocalNotification ("ドロボーにおそわれました4");
+		_ScheduleLocalNotification ();
 		#endif
 
 		#if UNITY_ANDROID
@@ -44,16 +42,30 @@ public class NotificationManager : MonoBehaviour {
 		#endif
 	}
 
-	private void _ScheduleLocalNotification (string title) {
-		#if UNITY_IPHONE
-		LocalNotification localNotification = new LocalNotification ();
-		localNotification.applicationIconBadgeNumber = 1;
-		localNotification.alertBody = title;
-		localNotification.soundName = LocalNotification.defaultSoundName;
-		localNotification.hasAction = true;
-		localNotification.fireDate = System.DateTime.Now.AddSeconds (60);
-		NotificationServices.ScheduleLocalNotification (localNotification);
-		#endif
+	private void _ScheduleLocalNotification () {
+		int pushCount = 4;
+		long secomCount = PrefsManager.Instance.GetSecomData ().Count;
+		DateTime lastFireDate = System.DateTime.Now;
+		for (int i = 0; i < pushCount; i++) {
+			string title = "";
+			if (secomCount >= i + 1) {
+				title = "アルツックがドロボーを撃退しました！";
+			} else {
+				title = "ドロボーに襲われてるよ！早く退治して！";
+			}
+			double addSeconds = (double)UnityEngine.Random.Range (3, 12);
+			Debug.Log ("add seconds = " + addSeconds);
+			#if UNITY_IPHONE
+			LocalNotification localNotification = new LocalNotification ();
+			localNotification.applicationIconBadgeNumber = 1;
+			localNotification.alertBody = title;
+			localNotification.soundName = LocalNotification.defaultSoundName;
+			localNotification.hasAction = true;
+			lastFireDate = lastFireDate.AddSeconds (addSeconds);
+			localNotification.fireDate = lastFireDate;
+			NotificationServices.ScheduleLocalNotification (localNotification);
+			#endif
+		}
 	}
 
 	private void ClearNotifications () {

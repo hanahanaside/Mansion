@@ -57,13 +57,12 @@ public class EnemyGenerator : MonoBehaviour {
 			DateTime dtOld = DateTime.Parse (PrefsManager.Instance.GetExitDate ());
 			DateTime dtNow = DateTime.Now;
 			TimeSpan ts = dtNow - dtOld;
-			//	int sleepHours = ts.Hours;
-			int sleepHours = ts.Minutes;
-			Debug.Log ("sleep Hours = " + sleepHours);
-			if (sleepHours <= 0) {
+			int sleepMinuts = ts.Minutes;
+			Debug.Log ("sleep Hours = " + sleepMinuts);
+			if (sleepMinuts <= 0) {
 				return;
 			}
-			GenerateEnemyWhileSleepTime (sleepHours);
+			GenerateEnemyWhileSleepTime (sleepMinuts);
 		}
 	}
 
@@ -107,14 +106,14 @@ public class EnemyGenerator : MonoBehaviour {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_ENEMY);
 	}
 
-	private void GenerateEnemyWhileSleepTime (int sleepHours) {
+	private void GenerateEnemyWhileSleepTime (int sleepMinuts) {
 		SecomData secomdata = PrefsManager.Instance.GetSecomData ();
 		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
 		//解放しているレベルによって出現させる泥棒を変更
 		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
-		while (sleepHours > 0) {
+		while (sleepMinuts > 0) {
 			if (secomdata.Count <= 0) {
 				break;
 			}
@@ -123,9 +122,9 @@ public class EnemyGenerator : MonoBehaviour {
 			historyData.EnemyId = enemyId;
 			historyData.FlagSecom = 1;
 			historyData.Damage = "0";
-			historyData.Date = dtNow.AddHours (-sleepHours).ToString ("MM/dd HH:mm");
+			historyData.Date = dtNow.AddHours (-sleepMinuts).ToString ("MM/dd HH:mm");
 			secomdata.Count--;
-			sleepHours--;
+			sleepMinuts--;
 			StatusDataKeeper.Instance.IncrementUseSecomCount ();
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			PrefsManager.Instance.SaveSecomData (secomdata);
@@ -135,7 +134,7 @@ public class EnemyGenerator : MonoBehaviour {
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
 		int j = 1;
 		//セコムで撃退しきれなかった分を減算
-		while (sleepHours > 0) {
+		while (sleepMinuts > 0) {
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
 			EnemyData enemyData = enemyDataList [enemyId - 1];
 			decimal persent = CountManager.Instance.KeepMoneyCount / 100;
@@ -149,7 +148,7 @@ public class EnemyGenerator : MonoBehaviour {
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			CountManager.Instance.DecreaseMoneyCount (damage);
 			j++;
-			sleepHours--;
+			sleepMinuts--;
 		}
 	}
 
