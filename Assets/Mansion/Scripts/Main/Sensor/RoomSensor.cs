@@ -10,7 +10,6 @@ public class RoomSensor : MonoBehaviour {
 
 	void  OnTriggerEnter (Collider collider) {
 			ChangeDepth (collider);
-		Debug.Log ("enter");
 	}
 
 	void OnTriggerExit(Collider collider){

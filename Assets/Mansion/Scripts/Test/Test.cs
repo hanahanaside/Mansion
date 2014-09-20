@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	public UISprite sprite;
+	void  OnTriggerEnter (Collider collider) {
+		Debug.Log ("enter");
+	}
 
-	void Start(){
-		Vector3 position = sprite.gameObject.transform.position;
-		Debug.Log ("p = " + position);
+	void OnTriggerExit(Collider collider){
+		Debug.Log ("exit");
 	}
 }
