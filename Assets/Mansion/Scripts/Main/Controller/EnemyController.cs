@@ -92,7 +92,16 @@ public abstract class EnemyController : HumanController {
 	public void StartAtacking () {
 		IsAtacking = true;
 		float x = 0;
-		float y = UnityEngine.Random.Range (limitBottom, limitTop);
+		float moveToY = UnityEngine.Random.Range (limitBottom, limitTop);
+		Debug.Log ("moveToY = " + moveToY);
+		Debug.Log ("cueentY = " + transform.localPosition.y);
+		if(transform.localPosition.y < moveToY){
+			//up
+			mSpeedY = 1;
+		}else {
+			//down
+			mSpeedY = -1;
+		}
 		if (transform.eulerAngles.y == 0) {
 			x = UnityEngine.Random.Range (limitLeft, transform.localPosition.x);
 		} else {
@@ -100,7 +109,7 @@ public abstract class EnemyController : HumanController {
 		}
 		Hashtable hash = new Hashtable ();
 		hash.Add ("x", x);
-		hash.Add ("y", y);
+		hash.Add ("y", moveToY);
 		hash.Add ("speed", 1000.0f);
 		hash.Add ("delay", 1);
 		hash.Add ("islocal", true);

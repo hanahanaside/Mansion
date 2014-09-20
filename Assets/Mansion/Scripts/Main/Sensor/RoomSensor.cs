@@ -28,7 +28,6 @@ public class RoomSensor : MonoBehaviour {
 		}
 		if(tag == "CharactorSensor"){
 			collider.gameObject.transform.parent.SendMessage ("MoveDepth", sprite);
-			Debug.Log ("eeeeeeeeeeeeeee");
 		}
 	}
 }

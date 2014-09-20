@@ -3,11 +3,10 @@ using System.Collections;
 
 public class ResidentController : HumanController {
 
-
 	void SetDepth (int roomId) {
 		switch (roomId) {
 		case 1:
-			sprite.depth = 10001;
+			sprite.depth = 1001;
 			break;
 		case 2:
 			sprite.depth = 901;
