@@ -8,9 +8,18 @@ public abstract class HumanController : MonoBehaviour {
 	public float limitRight;
 	public float limitTop;
 	public float limitBottom;
-	private float mSpeedX;
-	private float mSpeedY;
+	public float mSpeedX;
+	public float mSpeedY;
 	private float mTime;
+
+	void MoveDepth (UISprite sprite) {
+		if (mSpeedY > 0) {
+			this.sprite.depth = sprite.depth - 1;
+		} else {
+			this.sprite.depth = sprite.depth + 1;
+		}
+	}
+
 
 	public void Walk () {
 		mTime -= Time.deltaTime;

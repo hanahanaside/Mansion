@@ -2,40 +2,42 @@
 using System.Collections;
 
 public class ResidentController : HumanController {
+
+
 	void SetDepth (int roomId) {
 		switch (roomId) {
 		case 1:
-			sprite.depth = 1001;
+			sprite.depth = 10001;
 			break;
 		case 2:
-			sprite.depth = 91;
+			sprite.depth = 901;
 			break;
 		case 3:
-			sprite.depth = 81;
+			sprite.depth = 801;
 			break;
 		case 4:
-			sprite.depth = 71;
+			sprite.depth = 701;
 			break;
 		case 5:
-			sprite.depth = 61;
+			sprite.depth = 601;
 			break;
 		case 6:
-			sprite.depth = 51;
+			sprite.depth = 501;
 			break;
 		case 7:
-			sprite.depth = 41;
+			sprite.depth = 401;
 			break;
 		case 8:
-			sprite.depth = 31;
+			sprite.depth = 301;
 			break;
 		case 9:
-			sprite.depth = 21;
+			sprite.depth = 201;
 			break;
 		case 10:
-			sprite.depth = 11;
+			sprite.depth = 101;
 			break;
 		case 11:
-			sprite.depth = 1;
+			sprite.depth = 10;
 			break;
 		}
 	}
@@ -52,15 +54,5 @@ public class ResidentController : HumanController {
 		sprite.enabled = false;
 	}
 
-	void MoveDepth (UISprite sprite) {
 
-		Vector3 roomPosition = sprite.transform.position;
-		//	float roomY = roomPosition.y - (float)(sprite.height /2000f);
-		float residentY = transform.position.y;
-		if (residentY > roomPosition.y) {
-			this.sprite.depth = sprite.depth - 1;
-		} else {
-			this.sprite.depth = sprite.depth + 1;
-		}
-	}
 }

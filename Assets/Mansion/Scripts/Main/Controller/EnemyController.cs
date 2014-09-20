@@ -27,7 +27,7 @@ public abstract class EnemyController : HumanController {
 	void Hide () {
 		sprite.enabled = false;
 	}
-
+		
 	public float AtackIntervalTime {
 		set;
 		get;
@@ -86,7 +86,7 @@ public abstract class EnemyController : HumanController {
 	}
 
 	public void SetAtackIntervalTime () {
-		AtackIntervalTime = 5.0f;
+		AtackIntervalTime = 10.0f;
 	}
 
 	public void StartAtacking () {

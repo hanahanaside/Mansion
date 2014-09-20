@@ -14,28 +14,21 @@ public class RoomSensor : MonoBehaviour {
 
 	void OnTriggerExit(Collider collider){
 
-				ChangeDepth (collider);
+		//		ChangeDepth (collider);
 	}
 
 	void OnTriggerStay(Collider collider){
-		//	ChangeDepth (collider);
-	}
-
-	void Show(){
-		collider.enabled = true;
 
 	}
-
+		
 	private void ChangeDepth(Collider collider){
 		string tag = collider.tag;
-		if (tag == "Resident" || tag == "Enemy") {
-//			if(sprite.color == Color.red){
-//				sprite.color = Color.blue;
-//			}else {
-//				sprite.color = Color.red;
-//			}
+		if (tag == "Resident") {
 			collider.gameObject.SendMessage ("MoveDepth", sprite);
 		}
-
+		if(tag == "CharactorSensor"){
+			collider.gameObject.transform.parent.SendMessage ("MoveDepth", sprite);
+			Debug.Log ("eeeeeeeeeeeeeee");
+		}
 	}
 }

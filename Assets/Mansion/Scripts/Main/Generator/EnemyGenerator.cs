@@ -13,6 +13,8 @@ public class EnemyGenerator : MonoBehaviour {
 	private static EnemyGenerator sInstance;
 	private List<EnemyData> mEnemyDataList;
 
+	private bool flag;
+
 	void Start () {
 		sInstance = this;
 		mHomeChildList = homePanelGrid.GetChildList ();

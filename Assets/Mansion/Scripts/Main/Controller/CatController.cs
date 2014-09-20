@@ -10,25 +10,12 @@ public class CatController : EnemyController {
 		}
 		AtackIntervalTime -= Time.deltaTime;
 		if (AtackIntervalTime < 0) {
-			StopWalkAnimation ();
-			StartAtacking ();
+				StopWalkAnimation ();
+				StartAtacking ();
 		} else {
 			Walk ();
 		}
 	}
-
-	void MoveDepth(UISprite sprite){
-
-		Vector3 roomPosition = sprite.transform.position;
-		float roomY = roomPosition.y + 0.1f;
-		float residentY = transform.position.y;
-		if(residentY > roomY){
-			this.sprite.depth = sprite.depth - 1;
-		}else {
-			this.sprite.depth = sprite.depth + 1;
-		}
-	}
-
 
 	public override IEnumerator Atack () {
 		Debug.Log ("atack");
