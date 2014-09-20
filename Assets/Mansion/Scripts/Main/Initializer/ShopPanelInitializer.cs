@@ -6,7 +6,8 @@ public class ShopPanelInitializer : MonoBehaviour {
 	public GameObject shopItemButtonPrefab;
 	public UIGrid shopItemGrid;
 	public UIGrid stageItemGrid;
-	public UILabel secomCountLabel;
+	public UILabel secomCountLabel; 
+	public UISprite spaceSprite;
 	// Use this for initialization
 	void OnEnable () {
 		List<ShopItemData> shopItemDataList = ShopItemDataDao.Instance.GetShopItemDataList ();
@@ -40,6 +41,7 @@ public class ShopPanelInitializer : MonoBehaviour {
 		List<Transform> childList = shopItemGrid.GetChildList ();
 		int count = childList.Count;
 		Transform finalChild = childList [count - 1];
+		spaceSprite.transform.localPosition = finalChild.localPosition;
 	}
 
 	private void InitShopItemCells (List<Transform> shopItemChildList, List<ShopItemData> shopItemDataList) {

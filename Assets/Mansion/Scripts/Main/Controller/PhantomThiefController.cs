@@ -21,7 +21,6 @@ public class PhantomThiefController : EnemyController {
 	
 	public override IEnumerator Atack () {
 		Debug.Log ("atack");
-		IsAtacking = true;
 		SetSprite("enemy5_atack_1");
 		yield return new WaitForSeconds (1.0f);
 		SetSprite("enemy5_atack_2");
@@ -35,6 +34,7 @@ public class PhantomThiefController : EnemyController {
 		transform.localRotation = Quaternion.Euler(0,0,0);
 		SetSprite("enemy5_walk_1");
 		SetAtackIntervalTime ();
+		RestartWalkAnimation ();
 		IsAtacking = false;
 	}
 

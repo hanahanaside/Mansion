@@ -55,7 +55,7 @@ public abstract class EnemyController : HumanController {
 		getMoneyLabelObject.transform.localScale = new Vector3 (1, 1, 1);
 		getMoneyLabelObject.transform.localPosition = transform.localPosition;
 		getMoneyCount = Math.Round (getMoneyCount, 0, MidpointRounding.AwayFromZero);
-		getMoneyLabelObject.SendMessage ("SetCount", "+" + getMoneyCount);
+		getMoneyLabelObject.SendMessage ("SetCount", "+" + CommaMarker.MarkDecimalCount(getMoneyCount));
 		CountManager.Instance.AddMoneyCount (getMoneyCount);
 		StatusDataKeeper.Instance.IncrementAtackEnemyCount ();
 

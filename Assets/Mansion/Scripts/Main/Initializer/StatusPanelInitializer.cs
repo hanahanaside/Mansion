@@ -12,7 +12,7 @@ public class StatusPanelInitializer : MonoBehaviour {
 	void OnEnable () {
 		InitHistoryGrid ();
 		InitGotItemGrid ();
-		//	InitWork ();
+		InitWork ();
 	}
 
 	private void InitHistoryGrid () {

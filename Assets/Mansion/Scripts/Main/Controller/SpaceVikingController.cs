@@ -36,6 +36,7 @@ public class SpaceVikingController : EnemyController {
 		yield return new WaitForSeconds (0.5f);
 		SetSprite("enemy6_walk_1");
 		SetAtackIntervalTime ();
+		RestartWalkAnimation ();
 		IsAtacking = false;
 	}
 	
