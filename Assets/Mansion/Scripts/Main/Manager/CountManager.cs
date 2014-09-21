@@ -71,7 +71,8 @@ public class CountManager : MonoBehaviour {
 	}
 
 	public void UpdateGenerateSpeed () {
-		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed ();
+		decimal pitBonusTimes = PitDataKeeper.Instance.GetPitBonusTimes ();
+		mTotalGenerateSpeed = RoomDataDao.Instance.GetTotalGenerateSpeed () * pitBonusTimes;
 		SetGenerateSpeedLabel ();
 	}
 

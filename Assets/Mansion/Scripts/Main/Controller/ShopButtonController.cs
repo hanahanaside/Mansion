@@ -48,6 +48,9 @@ public class ShopButtonController : MonoBehaviour {
 			if(mShopItemData.Id < 5){
 				ShopItemDataDao.Instance.UpdateUnLockLevel (mShopItemData.Id + 1, ShopItemData.UNLOCK_LEVEL_LOCKED);
 			}
+			//ピットボーナスを更新する
+			PitDataKeeper.Instance.UpdatePitData ();
+			CountManager.Instance.UpdateGenerateSpeed ();
 		}
 	}
 		

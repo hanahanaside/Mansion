@@ -8,24 +8,23 @@ public class PitController : MonoBehaviour {
 	public GameObject moneyParticlePrefab;
 	public GameObject pit;
 	public GameObject effectPoint;
-	private ShopItemData mCurrentPitData;
 	private ShopItemData mNextPitData;
 
 	void Start () {
 		transform.parent.Translate (0, 0.05f, 0);
 	}
 
-	void Init (ShopItemData pitData) {
-		mCurrentPitData = pitData;
+	void Init () {
+		ShopItemData pitData = PitDataKeeper.Instance.PitData;
 		foreach (GameObject hideObject in hideObjectArray) {
 			hideObject.SetActive (true);
 		}
-		if (mCurrentPitData.Id < 5) {
-			mNextPitData = ShopItemDataDao.Instance.GetShopItemDataById (mCurrentPitData.Id + 1);
+		if (pitData.Id < 5) {
+			mNextPitData = ShopItemDataDao.Instance.GetShopItemDataById (pitData.Id + 1);
 		}
-		Debug.Log ("pitLevel = " + mCurrentPitData.Id);
-		backGroundSprite.spriteName = "bg_pit_" + mCurrentPitData.Id;
-		string spriteName = "pit_" + mCurrentPitData.Id;
+		Debug.Log ("pitLevel = " + pitData.Id);
+		backGroundSprite.spriteName = "bg_pit_" + pitData.Id;
+		string spriteName = "pit_" + pitData.Id;
 		pit.GetComponent<UIButton> ().normalSprite = spriteName;
 		pit.GetComponent<UISprite> ().spriteName = spriteName;
 	}
@@ -42,7 +41,7 @@ public class PitController : MonoBehaviour {
 		StatusDataKeeper.Instance.IncrementTotalTapPitCount ();
 		GameObject countLabelObject = InstantiateObject (countLabelPrefab);
 		countLabelObject.transform.Translate (0, 0.07f, 0);
-		int getPoint = mCurrentPitData.Effect;
+		int getPoint = PitDataKeeper.Instance.PitData.Effect;
 		countLabelObject.SendMessage ("SetCount", "+" + CommaMarker.MarkIntCount(getPoint));
 		Instantiate (moneyParticlePrefab, effectPoint.transform.position, Quaternion.identity);
 		CountManager.Instance.AddMoneyCount (getPoint);
@@ -52,7 +51,8 @@ public class PitController : MonoBehaviour {
 	}
 		
 	private void CheckUnLickPitItem () {
-		if (mCurrentPitData.Id >= 5) {
+		ShopItemData pitData = PitDataKeeper.Instance.PitData;
+		if (pitData.Id >= 5) {
 			return;
 		}
 		if (mNextPitData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED) {
@@ -60,7 +60,7 @@ public class PitController : MonoBehaviour {
 		}
 		if (StatusDataKeeper.Instance.StatusData.TotalTapPitCount >= mNextPitData.UnLockCondition) {
 			Debug.Log ("unlock pit");
-			ShopItemDataDao.Instance.UpdateUnLockLevel (mCurrentPitData.Id + 1, ShopItemData.UNLOCK_LEVEL_UNLOCKED);
+			ShopItemDataDao.Instance.UpdateUnLockLevel (pitData.Id + 1, ShopItemData.UNLOCK_LEVEL_UNLOCKED);
 		}
 	}
 

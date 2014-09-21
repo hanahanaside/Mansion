@@ -30,8 +30,7 @@ public class HomePanelController : MonoBehaviour {
 			RoomData roomData = roomDataList [i];
 			childObject.BroadcastMessage ("Init", roomData);
 		}
-		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
-		mPitObject.BroadcastMessage ("Init", pitData);
+		mPitObject.BroadcastMessage ("Init");
 
 		SetCenterPosition (roomDataList);
 	}
