@@ -12,11 +12,13 @@ public class RoomItemDialogController : DialogController {
 	public UILabel descriptionLabel;
 	private RoomData mRoomData;
 	private TweenColor mShortMoneyTweenColor;
+	private iTweenEvent mShortMoneyTweenScale;
 
 	void Init (RoomData roomData) {
 		Debug.Log ("roomId = " + roomData.Id);
 		mRoomData = roomData;
 		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
+		mShortMoneyTweenScale = priceLabelObject.GetComponent<iTweenEvent>();
 		string spriteName = "room_item_" + roomData.Id;
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
 		itemSprite.spriteName = "room_item_" + roomData.Id;
@@ -37,6 +39,7 @@ public class RoomItemDialogController : DialogController {
 			//short money
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
 			mShortMoneyTweenColor.PlayForward ();
+			mShortMoneyTweenScale.Play ();
 			StartCoroutine (StopShortTween ());
 		} else if (mRoomData.ItemCount == 0) {
 			FirstItemBought ();
@@ -55,6 +58,7 @@ public class RoomItemDialogController : DialogController {
 	private IEnumerator StopShortTween () {
 		yield return new WaitForSeconds (1.0f);
 		mShortMoneyTweenColor.enabled = false;
+		mShortMoneyTweenScale.Stop ();
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
 	}
 
