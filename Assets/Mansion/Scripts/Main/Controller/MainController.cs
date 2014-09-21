@@ -66,7 +66,7 @@ public class MainController : MonoBehaviour {
 		if (exSprite.enabled) {
 			exSprite.enabled = false;
 		}
-		NendAdInterstitial.Instance.Show ();
+		StartCoroutine (ShowInterstitialCoroutine());
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {
@@ -87,10 +87,7 @@ public class MainController : MonoBehaviour {
 		}
 		mSwitchStatusCount++;
 		if (mSwitchStatusCount % 5 == 0) {
-			BannerAd.Instance.Hide ();
-			RectangleAd.Instance.Show ();
-			rectanglePanel.SetActive (true);
-			FenceManager.Instance.ShowFence ();
+			StartCoroutine (ShowRectangleCoroutine());
 		}
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
@@ -101,6 +98,21 @@ public class MainController : MonoBehaviour {
 		mCurrentPanel = statusPanel;
 		statusPanel.SetActive (true);
 		ChangeButtonFilter (2);
+	}
+
+	private IEnumerator ShowRectangleCoroutine(){
+		yield return new WaitForSeconds (0.5f);
+		BannerAd.Instance.Hide ();
+		RectangleAd.Instance.Show ();
+		rectanglePanel.SetActive (true);
+		FenceManager.Instance.ShowFence ();
+		Debug.Log ("showRectangle");
+	}
+
+	private IEnumerator ShowInterstitialCoroutine(){
+		yield return new WaitForSeconds (0.5f);
+		NendAdInterstitial.Instance.Show ();
+		Debug.Log ("showInterstitial");
 	}
 
 	public void OnRecommendButtonClicked () {

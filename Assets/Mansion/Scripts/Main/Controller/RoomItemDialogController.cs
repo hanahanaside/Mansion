@@ -10,6 +10,7 @@ public class RoomItemDialogController : DialogController {
 	public UILabel nameLabel;
 	public UILabel countLabel;
 	public UILabel descriptionLabel;
+	public iTweenEvent updateCountEvent;
 	private RoomData mRoomData;
 	private TweenColor mShortMoneyTweenColor;
 	private iTweenEvent mShortMoneyTweenScale;
@@ -18,7 +19,7 @@ public class RoomItemDialogController : DialogController {
 		Debug.Log ("roomId = " + roomData.Id);
 		mRoomData = roomData;
 		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
-		mShortMoneyTweenScale = priceLabelObject.GetComponent<iTweenEvent>();
+		mShortMoneyTweenScale = priceLabelObject.GetComponent<iTweenEvent> ();
 		string spriteName = "room_item_" + roomData.Id;
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
 		itemSprite.spriteName = "room_item_" + roomData.Id;
@@ -47,6 +48,7 @@ public class RoomItemDialogController : DialogController {
 		} else {
 			OnBuyApart ();
 			UpdateIteminfoLabel ();
+			updateCountEvent.Play ();
 		}
 	}
 
