@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class HomePanelController : MonoBehaviour {
 	public UIGrid grid;
 	public UICenterOnChild centerOnChild;
+	public UIScrollView scrollView;
 	private Transform mTargetChildTransform;
 	private bool mCenterd;
 	private GameObject mPitObject;
@@ -31,20 +32,38 @@ public class HomePanelController : MonoBehaviour {
 		}
 		ShopItemData pitData = ShopItemDataDao.Instance.GetPitData ();
 		mPitObject.BroadcastMessage ("Init", pitData);
+
+		SetCenterPosition (roomDataList);
+	}
+
+	private void SetCenterPosition (List<RoomData> roomDataList) {
+		//ドロボーが存在している場合はドロボーの部屋をセンターにセット
+		GameObject enemyObject = GameObject.FindWithTag ("Enemy");
+		if (enemyObject != null) {
+			GameObject roomObject = enemyObject.transform.parent.gameObject;
+			int index = grid.GetIndex (roomObject.transform);
+			CenterOnChild (index);
+			return;
+		}
 		for (int i = 0; i < roomDataList.Count; i++) {
 			RoomData roomData = roomDataList [i];
 			if (roomData.ItemCount != 0) {
-				mTargetChildTransform = mChildList [i];
-				//神の国をセンターにするとずれるので１つ下げる
-				if (i == 0) {
-					mTargetChildTransform = mChildList [1];
-				}
-				//最初は１番下から始める
-				centerOnChild.CenterOn (mChildList [10]);
+				CenterOnChild (i);
 				return;
 			}
 		}
 		//最初は１番下から始める
+		scrollView.transform.localPosition = new Vector3 (0, 3307, 0);
+
+	}
+
+	private void CenterOnChild(int index){
+		mTargetChildTransform = mChildList [index];
+		//神の国をセンターにするとずれるので１つ下げる
+		if (index == 0) {
+			mTargetChildTransform = mChildList [1];
+		}
+		//スクロールを下からに見せるために一旦、一番下をセンターにセット
 		centerOnChild.CenterOn (mChildList [10]);
 	}
 

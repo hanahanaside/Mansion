@@ -12,7 +12,6 @@ public class EnemyGenerator : MonoBehaviour {
 	private float mGenerateIntervalTime;
 	private static EnemyGenerator sInstance;
 	private List<EnemyData> mEnemyDataList;
-	private bool flag;
 
 	void Start () {
 		sInstance = this;
