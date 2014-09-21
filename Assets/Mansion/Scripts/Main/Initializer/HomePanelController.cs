@@ -46,6 +46,10 @@ public class HomePanelController : MonoBehaviour {
 		}
 		for (int i = 0; i < roomDataList.Count; i++) {
 			RoomData roomData = roomDataList [i];
+			//ダンボールハウスしかアンロックしていない場合は何もしない
+			if (i == 10) {
+				break;
+			}
 			if (roomData.ItemCount != 0) {
 				CenterOnChild (i);
 				return;
@@ -56,7 +60,7 @@ public class HomePanelController : MonoBehaviour {
 
 	}
 
-	private void CenterOnChild(int index){
+	private void CenterOnChild (int index) {
 		mTargetChildTransform = mChildList [index];
 		//神の国をセンターにするとずれるので１つ下げる
 		if (index == 0) {
