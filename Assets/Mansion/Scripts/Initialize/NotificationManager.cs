@@ -59,7 +59,7 @@ public class NotificationManager : MonoBehaviour {
 			if (secomCount >= i + 1) {
 				title = "アルツックがドロボーを撃退しました！";
 			} else {
-				title = "ドロボーに襲われてるよ！早く退治して！";
+				title = "ドロボーに襲われたよ！";
 			}
 			double addSeconds = (double)UnityEngine.Random.Range (30, 121);
 			Debug.Log ("add seconds = " + addSeconds);
