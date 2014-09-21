@@ -44,19 +44,29 @@ public class IconAd : MonoBehaviour {
 		#endif
 	}
 
-	private void InitAd () {
-		webViewObject.Init (); //初期化
+	public void SetDownMargins () {
 		#if UNITY_IPHONE
-		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
-		int height = Screen.height;
+		webViewObject.SetMargins (0, 170, 0, 850);
+		#endif
+	}
 
+	public void SetDefaultMargins () {
+		#if UNITY_IPHONE
 		//iPhone4
+		int height = Screen.height;
 		if (height == 960) {
 			webViewObject.SetMargins (0, 120, 0, 900); 
 		} else {
 			webViewObject.SetMargins (0, 120, 0, 900); 
 		}
 		#endif
+	}
 
+	private void InitAd () {
+		webViewObject.Init (); //初期化
+		#if UNITY_IPHONE
+		webViewObject.LoadURL ("http://ad.graasb.com/shakky/money/ios/icon/"); //ページの読み込み
+		#endif
+		SetDefaultMargins ();
 	}
 }

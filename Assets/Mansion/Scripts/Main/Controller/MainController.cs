@@ -25,6 +25,14 @@ public class MainController : MonoBehaviour {
 	}
 
 	void Update () {
+
+		float y = scrollView.transform.localPosition.y;
+		if (y < -15f) {
+			IconAd.Instance.SetDownMargins ();
+		}else {
+			IconAd.Instance.SetDefaultMargins ();
+		}
+
 #if UNITY_ANDROID
 		if (Input.GetKey (KeyCode.Escape)) {
 			Application.Quit ();
@@ -54,7 +62,7 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (shopPanel)) {
 			return;
 		}
-		if(exSprite.enabled){
+		if (exSprite.enabled) {
 			exSprite.enabled = false;
 		}
 		NendAdInterstitial.Instance.Show ();
@@ -77,7 +85,7 @@ public class MainController : MonoBehaviour {
 			return;
 		}
 		mSwitchStatusCount++;
-		if(mSwitchStatusCount % 5 == 0){
+		if (mSwitchStatusCount % 5 == 0) {
 			BannerAd.Instance.Hide ();
 			RectangleAd.Instance.Show ();
 			rectanglePanel.SetActive (true);
