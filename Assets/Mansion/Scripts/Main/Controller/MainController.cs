@@ -25,13 +25,14 @@ public class MainController : MonoBehaviour {
 	}
 
 	void Update () {
-
+		#if !UNITY_EDITOR
 		float y = scrollView.transform.localPosition.y;
 		if (y < -15f) {
 			IconAd.Instance.SetDownMargins ();
 		}else {
 			IconAd.Instance.SetDefaultMargins ();
 		}
+		#endif
 
 #if UNITY_ANDROID
 		if (Input.GetKey (KeyCode.Escape)) {
