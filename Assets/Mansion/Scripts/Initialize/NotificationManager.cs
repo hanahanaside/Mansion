@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class NotificationManager : MonoBehaviour {
@@ -24,8 +25,14 @@ public class NotificationManager : MonoBehaviour {
 		}
 	}
 
-	public void ScheduleLocalNotification () {
+	private void ScheduleLocalNotification () {
 		Debug.Log ("ScheduleLocalNotification");
+
+		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
+		//解放している部屋がなければ処理を終了
+		if (unlockRoomDataList.Count <= 0) {
+			return;
+		}
 
 		#if UNITY_IPHONE
 		NotificationServices.CancelAllLocalNotifications ();
@@ -44,6 +51,7 @@ public class NotificationManager : MonoBehaviour {
 
 	private void _ScheduleLocalNotification () {
 		int pushCount = 4;
+		string[] notificationDateArray = new string[pushCount];
 		long secomCount = PrefsManager.Instance.GetSecomData ().Count;
 		DateTime lastFireDate = System.DateTime.Now;
 		for (int i = 0; i < pushCount; i++) {
@@ -53,7 +61,7 @@ public class NotificationManager : MonoBehaviour {
 			} else {
 				title = "ドロボーに襲われてるよ！早く退治して！";
 			}
-			double addSeconds = (double)UnityEngine.Random.Range (3, 12);
+			double addSeconds = (double)UnityEngine.Random.Range (30, 121);
 			Debug.Log ("add seconds = " + addSeconds);
 			#if UNITY_IPHONE
 			LocalNotification localNotification = new LocalNotification ();
@@ -63,9 +71,11 @@ public class NotificationManager : MonoBehaviour {
 			localNotification.hasAction = true;
 			lastFireDate = lastFireDate.AddSeconds (addSeconds);
 			localNotification.fireDate = lastFireDate;
+			notificationDateArray[i] = lastFireDate.ToString();
 			NotificationServices.ScheduleLocalNotification (localNotification);
 			#endif
 		}
+		PrefsManager.Instance.NotificationDateArray = notificationDateArray;
 	}
 
 	private void ClearNotifications () {

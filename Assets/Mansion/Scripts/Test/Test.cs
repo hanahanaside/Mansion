@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
-	void  OnTriggerEnter (Collider collider) {
-		Debug.Log ("enter");
+	void Start(){
+		Debug.Log ("start");
 	}
 
-	void OnTriggerExit(Collider collider){
-		Debug.Log ("exit");
+	void OnApplicationPause(bool pauseStatus){
+		Debug.Log ("pause status " + pauseStatus);
 	}
+
 }

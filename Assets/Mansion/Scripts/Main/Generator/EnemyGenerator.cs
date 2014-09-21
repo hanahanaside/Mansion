@@ -12,7 +12,6 @@ public class EnemyGenerator : MonoBehaviour {
 	private float mGenerateIntervalTime;
 	private static EnemyGenerator sInstance;
 	private List<EnemyData> mEnemyDataList;
-
 	private bool flag;
 
 	void Start () {
@@ -21,6 +20,7 @@ public class EnemyGenerator : MonoBehaviour {
 		mEnemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
 		mHomeChildList.Reverse ();
 		SetGenerateIntervalTime ();
+		GenerateEnemyWhileSleepTime ();
 	}
 
 	void Update () {
@@ -50,19 +50,8 @@ public class EnemyGenerator : MonoBehaviour {
 	}
 
 	void OnApplicationPause (bool pauseStatus) {
-		if (pauseStatus) {
-			DateTime dtNow = DateTime.Now;
-			PrefsManager.Instance.SaveExitDate (dtNow.ToString ());
-		} else {
-			DateTime dtOld = DateTime.Parse (PrefsManager.Instance.GetExitDate ());
-			DateTime dtNow = DateTime.Now;
-			TimeSpan ts = dtNow - dtOld;
-			int sleepMinuts = ts.Minutes;
-			Debug.Log ("sleep Hours = " + sleepMinuts);
-			if (sleepMinuts <= 0) {
-				return;
-			}
-			GenerateEnemyWhileSleepTime (sleepMinuts);
+		if (!pauseStatus) {
+			GenerateEnemyWhileSleepTime ();
 		}
 	}
 
@@ -106,49 +95,52 @@ public class EnemyGenerator : MonoBehaviour {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_ENEMY);
 	}
 
-	private void GenerateEnemyWhileSleepTime (int sleepMinuts) {
+	private void GenerateEnemyWhileSleepTime () {
+		Debug.Log ("GenerateEnemyWhileSleepTime");
 		SecomData secomdata = PrefsManager.Instance.GetSecomData ();
 		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
-		//解放しているレベルによって出現させる泥棒を変更
-		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
-		DateTime dtNow = DateTime.Now;
-		Debug.Log ("secom count = " + secomdata.Count);
-		while (sleepMinuts > 0) {
-			if (secomdata.Count <= 0) {
-				break;
-			}
-			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
-			HistoryData historyData = new HistoryData ();
-			historyData.EnemyId = enemyId;
-			historyData.FlagSecom = 1;
-			historyData.Damage = "0";
-			historyData.Date = dtNow.AddHours (-sleepMinuts).ToString ("MM/dd HH:mm");
-			secomdata.Count--;
-			sleepMinuts--;
-			StatusDataKeeper.Instance.IncrementUseSecomCount ();
-			HistoryDataDao.Instance.InsertHistoryData (historyData);
-			PrefsManager.Instance.SaveSecomData (secomdata);
-			Debug.Log ("secom count = " + secomdata.Count);
+		//解放している部屋がなければ処理を終了
+		if (unlockRoomDataList.Count <= 0) {
+			return;
 		}
 
+		//解放しているレベルによって出現させる泥棒を変更
+		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
+		string[] notificationDateArray = PrefsManager.Instance.NotificationDateArray;
+		DateTime dtNow = DateTime.Now;
+		Debug.Log ("secom count = " + secomdata.Count);
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
-		int j = 1;
-		//セコムで撃退しきれなかった分を減算
-		while (sleepMinuts > 0) {
+		foreach (string notificationDate in notificationDateArray) {
+			DateTime dtNotification = DateTime.Parse (notificationDate);
+			if (dtNotification > dtNow) {
+				//dtNotificationはNowよりも新しい
+				Debug.Log ("break");
+				break;
+			}
+
 			int enemyId = UnityEngine.Random.Range (1, enemyPrefabArray.Length + 1 - decreaseCount);
-			EnemyData enemyData = enemyDataList [enemyId - 1];
-			decimal persent = CountManager.Instance.KeepMoneyCount / 100;
-			decimal damage = enemyData.Atack * persent;
-			damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
 			HistoryData historyData = new HistoryData ();
 			historyData.EnemyId = enemyId;
-			historyData.FlagSecom = 0;
-			historyData.Damage = damage.ToString ();
-			historyData.Date = dtNow.AddHours (-j).ToString ("MM/dd HH:mm");
+			historyData.Date = notificationDate;
+			//セコムで撃退
+			if (secomdata.Count > 1) {
+				historyData.FlagSecom = 1;
+				historyData.Damage = "0";
+				secomdata.Count--;
+				StatusDataKeeper.Instance.IncrementUseSecomCount ();
+				PrefsManager.Instance.SaveSecomData (secomdata);
+				Debug.Log ("secom count = " + secomdata.Count);
+			} else {
+				EnemyData enemyData = enemyDataList [enemyId - 1];
+				decimal persent = CountManager.Instance.KeepMoneyCount / 100;
+				decimal damage = enemyData.Atack * persent;
+				damage = Math.Round (damage, 0, MidpointRounding.AwayFromZero);
+				historyData.FlagSecom = 0;
+				historyData.Damage = damage.ToString ();
+				CountManager.Instance.DecreaseMoneyCount (damage);
+			}
+
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
-			CountManager.Instance.DecreaseMoneyCount (damage);
-			j++;
-			sleepMinuts--;
 		}
 	}
 

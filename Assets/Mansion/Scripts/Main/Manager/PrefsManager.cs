@@ -11,6 +11,7 @@ public class PrefsManager {
 	private const string FLAG_REVIEW = "flagReview";
 	private const string BOOST_TIME = "boostTime";
 	private const string OPENING_FINISHED = "openingFinished";
+	private const string NOTIFICATION_DATE_ARRAY = "notificationDateArray";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -66,7 +67,7 @@ public class PrefsManager {
 	public decimal GetMoneyCount () {
 		Debug.Log ("GetMoneyCount");
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
-			keepMoneyCountString = "1000000000000000";
+		keepMoneyCountString = "1000000000000000";
 		decimal keepMoneyCount = 0;
 		if (!string.IsNullOrEmpty (keepMoneyCountString)) {
 			keepMoneyCount = decimal.Parse (keepMoneyCountString);
@@ -111,6 +112,15 @@ public class PrefsManager {
 		}
 		get {
 			return PlayerPrefs.GetFloat (BOOST_TIME, 0);
+		}
+	}
+
+	public string[] NotificationDateArray{
+		set{
+			PlayerPrefsX.SetStringArray (NOTIFICATION_DATE_ARRAY,value);
+		}
+		get{
+			return PlayerPrefsX.GetStringArray (NOTIFICATION_DATE_ARRAY);
 		}
 	}
 }
