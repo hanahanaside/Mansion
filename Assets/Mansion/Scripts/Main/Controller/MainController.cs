@@ -67,6 +67,7 @@ public class MainController : MonoBehaviour {
 		if (exSprite.enabled) {
 			exSprite.enabled = false;
 		}
+		DestroyMoneyEffect ();
 		StartCoroutine (ShowInterstitialCoroutine ());
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
@@ -86,6 +87,7 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (statusPanel)) {
 			return;
 		}
+		DestroyMoneyEffect ();
 		mSwitchStatusCount++;
 		if (mSwitchStatusCount % 5 == 0) {
 			StartCoroutine (ShowRectangleCoroutine ());
@@ -157,6 +159,13 @@ public class MainController : MonoBehaviour {
 				continue;
 			}
 			colorFilter.SetActive (true);
+		}
+	}
+
+	private void DestroyMoneyEffect () {
+		GameObject[] moneyEffectArray = GameObject.FindGameObjectsWithTag ("MoneyEffect");
+		foreach (GameObject moneyEffect in moneyEffectArray) {
+			Destroy (moneyEffect);
 		}
 	}
 }
