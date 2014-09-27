@@ -62,6 +62,7 @@ public class RoomItemDialogController : DialogController {
 		mShortMoneyTweenColor.enabled = false;
 		mShortMoneyTweenScale.Stop ();
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
+		priceLabelObject.transform.localScale = new Vector3 (1,1,1);
 	}
 
 	private void UpdateIteminfoLabel () {
