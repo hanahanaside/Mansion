@@ -55,7 +55,7 @@ public class IconAd : MonoBehaviour {
 		//iPhone4
 		int height = Screen.height;
 		if (height == 960) {
-			webViewObject.SetMargins (0, 120, 0, 900); 
+			webViewObject.SetMargins (50, 170, 0, 850); 
 		} else {
 			webViewObject.SetMargins (0, 120, 0, 900); 
 		}

@@ -46,7 +46,7 @@ public class BannerAd : MonoBehaviour {
 		int height = Screen.height;
 		//iPhone4
 		if(height == 960){
-			webViewObject.SetMargins (0, 890, 0, 146); 
+			webViewObject.SetMargins (0, 750, 0, 106); 
 		}else {
 			webViewObject.SetMargins (0, 890, 0, 146); 
 		}
