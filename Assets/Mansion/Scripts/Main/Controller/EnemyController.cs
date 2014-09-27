@@ -59,7 +59,9 @@ public abstract class EnemyController : HumanController {
 		CountManager.Instance.AddMoneyCount (getMoneyCount);
 		StatusDataKeeper.Instance.IncrementAtackEnemyCount ();
 
-		if (destroyAnimation != null) {
+		if (destroyAnimation == null) {
+			StartCoroutine (Atack());
+		}else {
 			destroyAnimation.enabled = true;
 		}
 
