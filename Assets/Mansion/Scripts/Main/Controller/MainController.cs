@@ -10,6 +10,7 @@ public class MainController : MonoBehaviour {
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
 	public UISprite exSprite;
+	public UISprite rectangleBackground;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
 
@@ -66,7 +67,7 @@ public class MainController : MonoBehaviour {
 		if (exSprite.enabled) {
 			exSprite.enabled = false;
 		}
-		StartCoroutine (ShowInterstitialCoroutine());
+		StartCoroutine (ShowInterstitialCoroutine ());
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {
@@ -87,7 +88,7 @@ public class MainController : MonoBehaviour {
 		}
 		mSwitchStatusCount++;
 		if (mSwitchStatusCount % 5 == 0) {
-			StartCoroutine (ShowRectangleCoroutine());
+			StartCoroutine (ShowRectangleCoroutine ());
 		}
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
@@ -100,16 +101,22 @@ public class MainController : MonoBehaviour {
 		ChangeButtonFilter (2);
 	}
 
-	private IEnumerator ShowRectangleCoroutine(){
+	private IEnumerator ShowRectangleCoroutine () {
 		yield return new WaitForSeconds (0.5f);
 		BannerAd.Instance.Hide ();
 		RectangleAd.Instance.Show ();
 		rectanglePanel.SetActive (true);
+		#if UNITY_IPHONE
+		int height = Screen.height;
+		if (height == 960) {
+			rectangleBackground.enabled = false;
+		}
+		#endif
 		FenceManager.Instance.ShowFence ();
 		Debug.Log ("showRectangle");
 	}
 
-	private IEnumerator ShowInterstitialCoroutine(){
+	private IEnumerator ShowInterstitialCoroutine () {
 		yield return new WaitForSeconds (0.5f);
 		NendAdInterstitial.Instance.Show ();
 		Debug.Log ("showInterstitial");

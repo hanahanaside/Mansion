@@ -41,8 +41,8 @@ public class RoomController : MonoBehaviour {
 		if (!firstItemSprite.enabled) {
 			SetActiveItem ();
 			//所持アイテム数が表示アイテム数より多い場合は表示アイテム数の最大数を生成する
-			if (mRoomData.ItemCount > mItemSpriteList.Count) {
-				GenerateResident (mItemSpriteList.Count);
+			if (mRoomData.ItemCount >= 20) {
+				GenerateResident (20);
 			} else {
 				GenerateResident (mRoomData.ItemCount);
 			}
@@ -98,6 +98,9 @@ public class RoomController : MonoBehaviour {
 
 		if (mRoomData.ItemCount <= mItemSpriteList.Count) {
 			SetActiveItem ();
+		}
+
+		if(mRoomData.ItemCount <= 20){
 			GenerateResident (1);
 		}
 

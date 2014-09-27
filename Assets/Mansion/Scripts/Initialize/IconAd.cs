@@ -9,7 +9,7 @@ public class IconAd : MonoBehaviour {
 		sInstance = this;
 		DontDestroyOnLoad (gameObject);
 		#if !UNITY_EDITOR
-		InitAd();
+			InitAd();
 		#endif
 	}
 
@@ -46,7 +46,12 @@ public class IconAd : MonoBehaviour {
 
 	public void SetDownMargins () {
 		#if UNITY_IPHONE
-		webViewObject.SetMargins (0, 170, 0, 850);
+		int height = Screen.height;
+		if (height == 960) {
+			webViewObject.SetMargins (50, 270, 450, 800); 
+		} else {
+			webViewObject.SetMargins (0, 170, 500, 850);
+		}
 		#endif
 	}
 
@@ -55,9 +60,9 @@ public class IconAd : MonoBehaviour {
 		//iPhone4
 		int height = Screen.height;
 		if (height == 960) {
-			webViewObject.SetMargins (50, 170, 0, 850); 
+			webViewObject.SetMargins (50, 220, 450, 850); 
 		} else {
-			webViewObject.SetMargins (0, 120, 0, 900); 
+			webViewObject.SetMargins (0, 120, 500, 900); 
 		}
 		#endif
 	}

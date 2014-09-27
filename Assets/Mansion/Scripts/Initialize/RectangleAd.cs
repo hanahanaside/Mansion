@@ -43,7 +43,12 @@ public class RectangleAd : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 		webViewObject.Init (); //初期化
 		LoadURL ();
-		webViewObject.SetMargins (0, 300, 0, 300); //下に100pxマージンを取る
+		int height = Screen.height;
+		if (height == 960) {
+			webViewObject.SetMargins (0, 150, 0, 300); 
+		} else {
+			webViewObject.SetMargins (0, 300, 0, 300); 
+		}
 	}
 
 	private void LoadURL () {
