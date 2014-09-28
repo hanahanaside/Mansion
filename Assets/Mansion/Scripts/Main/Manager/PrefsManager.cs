@@ -66,8 +66,7 @@ public class PrefsManager {
 
 	public decimal GetMoneyCount () {
 		Debug.Log ("GetMoneyCount");
-		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT);
-		keepMoneyCountString = "1000000000000";
+		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT, "3000");
 		decimal keepMoneyCount = 0;
 		if (!string.IsNullOrEmpty (keepMoneyCountString)) {
 			keepMoneyCount = decimal.Parse (keepMoneyCountString);
@@ -95,7 +94,7 @@ public class PrefsManager {
 		}
 	}
 
-	public int FlagOpeningFinished {
+	public int FlagTutorialFinished {
 		get {
 			return PlayerPrefs.GetInt (OPENING_FINISHED, 0);
 		}
@@ -115,11 +114,11 @@ public class PrefsManager {
 		}
 	}
 
-	public string[] NotificationDateArray{
-		set{
-			PlayerPrefsX.SetStringArray (NOTIFICATION_DATE_ARRAY,value);
+	public string[] NotificationDateArray {
+		set {
+			PlayerPrefsX.SetStringArray (NOTIFICATION_DATE_ARRAY, value);
 		}
-		get{
+		get {
 			return PlayerPrefsX.GetStringArray (NOTIFICATION_DATE_ARRAY);
 		}
 	}

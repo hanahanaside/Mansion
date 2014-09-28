@@ -5,12 +5,15 @@ using System.Collections.Generic;
 
 public class Test : MonoBehaviour {
 
+	public WebViewObject w;
+	private const string URL = "http://www.yahoo.co.jp/";
+
+
 	void Start(){
 		Debug.Log ("start");
-	}
-
-	void OnApplicationPause(bool pauseStatus){
-		Debug.Log ("pause status " + pauseStatus);
+		w.Init ();
+		w.LoadURL (URL);
+		w.SetMargins (0, 890, 0, 146); 
 	}
 
 }

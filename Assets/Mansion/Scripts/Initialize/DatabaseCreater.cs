@@ -17,15 +17,6 @@ public class DatabaseCreater : MonoBehaviour {
 	private void CreateDatabase () {
 		string baseFilePath = Application.streamingAssetsPath + "/" + DATABASE_FILE_NAME;
 		string filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
-#if UNITY_EDITOR
-		File.Delete(filePath);
-		PrefsManager.Instance.SaveMoneyCount(0);
-		SecomData secomData = new SecomData();
-		secomData.Count = 0;
-		secomData.MacxCount = 0;
-		PrefsManager.Instance.SaveSecomData(secomData);
-		PrefsManager.Instance.FlagOpeningFinished = 0;
-#endif
 
 		#if UNITY_IPHONE
 		if(!File.Exists(filePath)){

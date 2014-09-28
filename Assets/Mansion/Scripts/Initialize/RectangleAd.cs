@@ -43,12 +43,18 @@ public class RectangleAd : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 		webViewObject.Init (); //初期化
 		LoadURL ();
+		#if UNITY_IPHONE
 		int height = Screen.height;
 		if (height == 960) {
 			webViewObject.SetMargins (0, 150, 0, 300); 
 		} else {
 			webViewObject.SetMargins (0, 300, 0, 300); 
 		}
+		#endif
+
+		#if UNITY_ANDROID
+		webViewObject.SetMargins (0, 150, 0, 300); 
+		#endif
 	}
 
 	private void LoadURL () {

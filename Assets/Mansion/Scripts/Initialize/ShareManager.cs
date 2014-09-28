@@ -28,7 +28,7 @@ public class ShareManager : MonoBehaviour {
 	void Start () {
 		sInstance = this;
 		DontDestroyOnLoad (gameObject);
-		#if UNITY_ANDROID
+		#if UNITY_ANDROID && !UNITY_EDITOR
 		StartCoroutine (WriteBytes ());
 		#endif
 	}

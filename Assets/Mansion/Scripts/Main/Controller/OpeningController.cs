@@ -22,7 +22,7 @@ public class OpeningController : MonoBehaviour {
 	}
 
 	private void Transition () {
-		PrefsManager.Instance.FlagOpeningFinished = 1;
-		Application.LoadLevel ("Main");
+		SoundManager.Instance.StopBGM ();
+		Application.LoadLevel ("Tutorial");
 	}
 }
