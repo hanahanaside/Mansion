@@ -7,11 +7,11 @@ public class ReviewDialogController : DialogController {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		string url = "";
 		#if UNITY_IPHONE
-		url = "https://itunes.apple.com/jp/app/pazuru-doragonzu/id493470467?mt=8";
+		url = "https://itunes.apple.com/app/id921934428";
 		#endif
 
 		#if UNITY_ANDROID
-		url = "https://play.google.com/store/apps/details?id=jp.gungho.pad";
+		url = "https://play.google.com/store/apps/details?id=com.shakky.money";
 		#endif
 		if(PrefsManager.Instance.FlagReview == 0){
 			CountManager.Instance.AddMoneyCount (50000L);

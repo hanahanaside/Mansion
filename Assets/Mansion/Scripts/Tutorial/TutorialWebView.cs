@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class TutorialWebView : MonoBehaviour {
-	//private const string URL = "http://ad.graasb.com/shakky/money/tutorial/";
-	private const string URL = "http://www.yahoo.co.jp/";
+	private const string URL = "http://ad.graasb.com/shakky/money/tutorial/";
+	//private const string URL = "http://www.yahoo.co.jp/";
 	public WebViewObject webViewObject;
 
 
