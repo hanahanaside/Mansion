@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -25,17 +25,5 @@ public class SharingBinding
         if( Application.platform == RuntimePlatform.IPhonePlayer )
 			_sharingShareItems( Json.encode( items ), Json.encode( excludedActivityTypes ) );
     }
-
-
-	[DllImport("__Internal")]
-	private static extern void _sharingSetPopoverPosition( float x, float y );
-
-	// iOS 8+ only and iPad only. Sets the popover arrow position for displaying the share sheet. Set this to match your share button location.
-	public static void setPopoverPosition( float x, float y )
-	{
-		if( Application.platform == RuntimePlatform.IPhonePlayer )
-			_sharingSetPopoverPosition( x, y );
-	}
-
 }
 #endif

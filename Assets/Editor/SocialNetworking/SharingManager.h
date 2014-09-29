@@ -10,7 +10,6 @@
 
 
 @interface SharingManager : NSObject
-@property (nonatomic) CGPoint popoverRootPoint;
 
 
 + (SharingManager*)sharedManager;

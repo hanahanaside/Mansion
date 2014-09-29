@@ -35,6 +35,7 @@ public class RectangleAd : MonoBehaviour {
 
 	public void Hide () {
 		#if !UNITY_EDITOR
+		LoadURL();
 		webViewObject.SetVisibility (false);
 		#endif
 	}
