@@ -69,11 +69,7 @@ public class MainController : MonoBehaviour {
 			exSprite.enabled = false;
 		}
 		DestroyMoneyEffect ();
-		//	StartCoroutine (ShowInterstitialCoroutine ());
-		mSwitchShopCount++;
-		if (mSwitchShopCount % 3 == 0) {
-			StartCoroutine (ShowRectangleCoroutine ());
-		}
+		StartCoroutine (ShowInterstitialCoroutine ());
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {
