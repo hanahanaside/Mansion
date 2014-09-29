@@ -19,8 +19,8 @@ public class TutorialController : MonoBehaviour {
 		mInterval -= Time.deltaTime;
 		if (mInterval < 0.0f) {
 			mPaused = true;
-			tutorialWebView.Hide ();
-			//	ShowTutorialBonusDialog ();
+			//tutorialWebView.Hide ();
+			//ShowTutorialBonusDialog ();
 		}
 	}
 
@@ -33,5 +33,9 @@ public class TutorialController : MonoBehaviour {
 			Application.LoadLevel ("Main");
 		};
 		alertDialog.Show (title, message, "OK");
+	}
+
+	public void OnSkipButtonClicked(){
+		ShowTutorialBonusDialog ();
 	}
 }

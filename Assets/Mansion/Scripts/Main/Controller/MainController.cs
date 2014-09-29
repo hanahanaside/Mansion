@@ -13,6 +13,7 @@ public class MainController : MonoBehaviour {
 	public UISprite rectangleBackground;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
+	private int mSwitchShopCount;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
@@ -68,7 +69,11 @@ public class MainController : MonoBehaviour {
 			exSprite.enabled = false;
 		}
 		DestroyMoneyEffect ();
-		StartCoroutine (ShowInterstitialCoroutine ());
+		//	StartCoroutine (ShowInterstitialCoroutine ());
+		mSwitchShopCount++;
+		if (mSwitchShopCount % 3 == 0) {
+			StartCoroutine (ShowRectangleCoroutine ());
+		}
 		if (mCurrentPanel.Equals (homePanel)) {
 			homePanelController.HideRoomObjects ();
 		} else {
@@ -120,6 +125,7 @@ public class MainController : MonoBehaviour {
 
 	private IEnumerator ShowInterstitialCoroutine () {
 		yield return new WaitForSeconds (0.5f);
+		NendAdInterstitial.Instance.Dismiss ();
 		NendAdInterstitial.Instance.Show ();
 		Debug.Log ("showInterstitial");
 	}

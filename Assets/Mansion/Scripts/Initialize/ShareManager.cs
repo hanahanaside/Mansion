@@ -49,7 +49,7 @@ public class ShareManager : MonoBehaviour {
 		sb.Append ("#ウハマン\n");
 		sb.Append ("http://bit.ly/ZicIhZ");
 		string imagePath = Application.streamingAssetsPath + "/" + fileName;
-		TwitterBinding.showTweetComposer (sb.ToString (), imagePath);
+		TwitterBinding.showTweetComposer (sb.ToString(), imagePath);
 		#endif
 
 		#if UNITY_ANDROID
@@ -59,6 +59,7 @@ public class ShareManager : MonoBehaviour {
 		SocialConnector.Share (text, url, path);
 		#endif
 	}
+		
 	#if UNITY_ANDROID
 	private IEnumerator WriteBytes () {
 		for (int i = 0; i < shareFileNameArray.Length; i++) {
