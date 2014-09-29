@@ -13,7 +13,6 @@ public class MainController : MonoBehaviour {
 	public UISprite rectangleBackground;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
-	private int mSwitchShopCount;
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);

@@ -188,14 +188,6 @@ NSInteger InterstitialClickTypeToInteger(NADInterstitialClickType type)
     }
 }
 
-BOOL ShouldAutorotateIMP(id self, SEL _cmd)
-{
-    if ( [UnityGetGLViewController() respondsToSelector:@selector(shouldAutorotate)] )
-        return [UnityGetGLViewController() shouldAutorotate];
-    else
-        return YES;
-}
-
 NSUInteger SupportedInterfaceOrientationsIMP(id self, SEL _cmd)
 {
     if ( [UnityGetGLViewController() respondsToSelector:@selector(supportedInterfaceOrientations)] )
@@ -218,10 +210,7 @@ void AddRotateMethodToInterstitialViewController()
     dispatch_once(&onceToken, ^{
         Class cls = NSClassFromString(@"NADInterstitialViewController");
         if ( _ios60orNewer )
-        {
-            class_addMethod(cls, @selector(shouldAutorotate), (IMP)&ShouldAutorotateIMP, "c8@0:4");
             class_addMethod(cls, @selector(supportedInterfaceOrientations), (IMP)&SupportedInterfaceOrientationsIMP, "I8@0:4");
-        }
         else
             class_replaceMethod(cls, @selector(shouldAutorotateToInterfaceOrientation:), (IMP)&ShouldAutorotateToInterfaceOrientationIMP, "c12@0:4i8");
     });
