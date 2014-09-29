@@ -14,7 +14,6 @@ public class RoomItemDialogController : DialogController {
 	private RoomData mRoomData;
 	private TweenColor mShortMoneyTweenColor;
 	private iTweenEvent mShortMoneyTweenScale;
-	private bool mAnimationPlaying = false;
 
 	void Init (RoomData roomData) {
 		Debug.Log ("roomId = " + roomData.Id);
@@ -40,12 +39,9 @@ public class RoomItemDialogController : DialogController {
 		if (keepMoneyCount < PriceCalculator.CalcRoomItemPrice (mRoomData)) {
 			//short money
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
-			if(!mAnimationPlaying){
-				mAnimationPlaying = true;
-				mShortMoneyTweenColor.PlayForward ();
-				mShortMoneyTweenScale.Play ();
-				StartCoroutine (StopShortTween ());
-			}
+			mShortMoneyTweenColor.PlayForward ();
+			mShortMoneyTweenScale.Play ();
+			StartCoroutine (StopShortTween ());
 		} else if (mRoomData.ItemCount == 0) {
 			FirstItemBought ();
 			Destroy (transform.parent.gameObject);
@@ -67,7 +63,6 @@ public class RoomItemDialogController : DialogController {
 		mShortMoneyTweenScale.Stop ();
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
 		priceLabelObject.transform.localScale = new Vector3 (1,1,1);
-		mAnimationPlaying = false;
 	}
 
 	private void UpdateIteminfoLabel () {

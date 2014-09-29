@@ -59,11 +59,8 @@ public class NendAdInterstitial : MonoBehaviour {
 		get {
 			return _instance;
 		}
-		set{
-			_instance = value;
-		}
 	}
-		
+
 	private NendAdInterstitialCallback _callback = null;
 	public NendAdInterstitialCallback Callback
 	{

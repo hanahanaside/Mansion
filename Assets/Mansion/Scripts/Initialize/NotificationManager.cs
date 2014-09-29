@@ -61,16 +61,15 @@ public class NotificationManager : MonoBehaviour {
 			} else {
 				title = "ドロボーに襲われたよ！";
 			}
-			double addMinutes = (double)UnityEngine.Random.Range (30, 121);
-			Debug.Log ("add Minutes = " + addMinutes);
+			double addSeconds = (double)UnityEngine.Random.Range (30, 121);
+			Debug.Log ("add seconds = " + addSeconds);
 			#if UNITY_IPHONE
 			LocalNotification localNotification = new LocalNotification ();
 			localNotification.applicationIconBadgeNumber = 1;
 			localNotification.alertBody = title;
 			localNotification.soundName = LocalNotification.defaultSoundName;
 			localNotification.hasAction = true;
-			//	lastFireDate = lastFireDate.AddSeconds (addSeconds);
-			lastFireDate = lastFireDate.AddMinutes(addMinutes);
+			lastFireDate = lastFireDate.AddSeconds (addSeconds);
 			localNotification.fireDate = lastFireDate;
 			notificationDateArray[i] = lastFireDate.ToString();
 			NotificationServices.ScheduleLocalNotification (localNotification);

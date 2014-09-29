@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Text;
 
@@ -12,7 +12,6 @@ public class ShopItemDialogController : DialogController {
 	private ShopItemData mShopItemData;
 	private TweenColor mShortMoneyTweenColor;
 	private iTweenEvent mShortMoneyScaleEvent;
-	private bool mAnimationPlaying = false;
 
 	void Init (ShopItemData shopItemData) {
 		mShopItemData = shopItemData;
@@ -27,12 +26,9 @@ public class ShopItemDialogController : DialogController {
 		decimal keepMoneyCount = CountManager.Instance.KeepMoneyCount;
 		if (keepMoneyCount < mShopItemData.Price) {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
-			if (!mAnimationPlaying) {
-				mAnimationPlaying = true;
-				mShortMoneyTweenColor.PlayForward ();
-				mShortMoneyScaleEvent.Play ();
-				StartCoroutine (StopShortTween ());
-			}
+			mShortMoneyTweenColor.PlayForward ();
+			mShortMoneyScaleEvent.Play ();
+			StartCoroutine (StopShortTween ());
 			return;
 		} 
 		CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
@@ -53,7 +49,6 @@ public class ShopItemDialogController : DialogController {
 		}
 		secomData.Count++;
 		PrefsManager.Instance.SaveSecomData (secomData);
-		mShopItemData.Price = secomData.Price;
 		SetPriceLabel (secomData.Price);
 		base.OnBuyButtonClicked ();
 	}
@@ -129,8 +124,6 @@ public class ShopItemDialogController : DialogController {
 		mShortMoneyTweenColor.enabled = false;
 		mShortMoneyScaleEvent.Stop ();
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
-		priceLabelObject.transform.localScale = new Vector3 (1,1,1);
-		mAnimationPlaying = false;
 	}
 
 	private void SetPriceLabel(long price){

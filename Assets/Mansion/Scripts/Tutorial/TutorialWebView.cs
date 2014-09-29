@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TutorialWebView : MonoBehaviour {
 	private const string URL = "http://ad.graasb.com/shakky/money/tutorial/";
+	//private const string URL = "http://www.yahoo.co.jp/";
 	public WebViewObject webViewObject;
 
 
@@ -19,7 +20,7 @@ public class TutorialWebView : MonoBehaviour {
 	private void LoadURL(){
 		webViewObject.Init ();
 		webViewObject.LoadURL (URL);
-		webViewObject.SetMargins (0,0,0,300);
+		webViewObject.SetMargins (0,0,0,0);
 		webViewObject.SetVisibility (true);
 	}
 }
