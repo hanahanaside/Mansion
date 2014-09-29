@@ -20,7 +20,7 @@ public class TutorialController : MonoBehaviour {
 		if (mInterval < 0.0f) {
 			mPaused = true;
 			tutorialWebView.Hide ();
-			//	ShowTutorialBonusDialog ();
+			ShowTutorialBonusDialog ();
 		}
 	}
 

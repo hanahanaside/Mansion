@@ -15,6 +15,12 @@
 
 
 
+void _sharingSetPopoverPosition( float x, float y )
+{
+	[SharingManager sharedManager].popoverRootPoint = CGPointMake( x, y );
+}
+
+
 NSArray * _sharingSharingArrayFromItems( NSArray *items )
 {
 	NSMutableArray *fixedItems = [NSMutableArray array];

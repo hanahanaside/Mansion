@@ -38,16 +38,50 @@ UIViewController *UnityGetGLViewController();
 	
 	UIActivityViewController *activityController = [[[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil] autorelease];
 	activityController.excludedActivityTypes = excludedActivityTypes;
-	activityController.completionHandler = ^( NSString *activityType, BOOL completed )
+
+	if( [activityController respondsToSelector:@selector(setCompletionWithItemsHandler:)] )
 	{
-		UnityPause( false );
-		
-		if( completed )
-			UnitySendMessage( "SharingManager", "sharingFinishedWithActivityType", activityType.UTF8String );
-		else
-			UnitySendMessage( "SharingManager", "sharingCancelled", "" );
-	};
-	[UnityGetGLViewController() presentModalViewController:activityController animated:YES];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+		activityController.completionWithItemsHandler = ^( NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError )
+		{
+			if( activityError )
+				NSLog( @"UIActivityViewController error: %@", activityError );
+			if( activityType )
+				NSLog( @"UIActivityViewController activityType: %@", activityType );
+			if( returnedItems )
+				NSLog( @"UIActivityViewController returnedItems: %@", returnedItems );
+
+			UnityPause( false );
+
+			if( completed )
+				UnitySendMessage( "SharingManager", "sharingFinishedWithActivityType", activityType.UTF8String );
+			else
+				UnitySendMessage( "SharingManager", "sharingCancelled", "" );
+		};
+#endif
+	}
+	else
+	{
+		activityController.completionHandler = ^( NSString *activityType, BOOL completed )
+		{
+			UnityPause( false );
+			
+			if( completed )
+				UnitySendMessage( "SharingManager", "sharingFinishedWithActivityType", activityType.UTF8String );
+			else
+				UnitySendMessage( "SharingManager", "sharingCancelled", "" );
+		};
+	}
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && [activityController respondsToSelector:@selector(setCompletionWithItemsHandler:)] )
+	{
+		activityController.popoverPresentationController.sourceView = UnityGetGLView();
+		activityController.popoverPresentationController.sourceRect = CGRectMake( [SharingManager sharedManager].popoverRootPoint.x, [SharingManager sharedManager].popoverRootPoint.y, 5, 5 );
+	}
+#endif
+
+	[UnityGetGLViewController() presentViewController:activityController animated:YES completion:NULL];
 }
 
 @end

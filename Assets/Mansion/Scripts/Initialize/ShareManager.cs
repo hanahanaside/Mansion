@@ -39,8 +39,9 @@ public class ShareManager : MonoBehaviour {
 
 	public void Share () {
 		string fileName = shareFileNameArray [0];
-		decimal moneyCout = StatusDataKeeper.Instance.StatusData.MaxKeepCount;
-		string moneyString = MoneyCountConverter.Convert (moneyCout);
+		//decimal moneyCout = StatusDataKeeper.Instance.StatusData.MaxKeepCount;
+		//	string moneyString = MoneyCountConverter.Convert (moneyCout);
+		string moneyString = "test";
 		#if UNITY_IPHONE
 		StringBuilder sb = new StringBuilder ();
 		sb.Append ("[" + moneyString + "]\n");
