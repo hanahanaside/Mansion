@@ -69,7 +69,7 @@ public class NotificationManager : MonoBehaviour {
 			localNotification.alertBody = title;
 			localNotification.soundName = LocalNotification.defaultSoundName;
 			localNotification.hasAction = true;
-			//	lastFireDate = lastFireDate.AddSeconds (addMinutes);
+			//lastFireDate = lastFireDate.AddSeconds (addMinutes);
 			lastFireDate = lastFireDate.AddMinutes(addMinutes);
 			localNotification.fireDate = lastFireDate;
 			notificationDateArray[i] = lastFireDate.ToString();
