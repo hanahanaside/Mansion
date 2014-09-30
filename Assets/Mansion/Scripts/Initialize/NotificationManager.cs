@@ -69,7 +69,7 @@ public class NotificationManager : MonoBehaviour {
 			localNotification.alertBody = title;
 			localNotification.soundName = LocalNotification.defaultSoundName;
 			localNotification.hasAction = true;
-			//	lastFireDate = lastFireDate.AddSeconds (addSeconds);
+			//	lastFireDate = lastFireDate.AddSeconds (addMinutes);
 			lastFireDate = lastFireDate.AddMinutes(addMinutes);
 			localNotification.fireDate = lastFireDate;
 			notificationDateArray[i] = lastFireDate.ToString();
@@ -80,6 +80,7 @@ public class NotificationManager : MonoBehaviour {
 	}
 
 	private void ClearNotifications () {
+		Debug.Log ("ClearNotifications");
 		#if UNITY_IPHONE
 		LocalNotification localNtification = new LocalNotification ();
 		localNtification.applicationIconBadgeNumber = -1;

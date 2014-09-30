@@ -122,7 +122,7 @@ public class EnemyGenerator : MonoBehaviour {
 			historyData.EnemyId = enemyId;
 			historyData.Date = notificationDate;
 			//セコムで撃退
-			if (secomdata.Count > 1) {
+			if (secomdata.Count > 0) {
 				historyData.FlagSecom = 1;
 				historyData.Damage = "0";
 				secomdata.Count--;
