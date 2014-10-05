@@ -73,14 +73,15 @@ public class PrefsManager {
 		}
 		return keepMoneyCount;
 	}
-
-	public void SaveExitDate (string exitDate) {
-		PlayerPrefs.SetString (EXIT_DATE, exitDate);
-		PlayerPrefs.Save ();
-	}
-
-	public string GetExitDate () {
-		return PlayerPrefs.GetString (EXIT_DATE, "");
+		
+	public string ExitDate{
+		set{
+			PlayerPrefs.SetString (EXIT_DATE, value);
+			PlayerPrefs.Save ();
+		}
+		get{
+			return PlayerPrefs.GetString (EXIT_DATE);
+		}
 	}
 
 	public void SaveReviewed () {

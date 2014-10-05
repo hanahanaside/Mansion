@@ -81,6 +81,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopItemDialogController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\ShopPanelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\SpaceVikingController.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\Controller\StatusPanelController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Controller\WomanThiefController.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Converter\DamageConverter.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Converter\MoneyCountConverter.cs" />
@@ -115,6 +116,7 @@
      <Compile Include="Assets\Mansion\Scripts\Main\Sensor\CharactorSensor.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\Sensor\RoomSensor.cs" />
      <Compile Include="Assets\Mansion\Scripts\Main\StatusLabelUpdater.cs" />
+     <Compile Include="Assets\Mansion\Scripts\Main\WWW\WWWClient.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test.cs" />
      <Compile Include="Assets\Mansion\Scripts\Test\Test2.cs" />
      <Compile Include="Assets\Mansion\Scripts\Tutorial\TutorialController.cs" />

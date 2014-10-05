@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -40,12 +40,7 @@ public class RoomController : MonoBehaviour {
 		UISprite firstItemSprite = mItemSpriteList [0];
 		if (!firstItemSprite.enabled) {
 			SetActiveItem ();
-			//所持アイテム数が表示アイテム数より多い場合は表示アイテム数の最大数を生成する
-			if (mRoomData.ItemCount >= 20) {
-				GenerateResident (20);
-			} else {
-				GenerateResident (mRoomData.ItemCount);
-			}
+			GenerateResident (mRoomData.ItemCount);
 		}
 		SetTextData (); 
 	}
@@ -85,7 +80,7 @@ public class RoomController : MonoBehaviour {
 
 		//新規にアンロックできるアイテムがあればアンロック
 		foreach (ShopItemData shopItemData in mShopItemDataList) {
-			if(shopItemData.UnlockLevel != ShopItemData.UNLOCK_LEVEL_LOCKED){
+			if (shopItemData.UnlockLevel != ShopItemData.UNLOCK_LEVEL_LOCKED) {
 				continue;
 			}
 			int unlockCondition = shopItemData.UnLockCondition;
@@ -99,10 +94,8 @@ public class RoomController : MonoBehaviour {
 		if (mRoomData.ItemCount <= mItemSpriteList.Count) {
 			SetActiveItem ();
 		}
-
-		if(mRoomData.ItemCount <= 20){
-			GenerateResident (1);
-		}
+			
+		GenerateResident (1);
 
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
@@ -138,7 +131,7 @@ public class RoomController : MonoBehaviour {
 	private void SetTextData () {
 		nameLabel.text = mRoomData.ItemName + " : " + mRoomData.ItemCount;
 		decimal generateSpeed = mRoomData.GenerateSpeed * mRoomData.ItemCount;
-		generateSpeedLabel.text = CommaMarker.MarkDecimalCount(generateSpeed) + " / \u79d2";
+		generateSpeedLabel.text = CommaMarker.MarkDecimalCount (generateSpeed) + " / \u79d2";
 	}
 
 	private void Reset () {

@@ -18,8 +18,12 @@ public class CountManager : MonoBehaviour {
 		UpdateGenerateSpeed ();
 		mKeepMoneyCount = PrefsManager.Instance.GetMoneyCount ();
 		SetKeepCountLabel ();
-		if (mTotalGenerateSpeed != 0) {
-			ResetTime ();
+		if (mTotalGenerateSpeed == 0) {
+			return;
+		}
+		ResetTime ();
+		if (!string.IsNullOrEmpty (PrefsManager.Instance.ExitDate)) {
+			AddSleepGenerateCount ();
 		}
 	}
 
@@ -49,6 +53,10 @@ public class CountManager : MonoBehaviour {
 	void OnApplicationPause (bool pauseStatus) {
 		if (pauseStatus) {
 			PrefsManager.Instance.SaveMoneyCount (mKeepMoneyCount);
+			string exitDate = DateTime.Now.ToString ();
+			PrefsManager.Instance.ExitDate = exitDate;
+		} else {
+			AddSleepGenerateCount ();
 		}
 	}
 
@@ -100,17 +108,29 @@ public class CountManager : MonoBehaviour {
 		}
 	}
 
+	private void AddSleepGenerateCount () {
+		string exitDate = PrefsManager.Instance.ExitDate;
+		DateTime dtExit = DateTime.Parse (exitDate);
+		DateTime dtNow = DateTime.Now;
+		TimeSpan ts = dtNow - dtExit;
+		int sleepSeconds = ts.Seconds;
+		Debug.Log ("sleep seconds = " + sleepSeconds);
+		for (int i = 0; i < sleepSeconds; i++) {
+			AddMoneyCount (mTotalGenerateSpeed);
+		}
+	}
+
 	private void ResetTime () {
 		mTime = 0.01f;
 		//mTime = 1f;
 	}
 
 	private void SetKeepCountLabel () {
-		keepMoneyCountLabel.text = CommaMarker.MarkDecimalCount(mKeepMoneyCount) + " \u5186";
+		keepMoneyCountLabel.text = CommaMarker.MarkDecimalCount (mKeepMoneyCount) + " \u5186";
 	}
 
-	private void SetGenerateSpeedLabel(){
-		totalGenerateSpeedLabel.text = CommaMarker.MarkGenerateSpeed(mTotalGenerateSpeed) + " / \u79d2";
+	private void SetGenerateSpeedLabel () {
+		totalGenerateSpeedLabel.text = CommaMarker.MarkGenerateSpeed (mTotalGenerateSpeed) + " / \u79d2";
 
 	}
 }

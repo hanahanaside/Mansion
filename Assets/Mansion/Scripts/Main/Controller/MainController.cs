@@ -11,6 +11,7 @@ public class MainController : MonoBehaviour {
 	public HomePanelController homePanelController;
 	public UISprite exSprite;
 	public UISprite rectangleBackground;
+	public UITexture recommendTexture;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
 
@@ -23,6 +24,7 @@ public class MainController : MonoBehaviour {
 		scrollView.ResetPosition ();
 		mCurrentPanel = homePanel;
 		homePanelController.Init ();
+		LoadRecommendTexture ();
 	}
 
 	void Update () {
@@ -168,5 +170,14 @@ public class MainController : MonoBehaviour {
 		foreach (GameObject moneyEffect in moneyEffectArray) {
 			Destroy (moneyEffect);
 		}
+	}
+
+	private void LoadRecommendTexture(){
+		WWWClient wwwClient = new WWWClient (this,"https://dl.dropboxusercontent.com/u/32529846/logo.png");
+		wwwClient.OnSuccess = (WWW response) => {
+			recommendTexture.mainTexture  = response.texture;
+
+		};
+		wwwClient.Request ();
 	}
 }

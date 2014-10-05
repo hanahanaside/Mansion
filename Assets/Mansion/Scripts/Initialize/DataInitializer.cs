@@ -16,6 +16,7 @@ public class DataInitializer : MonoBehaviour {
 		secomData.MacxCount = 0;
 		PrefsManager.Instance.SaveSecomData(secomData);
 		PrefsManager.Instance.FlagTutorialFinished = 0;
+		PrefsManager.Instance.SaveMoneyCount (1000000000000m);
 	}
 	#endif
 }
