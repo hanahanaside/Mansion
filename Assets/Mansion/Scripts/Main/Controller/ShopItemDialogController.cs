@@ -110,13 +110,13 @@ public class ShopItemDialogController : DialogController {
 		}
 		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED) {
 			StringBuilder sb = new StringBuilder ();
-			sb.Append (shopItemData.Description);
+			sb.Append (shopItemData.Description + "。");
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
 			description = sb.ToString ();
 		}
 		if (shopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS) {
 			StringBuilder sb = new StringBuilder ();
-			sb.Append (shopItemData.Description + "\n");
+			sb.Append (shopItemData.Description + "。");
 			sb.Append (roomData.ItemName + "\u306e\u751f\u7523\u91cf" + shopItemData.Effect + "\u500d");
 			description = sb.ToString ();
 			buyButtonObject.SetActive (false);

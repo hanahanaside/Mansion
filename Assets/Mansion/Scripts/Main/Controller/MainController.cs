@@ -173,7 +173,7 @@ public class MainController : MonoBehaviour {
 	}
 
 	private void LoadRecommendTexture(){
-		WWWClient wwwClient = new WWWClient (this,"https://dl.dropboxusercontent.com/u/32529846/logo.png");
+		WWWClient wwwClient = new WWWClient (this,"http://ad.graasb.com/shakky/money/link/img/01.png");
 		wwwClient.OnSuccess = (WWW response) => {
 			recommendTexture.mainTexture  = response.texture;
 
