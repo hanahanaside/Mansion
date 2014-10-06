@@ -61,7 +61,7 @@ extern "C" {
         [chkAppListViewController setAppNameTextFont:ChkTextFontTypeDefault];
         [chkAppListViewController setAppDescriptionTextColor:ChkTextColorDefault];
         [chkAppListViewController setAppDescriptionTextFont:ChkTextFontType4];
-        [UnityGetGLViewController() presentModalViewController:appListController animated:YES];
+        [UnityGetGLViewController() presentModalViewController:chkAppListViewController animated:YES];
     }
 }
 

@@ -67,20 +67,19 @@ public class PrefsManager {
 	public decimal GetMoneyCount () {
 		Debug.Log ("GetMoneyCount");
 		string keepMoneyCountString = PlayerPrefs.GetString (KEEP_MONEY_COUNT, "3000");
-				decimal keepMoneyCount = 0;
+		decimal keepMoneyCount = 0;
 		if (!string.IsNullOrEmpty (keepMoneyCountString)) {
 			keepMoneyCount = decimal.Parse (keepMoneyCountString);
 		}
-		keepMoneyCount = 100000000000000m;
 		return keepMoneyCount;
 	}
-		
-	public string ExitDate{
-		set{
+
+	public string ExitDate {
+		set {
 			PlayerPrefs.SetString (EXIT_DATE, value);
 			PlayerPrefs.Save ();
 		}
-		get{
+		get {
 			return PlayerPrefs.GetString (EXIT_DATE);
 		}
 	}
