@@ -21,14 +21,23 @@ public class RoomItemDialogController : DialogController {
 		mRoomData = roomData;
 		mShortMoneyTweenColor = priceLabelObject.GetComponent<TweenColor> ();
 		mShortMoneyTweenScale = priceLabelObject.GetComponent<iTweenEvent> ();
-		string spriteName = "room_item_" + roomData.Id;
+		string spriteName = "";
+		if (roomData.ItemCount == 0) {
+			spriteName = "room_item_" + roomData.Id + "_lock";
+			nameLabel.text = "????";
+			descriptionLabel.text = "????????????????????";
+		} else {
+			spriteName = "room_item_" + roomData.Id;
+			nameLabel.text = roomData.ItemName;
+			descriptionLabel.text = roomData.ItemDescription;
+		}
 		UISpriteData spriteData = roomItemAtlas.GetSprite (spriteName);
-		itemSprite.spriteName = "room_item_" + roomData.Id;
+		itemSprite.spriteName = spriteName;
 		itemSprite.width = (int)(spriteData.width * 1.5); 
 		itemSprite.height = (int)(spriteData.height * 1.5);
-		nameLabel.text = roomData.ItemName;
+
 		UpdateIteminfoLabel ();
-		descriptionLabel.text = roomData.ItemDescription;
+
 	}
 
 	void OnButtonEntranceEventFinished () {
@@ -40,7 +49,7 @@ public class RoomItemDialogController : DialogController {
 		if (keepMoneyCount < PriceCalculator.CalcRoomItemPrice (mRoomData)) {
 			//short money
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
-			if(!mAnimationPlaying){
+			if (!mAnimationPlaying) {
 				mAnimationPlaying = true;
 				mShortMoneyTweenColor.PlayForward ();
 				mShortMoneyTweenScale.Play ();
@@ -66,7 +75,7 @@ public class RoomItemDialogController : DialogController {
 		mShortMoneyTweenColor.enabled = false;
 		mShortMoneyTweenScale.Stop ();
 		priceLabelObject.GetComponent<UILabel> ().color = Color.black;
-		priceLabelObject.transform.localScale = new Vector3 (1,1,1);
+		priceLabelObject.transform.localScale = new Vector3 (1, 1, 1);
 		mAnimationPlaying = false;
 	}
 
