@@ -129,9 +129,13 @@ public class RoomController : MonoBehaviour {
 	}
 
 	private void SetTextData () {
+		int effect = ShopItemDataDao.Instance.GetEffectByRoomId (mRoomData.Id);
+		decimal generateSpeed = mRoomData.GenerateSpeed * mRoomData.ItemCount * effect;
+		Debug.Log ("geneda = " + generateSpeed);
+		//decimal generateSpeed = 0.5m;
+		generateSpeedLabel.text = CommaMarker.MarkGenerateSpeed(generateSpeed) + " / \u79d2";
+		//generateSpeedLabel.text = "" + generateSpeed;
 		nameLabel.text = mRoomData.ItemName + " : " + mRoomData.ItemCount;
-		decimal generateSpeed = mRoomData.GenerateSpeed * mRoomData.ItemCount;
-		generateSpeedLabel.text = CommaMarker.MarkDecimalCount (generateSpeed) + " / \u79d2";
 	}
 
 	private void Reset () {
