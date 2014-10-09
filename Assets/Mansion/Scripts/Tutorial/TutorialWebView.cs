@@ -36,13 +36,13 @@ public class TutorialWebView : MonoBehaviour {
 				Debug.Log ("jswfEndFrame");
 			} else if (msg == "close") {
 				// チュートリアル終了
-				webViewObject.SetVisibility (false);
-				Destroy (webViewObject);
+				Debug.Log("finish");
+				ShowTutorialBonusDialog();
 			}
 		});
 
 		webViewObject.LoadURL (URL);
-		webViewObject.SetMargins (0, 0, 0, 0);
+		webViewObject.SetMargins (0, 0, 0, 100);
 		webViewObject.SetVisibility (true);
 		webViewObject.EvaluateJS (
 			"window.addEventListener('load', function() {" +
@@ -58,4 +58,16 @@ public class TutorialWebView : MonoBehaviour {
 			"}, false);"
 		);
 	}
+
+	private void ShowTutorialBonusDialog () {
+		string title = "チュートリアル完了ボーナス！";
+		string message = "お金を3000円プレゼント！";
+		AlertDialog alertDialog = new AlertDialog ();
+		alertDialog.OnPositiveButtonClicked = () => {
+			PrefsManager.Instance.FlagTutorialFinished = 1;
+			Application.LoadLevel ("Main");
+		};
+		alertDialog.Show (title, message, "OK");
+	}
+
 }

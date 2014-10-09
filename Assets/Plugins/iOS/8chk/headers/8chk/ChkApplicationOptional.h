@@ -2,7 +2,7 @@
 //  ChkApplicationOptional.h
 //  8chk
 //
-//  Ver 5.3.0
+//  Ver 5.3.2
 //
 //  Created by Tatsuya Uemura on 12/07/17.
 //  Copyright 2012 8crops inc. All rights reserved.

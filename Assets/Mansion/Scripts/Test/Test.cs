@@ -10,16 +10,11 @@ public class Test : MonoBehaviour {
 	public UITexture texture;
 
 	void Start(){
-		Debug.Log("aa");
-		WWWClient wwwClient = new WWWClient (this,"https://dl.dropboxusercontent.com/u/32529846/logo.png");
-		wwwClient.OnSuccess = (WWW response) => {
-			texture.mainTexture  = response.texture;
-
-		};
-		wwwClient.Request ();
+		Binding.SplashViewInitialize ();
 	}
 
 	public void OnButtonClicked(){
 		Debug.Log("click");
+		Binding2.SplashView ();
 	}
 }

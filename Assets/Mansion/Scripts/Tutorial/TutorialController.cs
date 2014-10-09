@@ -6,10 +6,11 @@ public class TutorialController : MonoBehaviour {
 	private float mInterval = 5.0f;
 	private bool mPaused = false;
 
-	void Start(){
+	void Start () {
 		#if UNITY_EDITOR
 		Application.LoadLevel ("Main");
 		#endif
+		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
 	}
 
 	void Update () {
@@ -30,12 +31,18 @@ public class TutorialController : MonoBehaviour {
 		AlertDialog alertDialog = new AlertDialog ();
 		alertDialog.OnPositiveButtonClicked = () => {
 			PrefsManager.Instance.FlagTutorialFinished = 1;
+			HistoryData historyData = new HistoryData ();
+			historyData.Damage = "31";
+			historyData.EnemyId = 2;
+			historyData.FlagSecom = 0;
+			historyData.Date = System.DateTime.Now.ToString ("MM/dd HH:mm");
+			HistoryDataDao.Instance.InsertHistoryData (historyData);
 			Application.LoadLevel ("Main");
 		};
 		alertDialog.Show (title, message, "OK");
 	}
 
-	public void OnSkipButtonClicked(){
+	public void OnSkipButtonClicked () {
 		ShowTutorialBonusDialog ();
 	}
 }

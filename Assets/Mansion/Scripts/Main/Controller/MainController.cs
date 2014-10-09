@@ -46,6 +46,12 @@ public class MainController : MonoBehaviour {
 #endif
 	}
 
+	void OnApplicationPause(bool pauseStatus){
+		if(!pauseStatus){
+			PopAdManager.Instance.ShowPopAd ();
+		}
+	}
+
 	public void OnHomeButtonClicked () {
 		Debug.Log ("home");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
