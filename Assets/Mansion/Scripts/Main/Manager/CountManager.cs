@@ -122,7 +122,6 @@ public class CountManager : MonoBehaviour {
 
 	private void ResetTime () {
 		mTime = 0.01f;
-		//mTime = 1f;
 	}
 
 	private void SetKeepCountLabel () {

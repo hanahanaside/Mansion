@@ -7,6 +7,8 @@ public class ShopPanelInitializer : MonoBehaviour {
 	public UIGrid shopItemGrid;
 	public UIGrid stageItemGrid;
 	public UILabel secomCountLabel; 
+	private static ShopPanelInitializer sInstance;
+
 	// Use this for initialization
 	void OnEnable () {
 		List<ShopItemData> shopItemDataList = ShopItemDataDao.Instance.GetShopItemDataList ();
@@ -16,6 +18,20 @@ public class ShopPanelInitializer : MonoBehaviour {
 		} else {
 			InitShopItemCells (shopItemChildList, shopItemDataList);
 		}
+		SetSecomLabel ();
+	}
+
+	void Awake(){
+		sInstance = this;
+	}
+
+	public static ShopPanelInitializer Instance{
+		get{
+			return sInstance;
+		}
+	}
+
+	public void SetSecomLabel(){
 		SecomData secomData = PrefsManager.Instance.GetSecomData ();
 		secomCountLabel.text = "×" + secomData.Count;
 	}

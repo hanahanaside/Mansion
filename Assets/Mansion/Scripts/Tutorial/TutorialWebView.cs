@@ -6,15 +6,12 @@ public class TutorialWebView : MonoBehaviour {
 	public WebViewObject webViewObject;
 
 	void Start () {
-		#if !UNITY_EDITOR
-		LoadURL();
+		#if UNITY_IPHONE
+		EtceteraBinding.showBezelActivityViewWithLabel("Loading");
 		#endif
+		LoadURL();
 	}
-
-	public void Hide () {
-		webViewObject.SetVisibility (false);
-	}
-
+		
 	private void LoadURL () {
 		webViewObject.Init ((msg) => {
 			Debug.Log ("webViewObjectCallBack = " + msg);
@@ -22,6 +19,9 @@ public class TutorialWebView : MonoBehaviour {
 			if (msg == "jswfEndFrame") {
 				// SWF の変換終了時に送信されます。
 				Debug.Log ("jswfEndFrame");
+				#if UNITY_IPHONE
+				EtceteraBinding.hideActivityView();
+				#endif
 			} else if (msg == "jswfBeginFrame") {
 				// フレームの処理を開始する直前に送信されます。
 				Debug.Log ("jswfBeginFrame");
@@ -37,12 +37,16 @@ public class TutorialWebView : MonoBehaviour {
 			} else if (msg == "close") {
 				// チュートリアル終了
 				Debug.Log("finish");
+				#if UNITY_EDITOR
+				Application.LoadLevel("Main");
+				#else
 				ShowTutorialBonusDialog();
+				#endif
 			}
 		});
 
 		webViewObject.LoadURL (URL);
-		webViewObject.SetMargins (0, 0, 0, 100);
+		webViewObject.SetMargins (0, 0, 0, 0);
 		webViewObject.SetVisibility (true);
 		webViewObject.EvaluateJS (
 			"window.addEventListener('load', function() {" +

@@ -141,6 +141,9 @@ public class EnemyGenerator : MonoBehaviour {
 
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 		}
+		ShopPanelInitializer.Instance.SetSecomLabel ();
+		StatusPanelInitializer.Instance.InitHistoryGrid ();
+
 	}
 
 	private void SetGenerateIntervalTime () {

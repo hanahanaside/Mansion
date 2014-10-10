@@ -35,10 +35,11 @@ public class ShopItemDialogController : DialogController {
 			}
 			return;
 		} 
-		CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
+
 		if (mShopItemData.Tag == ShopItemData.TAG_SECOM) {
 			BuySecom ();
 		} else {
+			CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
 			OnBuyShopItem ();
 			FenceManager.Instance.HideFence ();
 			Destroy (transform.parent.gameObject);
@@ -49,8 +50,10 @@ public class ShopItemDialogController : DialogController {
 		SecomData secomData = PrefsManager.Instance.GetSecomData ();
 		if (secomData.Count >= 10) {
 			SoundManager.Instance.PlaySE (AudioClipID.SE_SHORT_MONEY);
+			Debug.Log ("retur ");
 			return;
 		}
+		CountManager.Instance.DecreaseMoneyCount (mShopItemData.Price);
 		secomData.Count++;
 		PrefsManager.Instance.SaveSecomData (secomData);
 		mShopItemData.Price = secomData.Price;

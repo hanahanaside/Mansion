@@ -8,6 +8,7 @@ public class StatusPanelInitializer : MonoBehaviour {
 	public UIGrid historyGrid;
 	public GameObject historyButtonPrefab;
 	public GameObject shopItemButtonPrefab;
+	private static StatusPanelInitializer sInstance;
 
 	void OnEnable () {
 		InitHistoryGrid ();
@@ -15,7 +16,17 @@ public class StatusPanelInitializer : MonoBehaviour {
 		InitWork ();
 	}
 
-	private void InitHistoryGrid () {
+	void Awake(){
+		sInstance = this;
+	}
+
+	public static StatusPanelInitializer Instance{
+		get{
+			return sInstance;
+		}
+	}
+
+	public void InitHistoryGrid () {
 		List<HistoryData> historyDataList = HistoryDataDao.Instance.GetHistoryDataList ();
 		historyDataList.Reverse ();
 		List<Transform> historyChildList = historyGrid.GetChildList ();

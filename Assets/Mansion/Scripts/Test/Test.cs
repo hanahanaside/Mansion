@@ -7,10 +7,14 @@ using System.Threading;
 
 public class Test : MonoBehaviour {
 
-	public UITexture texture;
+	public WebViewObject webView;
 
 	void Start(){
-		Binding.SplashViewInitialize ();
+		webView.Init ((msg) => {
+
+		});
+		webView.LoadURL ("http://www.yahoo.co.jp/");
+		webView.SetVisibility (true);
 	}
 
 	public void OnButtonClicked(){
