@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class TutorialWebView : MonoBehaviour {
 	private const string URL = "http://ad.graasb.com/shakky/money/tutorial/";
@@ -68,10 +69,21 @@ public class TutorialWebView : MonoBehaviour {
 		string message = "お金を3000円プレゼント！";
 		AlertDialog alertDialog = new AlertDialog ();
 		alertDialog.OnPositiveButtonClicked = () => {
+			InsertHistoryData();
 			PrefsManager.Instance.FlagTutorialFinished = 1;
 			Application.LoadLevel ("Main");
 		};
 		alertDialog.Show (title, message, "OK");
 	}
 
+	private void InsertHistoryData(){
+		DateTime dtNow = DateTime.Now;
+		string date = dtNow.ToString ("MM/dd HH:mm");
+		HistoryData historyData = new HistoryData ();
+		historyData.EnemyId = 2;
+		historyData.Damage = "31";
+		historyData.Date = date;
+		historyData.FlagSecom = 0;
+		HistoryDataDao.Instance.InsertHistoryData (historyData);
+	}
 }

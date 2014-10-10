@@ -141,13 +141,14 @@ public class EnemyGenerator : MonoBehaviour {
 
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
 		}
-		ShopPanelInitializer.Instance.SetSecomLabel ();
-		StatusPanelInitializer.Instance.InitHistoryGrid ();
-
+		//ShopPanelInitializer.Instance.SetSecomLabel ();
+		//StatusPanelInitializer.Instance.InitHistoryGrid ();
+		Debug.Log ("finish");
 	}
 
 	private void SetGenerateIntervalTime () {
-		mGenerateIntervalTime = 45.0f;
+		//	mGenerateIntervalTime = 45.0f;
+		mGenerateIntervalTime = 10.0f;
 	}
 
 	private int GetDecreaseCount (List<RoomData> unlockRoomDataList) {

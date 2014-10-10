@@ -10,6 +10,7 @@ public class DataInitializer : MonoBehaviour {
 	void Awake(){
 		string filePath = Application.persistentDataPath + "/" + DATABASE_FILE_NAME;
 		File.Delete(filePath);
+		Debug.Log ("delete");
 		PrefsManager.Instance.SaveMoneyCount(2000);
 		SecomData secomData = new SecomData();
 		secomData.Count = 0;
