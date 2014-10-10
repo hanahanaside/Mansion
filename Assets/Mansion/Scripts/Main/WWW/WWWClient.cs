@@ -46,17 +46,35 @@ public class WWWClient {
 
 		if (mIsTimeOut) {
 			Debug.Log ("TimeOut");
-			mOnTimeOut ();
+			TimeOut ();
 		} else	if (mWWW.error == null) {
 			Debug.Log ("www ok");
 			Debug.Log ("result = " + mWWW.text);
-			mOnSuccess (mWWW);
+			Success ();
 		} else {
 			Debug.Log ("www error");
 			Debug.Log (mWWW.text);
-			mOnFail (mWWW);
+			Fail ();
 		}
 		mWWW.Dispose ();
+	}
+
+	private void TimeOut(){
+		if(mOnTimeOut != null){
+			mOnTimeOut ();
+		}
+	}
+
+	private void Success(){
+		if(mOnSuccess != null){
+			mOnSuccess (mWWW);
+		}
+	}
+
+	private void Fail(){
+		if(mOnFail != null){
+			mOnFail (mWWW);
+		}
 	}
 
 	private  IEnumerator CheckTimeout () {

@@ -8,7 +8,9 @@ public class PopAdManager : MonoBehaviour {
 	void Start () {
 		sInstance = this;
 		DontDestroyOnLoad (gameObject);
+		#if !UNITY_EDITOR
 		Binding.SplashViewInitialize ();
+		#endif
 	}
 
 	public static PopAdManager Instance{
@@ -18,6 +20,8 @@ public class PopAdManager : MonoBehaviour {
 	}
 
 	public void ShowPopAd(){
+		#if !UNITY_EDITOR
 		Binding2.SplashView ();
+		#endif
 	}
 }

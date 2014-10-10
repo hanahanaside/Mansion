@@ -30,6 +30,7 @@ public class StatusPanelInitializer : MonoBehaviour {
 		List<HistoryData> historyDataList = HistoryDataDao.Instance.GetHistoryDataList ();
 		historyDataList.Reverse ();
 		List<Transform> historyChildList = historyGrid.GetChildList ();
+		Debug.Log ("count = " + historyChildList.Count);
 		for (int i = 0; i < 4; i++) {
 			Debug.Log ("i = " + i);
 			//履歴が４つに満たない場合は終了

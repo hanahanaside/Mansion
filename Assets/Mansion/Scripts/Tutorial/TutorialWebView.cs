@@ -7,10 +7,11 @@ public class TutorialWebView : MonoBehaviour {
 	public WebViewObject webViewObject;
 
 	void Start () {
-		#if UNITY_IPHONE
+		#if !UNITY_EDITOR
 		EtceteraBinding.showBezelActivityViewWithLabel("Loading");
-		#endif
 		LoadURL();
+		#endif
+
 	}
 		
 	private void LoadURL () {

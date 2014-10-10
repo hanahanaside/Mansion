@@ -143,12 +143,10 @@ public class EnemyGenerator : MonoBehaviour {
 		}
 		//ShopPanelInitializer.Instance.SetSecomLabel ();
 		//StatusPanelInitializer.Instance.InitHistoryGrid ();
-		Debug.Log ("finish");
 	}
 
 	private void SetGenerateIntervalTime () {
-		//	mGenerateIntervalTime = 45.0f;
-		mGenerateIntervalTime = 10.0f;
+		mGenerateIntervalTime = 45.0f;
 	}
 
 	private int GetDecreaseCount (List<RoomData> unlockRoomDataList) {
