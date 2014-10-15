@@ -106,6 +106,7 @@ public class EnemyGenerator : MonoBehaviour {
 		//解放しているレベルによって出現させる泥棒を変更
 		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
 		string[] notificationDateArray = PrefsManager.Instance.NotificationDateArray;
+		Debug.Log ("date = " + notificationDateArray[0]);
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();
@@ -140,6 +141,7 @@ public class EnemyGenerator : MonoBehaviour {
 			}
 
 			HistoryDataDao.Instance.InsertHistoryData (historyData);
+			Debug.Log ("insert");
 		}
 		//ShopPanelInitializer.Instance.SetSecomLabel ();
 		//StatusPanelInitializer.Instance.InitHistoryGrid ();

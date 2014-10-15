@@ -7,7 +7,7 @@ public class StatusDataKeeper : MonoBehaviour {
 	private static StatusDataKeeper sInstance;
 	private StatusData mStatusData;
 
-	void Start () {
+	void Awake () {
 		sInstance = this;
 		mStatusData = PrefsManager.Instance.GetStatusData ();
 	}
@@ -44,7 +44,7 @@ public class StatusDataKeeper : MonoBehaviour {
 	public void IncrementTotalTapPitCount () {
 		if(String.IsNullOrEmpty(mStatusData.FirstGenerateDate)){
 			DateTime dtNow = DateTime.Now;
-			mStatusData.FirstGenerateDate = dtNow.ToString ();
+			mStatusData.FirstGenerateDate = dtNow.ToString ("yyyy/MM/dd hh:mm:ss");
 		}
 		mStatusData.TotalTapPitCount++;
 	}

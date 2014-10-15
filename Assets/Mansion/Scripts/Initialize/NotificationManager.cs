@@ -62,6 +62,7 @@ public class NotificationManager : MonoBehaviour {
 				title = "ドロボーに襲われたよ！";
 			}
 			double addMinutes = (double)UnityEngine.Random.Range (30, 121);
+			//double addMinutes = (double)UnityEngine.Random.Range (5, 10);
 			Debug.Log ("add Minutes = " + addMinutes);
 			#if UNITY_IPHONE
 			LocalNotification localNotification = new LocalNotification ();

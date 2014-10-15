@@ -7,7 +7,7 @@ public class ReviewDialogController : DialogController {
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
 		string url = "";
 		#if UNITY_IPHONE
-		url = "https://itunes.apple.com/app/id921934428";
+		url = "https://itunes.apple.com/jp/app/id921934428?mt=8/";
 		#endif
 
 		#if UNITY_ANDROID
