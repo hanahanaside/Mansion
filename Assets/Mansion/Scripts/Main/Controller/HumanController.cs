@@ -8,8 +8,8 @@ public abstract class HumanController : MonoBehaviour {
 	public float limitRight;
 	public float limitTop;
 	public float limitBottom;
-	public float mSpeedX;
-	public float mSpeedY;
+	protected float mSpeedX;
+	protected float mSpeedY;
 	private float mTime;
 
 	void MoveDepth (UISprite sprite) {
