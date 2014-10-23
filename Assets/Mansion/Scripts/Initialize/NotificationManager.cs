@@ -40,6 +40,7 @@ public class NotificationManager : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
+		EtceteraAndroid.cancelAllNotifications();
 		long secondsFromNow =  60L;
 		string title = "ウハウハ";
 		string subTitle = "泥棒に襲われています";
@@ -75,6 +76,11 @@ public class NotificationManager : MonoBehaviour {
 			localNotification.fireDate = lastFireDate;
 			notificationDateArray[i] = lastFireDate.ToString();
 			NotificationServices.ScheduleLocalNotification (localNotification);
+			#endif
+
+			#if UNITY_ANDROID
+			long addSeconds = (long)(addMinutes * 60);
+			EtceteraAndroid.scheduleNotification(addSeconds,"ウハマン",title,title,"");
 			#endif
 		}
 		PrefsManager.Instance.NotificationDateArray = notificationDateArray;
