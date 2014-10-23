@@ -8,10 +8,20 @@ public class TutorialWebView : MonoBehaviour {
 
 	void Start () {
 		#if !UNITY_EDITOR
-		EtceteraBinding.showBezelActivityViewWithLabel("Loading");
+		ShowProgressDialog();
 		LoadURL();
 		#endif
 
+	}
+
+	private void ShowProgressDialog(){
+		#if UNITY_IPHONE
+		EtceteraBinding.showBezelActivityViewWithLabel("Loading");
+		#endif
+
+		#if UNITY_ANDROID
+
+		#endif
 	}
 		
 	private void LoadURL () {

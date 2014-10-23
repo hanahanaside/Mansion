@@ -9,7 +9,16 @@ public class TutorialController : MonoBehaviour {
 		InsertHistoryData();
 		Application.LoadLevel ("Main");
 		#endif
+
+		#if UNITY_IPHONE
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
+		#endif
+
+		#if UNITY_ANDROID
+		InsertHistoryData();
+		Application.LoadLevel ("Main");
+		#endif
+
 	}
 
 	private void InsertHistoryData(){

@@ -136,7 +136,9 @@ public class MainController : MonoBehaviour {
 	public void OnRecommendButtonClicked () {
 		Debug.Log ("recommend");
 		SoundManager.Instance.PlaySE (AudioClipID.SE_BUTTON);
+		#if UNITY_IPHONE
 		Binding.ChkAppListView ();
+		#endif
 	}
 
 	public void OnCloseRectangleButtonClicked () {
