@@ -1,49 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="net.adcrops.demo.customize2"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="7" />
-
-    <application android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
-        <activity android:name="net.adcrops.demo.customize2.AdcropsCustomizeDemoActivity"
-                  android:label="@string/app_name"
-                  android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <meta-data android:value="418" android:name="ADC_MEDIA_SITE_ID"></meta-data>
-        <meta-data android:value="5LUZZpEv" android:name="ADC_MEDIA_SITE_KEY"></meta-data>
-        <meta-data android:value="true" android:name="ADC_USE_APP_UNIQUE_ID"></meta-data>
-
-        <meta-data android:value="20" android:name="ADC_LIST_COUNT"></meta-data>
-        <meta-data android:value="60" android:name="ADC_CONVERSION_TIMER_INTERVAL"></meta-data>
-        <meta-data android:value="false" android:name="ADC_USE_INSTALLED_LIST_ITEM"></meta-data>
-        <meta-data android:value="false" android:name="ADC_USE_POINT_DISPLAY_ITEM"></meta-data>
-        <meta-data android:value="http://d0.adcrops.net" android:name="ADC_INSTALLED_LIST_ITEM_URL"></meta-data>
-
-        <activity android:name="net.adcrops.demo.customize.activity.AdcropsCustomizeDemoViewListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"></action>
-            </intent-filter>
-        </activity>
-        <activity android:name="net.adcrops.demo.customize.activity.AdcropsCustomizeDemoDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"></action>
-            </intent-filter>
-        </activity>
-
-    </application>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.gree.unitywebview" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" android:versionCode="1" android:versionName="1.0">
+	<supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true" />
+	<application android:icon="@drawable/app_icon" android:label="@string/app_name" android:debuggable="true">
+		<activity android:name="com.unity3d.player.UnityPlayerNativeActivity" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+			<meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
+		</activity>
+		<activity android:name="com.prime31.EtceteraProxyActivity" android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" />
+		<activity android:name="com.prime31.WebViewActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+		<activity android:name="com.prime31.P31VideoPlayerActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+		<receiver android:name="com.prime31.AlarmManagerReceiver" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!-- TODO:Root化チェックの為に使用します。-->
-	<!--
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	-->
-	<!-- TODO:ADC_USE_APP_UNIQUE_IDがfalseの場合に必要となります。-->
-	<!-- 
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-	 --> 	
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.GET_TASKS" />
 </manifest>
