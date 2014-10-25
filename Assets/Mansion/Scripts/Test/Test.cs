@@ -14,8 +14,8 @@ public class Test : MonoBehaviour {
 
 	void Start(){
 		webView.Init ();
-		string url = "http://ad.graasb.com/shakky/money/android/top/";
-		webView.LoadURL (URL);
+		string url = "http://www.yahoo.co.jp/";
+		webView.LoadURL (url);
 		webView.SetVisibility (true);
 	}
 
