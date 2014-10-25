@@ -13,7 +13,9 @@ public class Test : MonoBehaviour {
 	public WebViewObject webView;
 
 	void Start(){
-		Debug.Log ("" + System.DateTime.Now.ToString("yyyy/mm/dd hh:mm:ss"));
+		webView.Init ();
+		webView.LoadURL ("http://www.yahoo.co.jp/");
+		webView.SetVisibility (true);
 	}
 
 	public void OnButtonClicked(){
