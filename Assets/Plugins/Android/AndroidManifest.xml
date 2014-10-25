@@ -26,7 +26,7 @@
 		</meta-data>
 		<meta-data android:value="http://d0.adcrops.net" android:name="ADC_INSTALLED_LIST_ITEM_URL">
 		</meta-data>
-		<!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<activity android:name="net.adcrops.demo.customize.activity.AdcropsCustomizeDemoViewListActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW">
@@ -43,11 +43,25 @@
 		<activity android:name="com.prime31.WebViewActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
 		<activity android:name="com.prime31.P31VideoPlayerActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 		<receiver android:name="com.prime31.AlarmManagerReceiver" />
+		<receiver android:name="jp.pushman.android.push.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="com.shakky.money" />
+			</intent-filter>
+		</receiver>
+		<service android:name="jp.pushman.android.push.GCMIntentService" android:label="pushman_service" />
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.GET_TASKS" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<permission android:name="com.shakky.money.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="com.shakky.money.permission.C2D_MESSAGE" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<!-- TODO:Root化チェックの為に使用します。-->
 	<!--
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />

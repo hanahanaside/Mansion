@@ -3,10 +3,9 @@ using System.Collections;
 using System;
 
 public class TutorialController : MonoBehaviour {
-
 	void Start () {
 		#if UNITY_EDITOR
-		InsertHistoryData();
+		InsertHistoryData ();
 		Application.LoadLevel ("Main");
 		#endif
 
@@ -15,13 +14,12 @@ public class TutorialController : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-		InsertHistoryData();
 		Application.LoadLevel ("Main");
 		#endif
 
 	}
 
-	private void InsertHistoryData(){
+	private void InsertHistoryData () {
 		DateTime dtNow = DateTime.Now;
 		string date = dtNow.ToString ("MM/dd HH:mm");
 		HistoryData historyData = new HistoryData ();

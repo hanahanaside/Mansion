@@ -6,21 +6,14 @@ using System.Globalization;
 using System.Threading;
 
 public class Test : MonoBehaviour {
+	void Start () {
+		AndroidJavaClass player = new AndroidJavaClass ("com.unity3d.player.UnityPlayer");   
+		AndroidJavaObject activity = player.GetStatic<AndroidJavaObject> ("currentActivity");
+		activity.Call ("runOnUiThread", new AndroidJavaRunnable (() => {
+			AndroidJavaClass pushman = new AndroidJavaClass ("jp.pushman.android.PushmanSDK");
+			pushman.CallStatic ("receiveOnCreate", activity);
+		}));
 
-	private const string URL = "http://ad.graasb.com/shakky/money/tutorial/";
-
-
-	public WebViewObject webView;
-
-	void Start(){
-		webView.Init ();
-		string url = "http://www.yahoo.co.jp/";
-		webView.LoadURL (url);
-		webView.SetVisibility (true);
-	}
-
-	public void OnButtonClicked(){
-		Debug.Log("click");
-		Binding2.SplashView ();
+	
 	}
 }
