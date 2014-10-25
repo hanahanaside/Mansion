@@ -40,7 +40,18 @@ public class RoomController : MonoBehaviour {
 		UISprite firstItemSprite = mItemSpriteList [0];
 		if (!firstItemSprite.enabled) {
 			SetActiveItem ();
+			#if UNITY_IPHONE
 			GenerateResident (mRoomData.ItemCount);
+			#endif
+
+			#if UNITY_ANDROID
+			if(mRoomData.ItemCount > 30){
+				GenerateResident (30);
+			}else {
+				GenerateResident (mRoomData.ItemCount);
+			}
+			#endif
+
 		}
 		SetTextData (); 
 	}
@@ -94,8 +105,18 @@ public class RoomController : MonoBehaviour {
 		if (mRoomData.ItemCount <= mItemSpriteList.Count) {
 			SetActiveItem ();
 		}
-			
+
+		#if UNITY_IPHONE
 		GenerateResident (1);
+		#endif
+
+		#if UNITY_ANDROID
+		if(mRoomData.ItemCount < 30){
+			GenerateResident (1);
+		}
+
+		#endif
+
 
 		CountManager.Instance.AddGenerateSpeed (mRoomData.GenerateSpeed);
 		SetTextData ();
