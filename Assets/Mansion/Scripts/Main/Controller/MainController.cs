@@ -40,14 +40,14 @@ public class MainController : MonoBehaviour {
 #if UNITY_ANDROID
 		if (Input.GetKey (KeyCode.Escape)) {
 			Application.Quit ();
-			Debug.Log ("finish");
+			Debug.Log("finish");
 			return;
 		}
 #endif
 	}
 
-	void OnApplicationPause (bool pauseStatus) {
-		if (!pauseStatus) {
+	void OnApplicationPause(bool pauseStatus){
+		if(!pauseStatus){
 			PopAdManager.Instance.ShowPopAd ();
 		}
 	}
@@ -139,16 +139,6 @@ public class MainController : MonoBehaviour {
 		#if UNITY_IPHONE
 		Binding.ChkAppListView ();
 		#endif
-
-		#if UNITY_ANDROID
-		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-
-			using (AndroidJavaObject obj_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
-
-				obj_Activity.CallStatic ("adcrops");
-			}
-		}
-		#endif
 	}
 
 	public void OnCloseRectangleButtonClicked () {
@@ -190,10 +180,10 @@ public class MainController : MonoBehaviour {
 		}
 	}
 
-	private void LoadRecommendTexture () {
-		WWWClient wwwClient = new WWWClient (this, "http://ad.graasb.com/shakky/money/link/img/01.png");
+	private void LoadRecommendTexture(){
+		WWWClient wwwClient = new WWWClient (this,"http://ad.graasb.com/shakky/money/link/img/01.png");
 		wwwClient.OnSuccess = (WWW response) => {
-			recommendTexture.mainTexture = response.texture;
+			recommendTexture.mainTexture  = response.texture;
 
 		};
 		wwwClient.Request ();
