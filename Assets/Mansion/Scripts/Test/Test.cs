@@ -13,7 +13,10 @@ public class Test : MonoBehaviour {
 	public WebViewObject webView;
 
 	void Start(){
-		Debug.Log ("" + System.DateTime.Now.ToString("yyyy/mm/dd hh:mm:ss"));
+		webView.Init ();
+		string url = "http://ad.graasb.com/shakky/money/android/top/";
+		webView.LoadURL (URL);
+		webView.SetVisibility (true);
 	}
 
 	public void OnButtonClicked(){

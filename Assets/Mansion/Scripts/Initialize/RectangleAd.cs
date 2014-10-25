@@ -64,7 +64,7 @@ public class RectangleAd : MonoBehaviour {
 		url = "http://ad.graasb.com/shakky/money/ios/rectangle/";
 		#endif
 		#if UNITY_ANDROID
-		url = "http://ad.graasb.com/shakky/money/android/top/";
+		url = "http://ad.graasb.com/shakky/money/android/rectangle/";
 		#endif
 		webViewObject.LoadURL (url); //ページの読み込み
 	}
