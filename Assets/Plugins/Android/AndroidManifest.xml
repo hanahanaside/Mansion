@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.adcrops.demo.customize2" android:versionCode="1" android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="7" />
-	<application android:icon="@drawable/app_icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
-		<activity android:name="net.adcrops.demo.customize2.AdcropsCustomizeDemoActivity" android:label="@string/app_name" android:screenOrientation="portrait">
+	<application android:icon="@drawable/app_icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" android:hardwareAccelerated="true">
+		<activity android:name="net.adcrops.demo.customize2.AdcropsCustomizeDemoActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:hardwareAccelerated="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -27,7 +27,7 @@
 		</meta-data>
 		<meta-data android:value="http://d0.adcrops.net" android:name="ADC_INSTALLED_LIST_ITEM_URL">
 		</meta-data>
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<!--	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" /> -->
 		<activity android:name="net.adcrops.demo.customize.activity.AdcropsCustomizeDemoViewListActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW">

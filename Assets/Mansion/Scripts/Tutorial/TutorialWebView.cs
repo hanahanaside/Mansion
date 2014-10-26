@@ -20,7 +20,7 @@ public class TutorialWebView : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-
+		//	EtceteraAndroid.showProgressDialog("Loading","please Wait");
 		#endif
 	}
 		
@@ -30,6 +30,9 @@ public class TutorialWebView : MonoBehaviour {
 				// SWF の変換終了時に送信されます。
 				#if UNITY_IPHONE
 				EtceteraBinding.hideActivityView();
+				#endif
+				#if UNITY_ANDROID
+				EtceteraAndroid.hideProgressDialog();
 				#endif
 			} else if (msg == "jswfBeginFrame") {
 				// フレームの処理を開始する直前に送信されます。
@@ -41,9 +44,7 @@ public class TutorialWebView : MonoBehaviour {
 				// フレームの処理が終了した直後に送信されます。
 			} else if (msg == "close") {
 				// チュートリアル終了
-				#if UNITY_EDITOR
-				Application.LoadLevel("Main");
-				#else
+				#if !UNITY_EDITOR
 				ShowTutorialBonusDialog();
 				#endif
 			}
