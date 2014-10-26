@@ -10,6 +10,7 @@
 			<meta-data android:name="unityplayer.UnityActivity" android:value="true" />
 			<meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
 		</activity>
+		<!-- Adcrops START-->
 		<meta-data android:value="4517" android:name="ADC_MEDIA_SITE_ID">
 		</meta-data>
 		<meta-data android:value="4btjmay5" android:name="ADC_MEDIA_SITE_KEY">
@@ -39,10 +40,14 @@
 				</action>
 			</intent-filter>
 		</activity>
+		<!-- Adcrops END-->
+		<!-- Prime31 START-->
 		<activity android:name="com.prime31.EtceteraProxyActivity" android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" />
 		<activity android:name="com.prime31.WebViewActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
 		<activity android:name="com.prime31.P31VideoPlayerActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 		<receiver android:name="com.prime31.AlarmManagerReceiver" />
+		<!-- Prime31 END-->
+		<!-- Pushman START -->
 		<receiver android:name="jp.pushman.android.push.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
 			<intent-filter>
 				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -51,7 +56,9 @@
 			</intent-filter>
 		</receiver>
 		<service android:name="jp.pushman.android.push.GCMIntentService" android:label="pushman_service" />
+		<!-- Pushman END -->
 	</application>
+	<!-- PERMISSION START -->
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -62,6 +69,7 @@
 	<permission android:name="com.shakky.money.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 	<uses-permission android:name="com.shakky.money.permission.C2D_MESSAGE" />
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<!-- PERMISSION END -->
 	<!-- TODO:Root化チェックの為に使用します。-->
 	<!--
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
