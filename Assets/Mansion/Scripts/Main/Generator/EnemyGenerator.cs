@@ -98,15 +98,15 @@ public class EnemyGenerator : MonoBehaviour {
 		Debug.Log ("GenerateEnemyWhileSleepTime");
 		SecomData secomdata = PrefsManager.Instance.GetSecomData ();
 		List<RoomData> unlockRoomDataList = RoomDataDao.Instance.GetUnLockRoomDataList ();
-		//解放している部屋がなければ処理を終了
-		if (unlockRoomDataList.Count <= 0) {
+		string[] notificationDateArray = PrefsManager.Instance.NotificationDateArray;
+		//初回起動時は中断データなナシ
+		if (notificationDateArray.Length == 0) {
 			return;
 		}
 
 		//解放しているレベルによって出現させる泥棒を変更
 		int decreaseCount = GetDecreaseCount (unlockRoomDataList);
-		string[] notificationDateArray = PrefsManager.Instance.NotificationDateArray;
-		Debug.Log ("date = " + notificationDateArray[0]);
+		Debug.Log ("date = " + notificationDateArray [0]);
 		DateTime dtNow = DateTime.Now;
 		Debug.Log ("secom count = " + secomdata.Count);
 		List<EnemyData> enemyDataList = EnemyDataDao.Instance.QueryEnemyDataList ();

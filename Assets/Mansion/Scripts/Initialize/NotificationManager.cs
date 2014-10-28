@@ -41,12 +41,7 @@ public class NotificationManager : MonoBehaviour {
 
 		#if UNITY_ANDROID
 		EtceteraAndroid.cancelAllNotifications();
-		long secondsFromNow =  60L;
-		string title = "ウハウハ";
-		string subTitle = "泥棒に襲われています";
-		string tickerText = "泥棒に襲われています";
-		string extraData = "extraData";
-		EtceteraAndroid.scheduleNotification(secondsFromNow,title,subTitle,tickerText,extraData);
+		_ScheduleLocalNotification();
 		#endif
 	}
 

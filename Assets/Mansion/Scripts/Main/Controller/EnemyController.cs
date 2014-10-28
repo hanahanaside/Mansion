@@ -49,7 +49,10 @@ public abstract class EnemyController : HumanController {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
 		EnemyGenerator.Instance.AttackedEnemy ();
 		decimal persent = CountManager.Instance.KeepMoneyCount / 100;
-		decimal getMoneyCount = mEnemyData.Atack * persent;
+		decimal damage = mEnemyData.Atack * persent;
+		decimal getMoneyCount = damage  * 0.2m;
+		Debug.Log ("damage = " + damage);
+		Debug.Log ("getMoney = " + getMoneyCount);
 		GameObject getMoneyLabelObject = Instantiate (mGetMoneyLabelPrefab) as GameObject;
 		getMoneyLabelObject.transform.parent = transform.parent;
 		getMoneyLabelObject.transform.localScale = new Vector3 (1, 1, 1);

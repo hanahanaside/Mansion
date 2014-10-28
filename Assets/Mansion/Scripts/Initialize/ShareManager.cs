@@ -31,6 +31,13 @@ public class ShareManager : MonoBehaviour {
 		#endif
 	}
 
+	void OnApplicationPause (bool pauseStatus) {
+		Debug.Log ("pauseeeeeeeeeeeeeeeeee " + pauseStatus);
+		if (!pauseStatus) {
+
+		}
+	}
+
 	public static ShareManager Instance {
 		get {
 			return sInstance;
@@ -59,7 +66,6 @@ public class ShareManager : MonoBehaviour {
 		SocialConnector.Share (text, url, path);
 		#endif
 	}
-		
 	#if UNITY_ANDROID
 	private IEnumerator WriteBytes () {
 		for (int i = 0; i < shareFileNameArray.Length; i++) {
