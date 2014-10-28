@@ -17,14 +17,16 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
-		BannerAd.Instance.Show ();
-		IconAd.Instance.ShowIconAd ();
 		shopPanel.SetActive (false);
 		statusPanel.SetActive (false);
 		scrollView.ResetPosition ();
 		mCurrentPanel = homePanel;
 		homePanelController.Init ();
 		LoadRecommendTexture ();
+		if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork){
+			BannerAd.Instance.Show ();
+			IconAd.Instance.ShowIconAd ();
+		}
 	}
 
 	void Update () {
