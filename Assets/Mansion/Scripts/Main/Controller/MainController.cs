@@ -22,8 +22,8 @@ public class MainController : MonoBehaviour {
 		scrollView.ResetPosition ();
 		mCurrentPanel = homePanel;
 		homePanelController.Init ();
-		LoadRecommendTexture ();
 		if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork){
+			LoadRecommendTexture ();
 			BannerAd.Instance.Show ();
 			IconAd.Instance.ShowIconAd ();
 		}
@@ -195,8 +195,9 @@ public class MainController : MonoBehaviour {
 	private void LoadRecommendTexture () {
 		WWWClient wwwClient = new WWWClient (this, "http://ad.graasb.com/shakky/money/link/img/01.png");
 		wwwClient.OnSuccess = (WWW response) => {
-			recommendTexture.mainTexture = response.texture;
-
+			if(response.texture != null){
+				recommendTexture.mainTexture = response.texture;
+			}
 		};
 		wwwClient.Request ();
 	}

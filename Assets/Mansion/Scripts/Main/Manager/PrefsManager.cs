@@ -12,6 +12,7 @@ public class PrefsManager {
 	private const string BOOST_TIME = "boostTime";
 	private const string OPENING_FINISHED = "openingFinished";
 	private const string NOTIFICATION_DATE_ARRAY = "notificationDateArray";
+	private const string ANDROID_NOTIFICATION_ID_ARRAY = "androidNotificationIdArray";
 	private static PrefsManager sInstance;
 
 	public static PrefsManager Instance {
@@ -122,6 +123,15 @@ public class PrefsManager {
 		}
 		get {
 			return PlayerPrefsX.GetStringArray (NOTIFICATION_DATE_ARRAY);
+		}
+	}
+
+	public int[] AndroidNotificationIdArray{
+		set{
+			PlayerPrefsX.SetIntArray (ANDROID_NOTIFICATION_ID_ARRAY,value);
+		}
+		get{
+			return PlayerPrefsX.GetIntArray (ANDROID_NOTIFICATION_ID_ARRAY);
 		}
 	}
 }
