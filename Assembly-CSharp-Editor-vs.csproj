@@ -134,7 +134,6 @@
      <Compile Include="Assets\iTweenEditor\Editor\iTweenPathEditor.cs" />
      <Compile Include="Assets\sqlitekit\Editor\SQLiteKitEditor.cs" />
      <Compile Include="Assets\sqlitekit\Editor\SQLiteKitEditorSettings.cs" />
-     <None Include="Assets\Plugins\Android\res\values\version.xml" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.6.8.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />

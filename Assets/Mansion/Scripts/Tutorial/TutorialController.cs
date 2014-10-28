@@ -15,6 +15,7 @@ public class TutorialController : MonoBehaviour {
 
 		#if UNITY_ANDROID
 		PrefsManager.Instance.FlagTutorialFinished = 1;
+		InsertHistoryData();
 		Application.LoadLevel ("Main");
 		#endif
 

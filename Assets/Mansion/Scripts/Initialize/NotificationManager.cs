@@ -25,7 +25,7 @@ public class NotificationManager : MonoBehaviour {
 		}
 	}
 
-	private void ScheduleLocalNotification () {
+	public void ScheduleLocalNotification () {
 		Debug.Log ("ScheduleLocalNotification");
 
 		#if UNITY_IPHONE
@@ -71,9 +71,9 @@ public class NotificationManager : MonoBehaviour {
 
 			#if UNITY_ANDROID
 			double addSeconds = addMinutes * 60;
-			Debug.Log("add Seconds = " + addSeconds);
 			fireDate = fireDate.AddSeconds(addSeconds);
 			secondsFromNow += (long)addSeconds;
+			Debug.Log("seconds from now = " + secondsFromNow);
 			int notificationId = EtceteraAndroid.scheduleNotification (secondsFromNow, "ウハマン", title, title, "");
 			androidNotificationIdArray [i] = notificationId;
 			#endif

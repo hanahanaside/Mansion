@@ -8,8 +8,8 @@ public class TutorialWebView : MonoBehaviour {
 
 	void Start () {
 		#if !UNITY_EDITOR
-		ShowProgressDialog();
-		LoadURL();
+		//	ShowProgressDialog();
+		//	LoadURL();
 		#endif
 
 	}
@@ -20,7 +20,7 @@ public class TutorialWebView : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-		//	EtceteraAndroid.showProgressDialog("Loading","please Wait");
+		EtceteraAndroid.showProgressDialog("Loading","please Wait");
 		#endif
 	}
 		

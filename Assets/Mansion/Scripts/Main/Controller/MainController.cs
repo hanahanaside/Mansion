@@ -22,7 +22,7 @@ public class MainController : MonoBehaviour {
 		scrollView.ResetPosition ();
 		mCurrentPanel = homePanel;
 		homePanelController.Init ();
-		if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork){
+		if (Application.internetReachability != NetworkReachability.NotReachable) {
 			LoadRecommendTexture ();
 			BannerAd.Instance.Show ();
 			IconAd.Instance.ShowIconAd ();
@@ -41,6 +41,7 @@ public class MainController : MonoBehaviour {
 
 #if UNITY_ANDROID
 		if (Input.GetKey (KeyCode.Escape)) {
+			NotificationManager.Instance.ScheduleLocalNotification ();
 			Application.Quit ();
 			Debug.Log ("finish");
 			return;
@@ -195,9 +196,7 @@ public class MainController : MonoBehaviour {
 	private void LoadRecommendTexture () {
 		WWWClient wwwClient = new WWWClient (this, "http://ad.graasb.com/shakky/money/link/img/01.png");
 		wwwClient.OnSuccess = (WWW response) => {
-			if(response.texture != null){
-				recommendTexture.mainTexture = response.texture;
-			}
+			recommendTexture.mainTexture = response.texture;
 		};
 		wwwClient.Request ();
 	}
