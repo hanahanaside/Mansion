@@ -61,7 +61,9 @@ public class MainController : MonoBehaviour {
 		if (CheckSamePanel (homePanel)) {
 			return;
 		}
-		IconAd.Instance.ShowIconAd ();
+		if (Application.internetReachability != NetworkReachability.NotReachable) {
+			IconAd.Instance.ShowIconAd ();
+		}
 		mCurrentPanel.SetActive (false);
 		mCurrentPanel = homePanel;
 		ChangeButtonFilter (0);
@@ -116,6 +118,10 @@ public class MainController : MonoBehaviour {
 
 	private IEnumerator ShowRectangleCoroutine () {
 		yield return new WaitForSeconds (0.5f);
+		// check network
+		if (Application.internetReachability == NetworkReachability.NotReachable) {
+			return true;
+		}
 		BannerAd.Instance.Hide ();
 		RectangleAd.Instance.Show ();
 		rectanglePanel.SetActive (true);
