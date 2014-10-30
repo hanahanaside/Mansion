@@ -12,7 +12,6 @@
   android:layout_height="wrap_content"
   android:text="@string/adcrops_list_view_footer_text_view"
 android:id="@+id/adcrops_list_view_FooterTextView" android:textColor="@color/adcrops_header_footer_text_color"/>
-<ProgressBar android:id="@+id/adcrops_list_view_footer_progressbar" style="?android:attr/progressBarStyleSmall" android:layout_height="wrap_content" android:layout_width="wrap_content" android:visibility="gone"></ProgressBar>
 
 <ImageView
     android:id="@+id/imageView1"

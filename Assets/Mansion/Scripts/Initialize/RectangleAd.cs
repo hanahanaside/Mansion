@@ -54,7 +54,12 @@ public class RectangleAd : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-		webViewObject.SetMargins (0, 300, 0, 300); 
+		if(Screen.width == 1080){
+			webViewObject.SetMargins (0,400, 0, 200); 
+		}else {
+			webViewObject.SetMargins (0, 300, 0, 300); 
+		}
+
 		#endif
 	}
 

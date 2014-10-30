@@ -67,8 +67,13 @@ public class IconAd : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-		//	webViewObject.SetMargins (50, 150, 600, 1020); 
-		webViewObject.SetMargins (0, 150, 550, 1010); 
+		Debug.Log("width = " + Screen.width);
+		Debug.Log("height = " + Screen.height);
+		if(Screen.width == 1080){
+			webViewObject.SetMargins (-200, 250, 550, 900); 
+		}else {
+			webViewObject.SetMargins (0, 150, 550, 1010); 
+		}
 		#endif
 	}
 

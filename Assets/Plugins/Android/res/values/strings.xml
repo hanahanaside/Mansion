@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AdcropsCustomizeDemo</string>
-    <string name="pushman_api_key">5705bd279a6c64b233eed19f756f71b7</string>
-    <string name="pushman_secret_key">Rqve4yuDjGcBFhSkRrRehRmr</string>
-    <string name="pushman_sender_id">TODO SENDER_ID</string>
 </resources>

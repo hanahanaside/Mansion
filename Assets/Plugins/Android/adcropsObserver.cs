@@ -32,6 +32,6 @@ public class  adcropsObserver : MonoBehaviour {
 			}
 		}
     }
-	
+
 	
 }
