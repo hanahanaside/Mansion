@@ -36,6 +36,7 @@ public class ShareManager : MonoBehaviour {
 	}
 
 	void OnApplicationPause (bool pauseStatus) {
+		#if UNITY_ANDROID
 		if (!pauseStatus) {
 			if(mSharebuttonClicked){
 				ShareBoostTimeKeeper.Instance.StartBoost ();
@@ -43,6 +44,7 @@ public class ShareManager : MonoBehaviour {
 				mSharebuttonClicked = false;
 			}
 		}
+		#endif
 	}
 
 	public static ShareManager Instance {

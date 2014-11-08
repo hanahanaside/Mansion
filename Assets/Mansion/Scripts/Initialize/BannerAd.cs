@@ -57,7 +57,7 @@ public class BannerAd : MonoBehaviour {
 		if(Screen.width == 1080){
 			webViewObject.SetMargins (0,1390, 0, 230); 
 		}else {
-			webViewObject.SetMargins (0,990, 0, 165); 
+			webViewObject.SetMargins (0,1000, 0, 165); 
 		}
 
 		#endif

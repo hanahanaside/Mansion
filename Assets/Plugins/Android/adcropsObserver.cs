@@ -24,6 +24,7 @@ public class  adcropsObserver : MonoBehaviour {
 	
 
 	void showAdcrops() {
+		#if UNITY_ANDROID
 		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
 
             using (AndroidJavaObject obj_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
@@ -31,6 +32,7 @@ public class  adcropsObserver : MonoBehaviour {
                 obj_Activity .CallStatic("adcrops");
 			}
 		}
+		#endif
     }
 
 	

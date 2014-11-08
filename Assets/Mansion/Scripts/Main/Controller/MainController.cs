@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MiniJSON;
+using System.Collections.Generic;
 
 public class MainController : MonoBehaviour {
 	public GameObject homePanel;
@@ -7,6 +9,7 @@ public class MainController : MonoBehaviour {
 	public GameObject statusPanel;
 	public GameObject rectanglePanel;
 	public GameObject[] colorFilterArray;
+	public GameObject cpiButton;
 	public UIScrollView scrollView;
 	public HomePanelController homePanelController;
 	public UISprite exSprite;
@@ -14,6 +17,21 @@ public class MainController : MonoBehaviour {
 	public UITexture recommendTexture;
 	private GameObject mCurrentPanel;
 	private int mSwitchStatusCount;
+
+	void Awake(){
+		#if UNITY_IPHONE
+		WWWClient wwwClient = new WWWClient (this,"http://ad.graasb.com/shakky/money/json/environment.json");
+		wwwClient.OnSuccess = (WWW response) => {
+			//JSONテキストのデコード
+			Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize(response.text) as Dictionary<string,object>;
+			string environment = (string)jsonData["environment"];
+			if(environment == "production"){
+				cpiButton.SetActive(true);
+			}
+		};
+		wwwClient.Request ();
+		#endif
+	}
 
 	void Start () {
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);

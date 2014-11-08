@@ -7,9 +7,9 @@ public class TutorialWebView : MonoBehaviour {
 	public WebViewObject webViewObject;
 
 	void Start () {
-		#if !UNITY_EDITOR
-		//	ShowProgressDialog();
-		//	LoadURL();
+		#if UNITY_IPHONE
+			ShowProgressDialog();
+			LoadURL();
 		#endif
 
 	}

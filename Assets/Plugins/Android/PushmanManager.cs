@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PushmanManager : MonoBehaviour {
+	#if UNITY_ANDROID
 	private AndroidJavaObject mActivity;
 	private AndroidJavaClass mPushman;
 
@@ -22,4 +23,5 @@ public class PushmanManager : MonoBehaviour {
 			mPushman.CallStatic ("start", mActivity);
 		}
 	}
+	#endif
 }
