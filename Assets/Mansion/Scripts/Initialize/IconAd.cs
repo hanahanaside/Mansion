@@ -71,7 +71,11 @@ public class IconAd : MonoBehaviour {
 		Debug.Log("height = " + Screen.height);
 		if(Screen.width == 1080){
 			webViewObject.SetMargins (-200, 250, 550, 900); 
-		}else {
+		}else if(Screen.width == 720){
+			//50 450
+			webViewObject.SetMargins (10, 180, 480, 850); 
+		}
+		else {
 			webViewObject.SetMargins (0, 150, 550, 1010); 
 		}
 		#endif

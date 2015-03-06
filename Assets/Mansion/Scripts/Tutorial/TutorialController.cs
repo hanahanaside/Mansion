@@ -9,14 +9,8 @@ public class TutorialController : MonoBehaviour {
 		Application.LoadLevel ("Main");
 		#endif
 
-		#if UNITY_IPHONE
+		#if !UNITY_EDITOR
 		SoundManager.Instance.PlayBGM (AudioClipID.BGM_MAIN);
-		#endif
-
-		#if UNITY_ANDROID
-		PrefsManager.Instance.FlagTutorialFinished = 1;
-		InsertHistoryData();
-		Application.LoadLevel ("Main");
 		#endif
 
 	}

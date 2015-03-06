@@ -54,10 +54,14 @@ public class BannerAd : MonoBehaviour {
 		#endif
 
 		#if UNITY_ANDROID
-		if(Screen.width == 1080){
-			webViewObject.SetMargins (0,1390, 0, 230); 
-		}else {
-			webViewObject.SetMargins (0,1000, 0, 165); 
+		Debug.Log ("width " + Screen.width);
+		if (Screen.width == 1080) {
+			webViewObject.SetMargins (0, 1390, 0, 230); 
+		} else if (Screen.width == 720) {
+			//180
+			webViewObject.SetMargins (0, 930, 0, 150); 
+		} else {
+			webViewObject.SetMargins (0, 1000, 0, 165); 
 		}
 
 		#endif

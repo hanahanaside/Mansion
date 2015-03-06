@@ -9,7 +9,7 @@ public class MoneyEffectManager : MonoBehaviour {
 		Init ();
 		Transform trans = transform;
 		for (int i = 0; i < trans.childCount; i++) {
-			trans.GetChild (i).gameObject.renderer.material.renderQueue = 4000;
+			trans.GetChild (i).gameObject.GetComponent<Renderer>().material.renderQueue = 4000;
 		}
 		yield return new WaitForSeconds (1.0f);
 		Destroy (gameObject);

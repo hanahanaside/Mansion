@@ -201,7 +201,7 @@ public class EtceteraUIManager : MonoBehaviourGUI
 	{
 		// scale the image down to a reasonable size before loading
 		EtceteraAndroid.scaleImageAtPath( imagePath, 0.1f );
-		testPlane.renderer.material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
+		testPlane.GetComponent<Renderer>().material.mainTexture = EtceteraAndroid.textureFromFileAtPath( imagePath );
 	}
 #endif
 }

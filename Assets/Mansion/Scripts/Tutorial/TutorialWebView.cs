@@ -7,7 +7,7 @@ public class TutorialWebView : MonoBehaviour {
 	public WebViewObject webViewObject;
 
 	void Start () {
-		#if UNITY_IPHONE
+		#if !UNITY_EDITOR
 			ShowProgressDialog();
 			LoadURL();
 		#endif
@@ -67,7 +67,7 @@ public class TutorialWebView : MonoBehaviour {
 			"}, false);"
 		);
 	}
-
+		
 	private void ShowTutorialBonusDialog () {
 		string title = "チュートリアル完了ボーナス！";
 		string message = "お金を3000円プレゼント！";

@@ -67,7 +67,7 @@ public class ShopButtonController : MonoBehaviour {
 	private void InitComponentsByLockLevel(){
 		questionSprite.enabled = false;
 		lockSprite.enabled = false;
-		parentObject.collider.enabled = false;
+		parentObject.GetComponent<Collider>().enabled = false;
 		itemSprite.enabled = false;
 		stampSprite.enabled = false;
 		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_CLOSED){
@@ -75,21 +75,21 @@ public class ShopButtonController : MonoBehaviour {
 		}
 		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_LOCKED){
 			lockSprite.enabled = true;
-			parentObject.collider.enabled = true;
+			parentObject.GetComponent<Collider>().enabled = true;
 			ShowItemSprite();
 		}
 		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_UNLOCKED){
 			ShowItemSprite();
-			parentObject.collider.enabled = true;
+			parentObject.GetComponent<Collider>().enabled = true;
 		}
 		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_BOUGHT){
 			ShowItemSprite();
 			stampSprite.enabled = true;
-			parentObject.collider.enabled = true;
+			parentObject.GetComponent<Collider>().enabled = true;
 		}
 		if(mShopItemData.UnlockLevel == ShopItemData.UNLOCK_LEVEL_STATUS){
 			ShowItemSprite();
-			parentObject.collider.enabled = true;
+			parentObject.GetComponent<Collider>().enabled = true;
 		}
 	}
 

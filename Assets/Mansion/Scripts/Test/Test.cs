@@ -13,7 +13,8 @@ public class Test : MonoBehaviour {
 
 
 	void Start () {
-		Debug.Log ("aaaaaa");
+		string a = "abcdefg";
+		Debug.Log (a.Substring(1));
 	
 
 	}
